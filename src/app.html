@@ -921,6 +921,7 @@ function authHTML(){
   return `<p style="margin:0">${esc(A.title)}</p>
     <label class="aul">Owner PIN<input id="au-pin" type="password" inputmode="numeric" maxlength="4" data-in="au-pin" value="${esc(A.pin)}" autocomplete="off"></label>
     ${A.change?`<label class="aul">New owner PIN<input type="password" inputmode="numeric" maxlength="4" data-in="au-new" value="${esc(A.newPin||"")}"></label><label class="aul">New PIN again<input type="password" inputmode="numeric" maxlength="4" data-in="au-new2" value="${esc(A.newPin2||"")}"></label>`:""}
+    ${!S.employees.some(e=>e.role==="owner")?`<p class="hint" style="margin:0">First-time setup: no owner is saved yet, so use <b>0000</b>.</p>`:""}
     ${A.err?`<p class="err" style="text-align:left;margin:0">${esc(A.err)}</p>`:""}
     <div style="display:flex;gap:8px"><button class="btn ok" data-act="auok">Authorise</button><button class="btn" data-act="aucancel">Cancel</button></div>`;
 }
@@ -2142,7 +2143,8 @@ const ACT = {
   async auok(el){
     const A=S.desk.auth; if(!A) return;
     const owners=S.employees.filter(e=>e.role==="owner");
-    if(!owners.some(o=>String(o.pin)===String(A.pin))){ A.err="Wrong owner PIN."; A.pin=""; renderModal(); setTimeout(()=>{ const i=$("#au-pin"); if(i) i.focus(); },30); return; }
+    const firstSetup=!owners.length && String(A.pin)==="0000";   /* brand-new order book: no owner saved yet */
+    if(!firstSetup && !owners.some(o=>String(o.pin)===String(A.pin))){ A.err="Wrong owner PIN."; A.pin=""; renderModal(); setTimeout(()=>{ const i=$("#au-pin"); if(i) i.focus(); },30); return; }
     if(A.change && (!/^\d{4}$/.test(A.newPin||"") || A.newPin!==A.newPin2)){ A.err="The new PIN must be 4 digits, entered the same twice."; renderModal(); return; }
     el.disabled=true;
     try{ await A.run(A); }catch(e){ dtoast("Could not save. Check the connection and try again."); }
