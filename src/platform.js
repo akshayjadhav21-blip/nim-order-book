@@ -36,13 +36,14 @@
         set: data => softWrite(ref.set(JSON.parse(JSON.stringify(data)))),
         update: data => softWrite(ref.update(JSON.parse(JSON.stringify(data)))),
         delete: () => softWrite(ref.delete()),
-        onSnapshot: (fn, err) => ref.onSnapshot({ includeMetadataChanges: false }, s => fn(wrapSnap(s)), e => err && err(errCode(e))),
+        // includeMetadataChanges: also report "server confirmed, nothing changed", so the app knows it is up to date
+        onSnapshot: (fn, err) => ref.onSnapshot({ includeMetadataChanges: true }, s => fn(wrapSnap(s)), e => err && err(errCode(e))),
         acquire: async () => ({ acquired: true })
       };
     },
     collection(path) {
       const ref = fs.collection(path);
-      return { onSnapshot: (fn, err) => ref.onSnapshot(q => fn(wrapQSnap(q)), e => err && err(errCode(e))) };
+      return { onSnapshot: (fn, err) => ref.onSnapshot({ includeMetadataChanges: true }, q => fn(wrapQSnap(q)), e => err && err(errCode(e))) };
     },
     /* safe running numbers (PO / claim numbers): a transaction, needs internet */
     async increment(path, extra) {
