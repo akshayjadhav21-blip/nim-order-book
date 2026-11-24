@@ -68,27 +68,47 @@
 
   /* ---------- Gemini (photo reading) ---------- */
   const blobToB64 = b => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(",")[1]); r.onerror = rej; r.readAsDataURL(b); });
-  async function gemini(prompt, images) {
-    const st = window.NIM_SETTINGS || {};
-    const key = st.geminiKey, model = (st.geminiModel || "").trim() || "gemini-flash-latest";
-    if (!key) throw { code: "nokey" };
-    if (!navigator.onLine) throw { code: "offline", message: "No internet connection." };
-    const parts = [{ text: prompt }];
-    for (const b of images || []) parts.push({ inline_data: { mime_type: b.type || "image/jpeg", data: await blobToB64(b) } });
+  const DEFAULT_MODEL = "gemini-flash-latest", BACKUP_MODEL = "gemini-flash-lite-latest";
+  async function geminiOnce(model, key, parts) {
     const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`, {
       method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": key },
       body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature: 0 } })
     });
-    if (r.status === 429) throw { code: "rate_limited" };
     const j = await r.json().catch(() => ({}));
-    if (!r.ok) throw { code: r.status === 400 || r.status === 403 ? "badkey" : "error", message: (j.error && j.error.message) || ("Error " + r.status) };
-    const txt = ((((j.candidates || [])[0] || {}).content || {}).parts || []).map(p => p.text || "").join("");
-    try { return JSON.parse(txt.replace(/^```(json)?|```$/g, "").trim()); } catch (e) { throw { code: "error", message: "Unreadable reply" }; }
+    return { r, j };
+  }
+  async function gemini(prompt, images) {
+    const st = window.NIM_SETTINGS || {};
+    const key = st.geminiKey;
+    let model = String(st.geminiModel || "").trim();
+    if (!/^[a-z0-9][a-z0-9.\-]*$/i.test(model)) model = DEFAULT_MODEL;     // empty or not a model name
+    if (!key) throw { code: "nokey" };
+    if (!navigator.onLine) throw { code: "offline", message: "No internet connection." };
+    const parts = [{ text: prompt }];
+    for (const b of images || []) parts.push({ inline_data: { mime_type: b.type || "image/jpeg", data: await blobToB64(b) } });
+    // busy (503/500/429) → wait and retry, then try the lighter backup model
+    const plan = [[model, 0], [model, 2500], [model === BACKUP_MODEL ? DEFAULT_MODEL : BACKUP_MODEL, 1000]];
+    let last = null;
+    for (const [m, wait] of plan) {
+      if (wait) await new Promise(res => setTimeout(res, wait));
+      const { r, j } = await geminiOnce(m, key, parts);
+      if (r.ok) {
+        const txt = ((((j.candidates || [])[0] || {}).content || {}).parts || []).map(p => p.text || "").join("");
+        try { return JSON.parse(txt.replace(/^```(json)?|```$/g, "").trim()); } catch (e) { throw { code: "error", message: "Unreadable reply" }; }
+      }
+      last = { r, j };
+      if (![429, 500, 503].includes(r.status)) break;
+    }
+    const { r, j } = last;
+    if (r.status === 429) throw { code: "rate_limited" };
+    if (r.status === 503 || r.status === 500) throw { code: "busy", message: "Google's photo reading is busy right now. Try again in a minute." };
+    throw { code: r.status === 400 || r.status === 403 ? "badkey" : "error", message: (j.error && j.error.message) || ("Error " + r.status) };
   }
   const sample = { limits: async () => ({ images: true }), json: (prompt, opt) => gemini(prompt, (opt && opt.images) || []) };
   window.NIM_testAI = async () => {
     try { const r = await gemini('Reply with JSON only: {"ok":true}', []); return r && r.ok ? "✓ Photo reading works." : "Got a reply, but not the expected one."; }
-    catch (e) { if (e.code === "nokey") return "Save a key first."; if (e.code === "rate_limited") return "Key works, but the free limit is used up for now."; throw new Error(e.message || "Test failed."); }
+    catch (e) { if (e.code === "nokey") return "Save a key first."; if (e.code === "rate_limited") return "Key works, but the free limit is used up for now.";
+      if (e.code === "busy") return "Key works ✓ – Google is busy right now, so scanning may need a retry."; throw new Error(e.message || "Test failed."); }
   };
 
   /* ---------- saving files (backup, CSV, claim PDF) ---------- */

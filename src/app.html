@@ -165,6 +165,10 @@ tr.pend td{background:var(--warnbg)}
 .ipkrow{text-align:left;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
 .ipkrow:hover{border-color:#1c64b4}
 .mtag{font-size:12px;font-weight:700;color:#1c64b4;background:#eef5ff;border-radius:6px;padding:1px 6px}
+.lastord{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-size:12px;font-weight:600;color:var(--ink);margin-top:2px}
+.lastord.none{color:var(--muted);font-weight:500}
+.ldot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+.ldot.ok{background:#1f9d55}.ldot.open{background:#d93025}
 .pobtn{padding:8px 12px;border-radius:8px;border:1px solid #1f9d55;background:var(--panel);color:#1f9d55;font-weight:700}
 .bb-wa{background:#1f9d55;color:#fff;font-size:20px}
 .wabtn{display:block;text-align:center;padding:18px;border-radius:14px;background:#1f9d55;color:#fff;font-family:var(--display);font-size:24px;font-weight:700;text-decoration:none}
@@ -248,6 +252,10 @@ tr.pend td{background:var(--warnbg)}
 .gsearch input:focus{border-color:var(--accent);outline:none}
 .srow[hidden]{display:none!important}
 .bb-scaninv{background:#0b6e6e;color:#fff}
+.invsrc{display:flex;flex-direction:column;gap:10px}
+.filebtn.alt{background:var(--panel);color:var(--brand);border:2px solid var(--brand)}
+.invpdf{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:96px;height:120px;border-radius:8px;border:1px solid var(--line);background:#fff3f0;font-size:30px}
+.invpdf b{font-size:13px;color:#b3261e}.invpdf small{font-size:10px;color:var(--muted);max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .invpages{display:flex;gap:8px;overflow-x:auto}
 .invpages img{height:120px;border-radius:8px;border:1px solid var(--line);background:#000}
 .invp{position:relative;flex:0 0 auto}
@@ -514,6 +522,7 @@ html.mode-desk .desk{min-height:calc(100vh - 90px)}
 html.mode-desk .titlebar .win{display:none}
 .setbox{display:flex;flex-direction:column;gap:8px;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);margin-top:14px}
 .setbox .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.setbox .keymask{-webkit-text-security:disc}
 .setbox input[type=password],.setbox input[type=text]{padding:8px 10px;border:1px solid var(--line);border-radius:8px;min-width:280px;background:var(--panel)}
 </style>
 </head>
@@ -606,11 +615,11 @@ function altParts(item){
 function itemCardHTML(ctx,f){
   const L = ctx==="phone" ? t : (k=>T.en[k]);
   const it=itemByPn(f.item.pn)||f.item; const alts=Array.isArray(it.alt)?it.alt:[]; const ap=altParts(it);
-  let h=`<div class="itemcard"><span><span class="mono">${esc(showPn(f.item.pn))}</span><br>${esc(showName(f.item.name))}${f.item.brand?" · "+esc(f.item.brand):""}${it.mrp!=null&&it.mrp!==""?" · MRP "+rupee(it.mrp):""}${ctx==="desk"&&it._pending?` <span class="gstp">To complete: ${esc(missingOf(it).join(", "))}</span>`:""}${alts.length?`<br><span class="hint">Alt. nos: <span class="mono">${esc(alts.join(", "))}</span></span>`:""}</span><span style="margin-left:auto;display:flex;flex-direction:column;gap:4px">${ctx==="desk"&&!it.isNew?`<button class="chg" style="margin-left:0" data-act="pedit" data-pn="${esc(it.pn)}">Edit part</button>`:""}<button class="chg" style="margin-left:0" data-act="iclear" data-ctx="${ctx}">${esc(L("change"))}</button></span></div>`;
+  let h=`<div class="itemcard"><span><span class="mono">${esc(showPn(f.item.pn))}</span><br>${esc(showName(f.item.name))}${f.item.brand?" · "+esc(f.item.brand):""}${it.mrp!=null&&it.mrp!==""?" · MRP "+rupee(it.mrp):""}${ctx==="desk"&&it._pending?` <span class="gstp">To complete: ${esc(missingOf(it).join(", "))}</span>`:""}${alts.length?`<br><span class="hint">Alt. nos: <span class="mono">${esc(alts.join(", "))}</span></span>`:""}<br>${lastOrderHTML(it)}</span><span style="margin-left:auto;display:flex;flex-direction:column;gap:4px">${ctx==="desk"&&!it.isNew?`<button class="chg" style="margin-left:0" data-act="pedit" data-pn="${esc(it.pn)}">Edit part</button>`:""}<button class="chg" style="margin-left:0" data-act="iclear" data-ctx="${ctx}">${esc(L("change"))}</button></span></div>`;
   if(ap.length) h+=`<div class="altbox"><b>Alternate parts in stock list</b>${ap.slice(0,6).map(a=>`<button data-act="ipick" data-ctx="${ctx}" data-pn="${esc(a.pn)}"><span><span class="mono">${esc(a.pn)}</span> · ${esc(a.name)}${a.brand?" · "+esc(a.brand):""}${a.mrp!=null&&a.mrp!==""?" · MRP "+rupee(a.mrp):""}</span><span class="use">Use this</span></button>`).join("")}</div>`;
   return h;
 }
-const viaTxt = x => x.via ? ` <span class="hint">(alt no. ${esc(x.via)})</span>` : "";
+const viaTxt = x => x.via && norm(x.via)!==norm(bareOf(x.it&&x.it.pn)) ? ` <span class="hint">(alt no. ${esc(x.via)})</span>` : "";
 const liveOrders = () => Object.values(S.orders).sort((a,b)=>String(b.created).localeCompare(String(a.created)));
 const deskUser = () => S.employees.find(e=>e.id===S.desk.userId) || S.employees.find(e=>e.role==="owner") || {id:"owner",name:"Owner",role:"owner"};
 
@@ -799,10 +808,27 @@ async function draftFromForm(ctx){
   await saveDraft(d); return d;
 }
 function phoneLines(f){ return [...(f.lines||[]), ...(f.item?[{item:f.item,vendor:f.vendor,qty:f.qty,draftId:f.draftId||null}]:[])]; }
+/* last time this part was ordered (orders + old purchase history); received = green dot, still open = red dot */
+function lastOrderInfo(item){
+  if(!item||!item.pn) return null;
+  const it=S.stockItems.find(i=>norm(i.pn)===norm(item.pn));
+  const codes=new Set(it?codesOf(it):[norm(item.pn), norm(bareOf(item.pn))].filter(Boolean));
+  let best=null;
+  liveOrders().forEach(o=>{ if(o.status==="Cancelled"||!codes.has(norm(o.pn))) return;
+    const d=localDate(o.created); if(!best||d>best.date) best={date:d, received:o.status==="Received", vendor:o.vendorName, qty:o.qty}; });
+  (S.history||[]).forEach(h=>{ if(!codes.has(norm(h.pn))) return; const d=String(h.date||"").slice(0,10);
+    if(d&&(!best||d>best.date)) best={date:d, received:true, vendor:h.vname, qty:h.qty}; });
+  return best;
+}
+function lastOrderHTML(item){
+  const L=lastOrderInfo(item);
+  if(!L) return `<span class="lastord none">Never ordered before</span>`;
+  return `<span class="lastord"><i class="ldot ${L.received?"ok":"open"}" title="${L.received?"Received":"Not received yet"}" aria-label="${L.received?"Received":"Not received yet"}"></i>Last ordered ${esc(fmtD(L.date).replace(/-(\d\d)(\d\d)$/,"-$2"))}</span>`;
+}
 function cartHTML(f){
   if(!f.lines||!f.lines.length) return "";
   return `<div class="cart"><b>Parts in this order (${f.lines.length+(f.item?1:0)})</b>`+f.lines.map((ln,i)=>{ const v=ln.vendor?vendorById(ln.vendor):null;
-    return `<div class="cline"><div class="ci"><span class="mono">${esc(showPn(ln.item.pn))}</span> <span class="hint">${esc(showName(ln.item.name))}</span><br><span class="hint" style="font-size:12px">${v?esc(v.name):"Vendor: choose on next screen"}</span></div>
+    return `<div class="cline"><div class="ci"><span class="mono">${esc(showPn(ln.item.pn))}</span> <span class="hint">${esc(showName(ln.item.name))}</span><br><span class="hint" style="font-size:12px">${v?esc(v.name):"Vendor: choose on next screen"}</span><br>${lastOrderHTML(ln.item)}</div>
       <div class="cq"><button data-act="lnqty" data-i="${i}" data-d="-1" aria-label="Less">−</button><span>${esc(ln.qty)}</span><button data-act="lnqty" data-i="${i}" data-d="1" aria-label="More">+</button></div>
       <div class="ca"><button data-act="lnedit" data-i="${i}">Edit</button><button class="x" data-act="lnrm" data-i="${i}" aria-label="Remove">✕</button></div></div>`; }).join("")+
     (f.item?`<span class="hint">Now adding: <b class="mono">${esc(showPn(f.item.pn))}</b> (below)</span>`:`<span class="hint">Add the next part below, or place the order.</span>`)+`</div>`;
@@ -948,7 +974,7 @@ function suggHTML(ctx, f){
   if(!S.items.length) return `<p class="hint">${esc(L("noItems"))}</p>`;
   if(norm(f.pn).length<2) return "";
   const m=matchItems(f.pn,5);
-  let h=`<div class="sugg">`+m.map(x=>`<button data-act="ipick" data-ctx="${ctx}" data-pn="${esc(x.it.pn)}"><b>${esc(x.it.pn)}${viaTxt(x)}</b><span>${esc(x.it.name)}${x.it.brand?" · "+esc(x.it.brand):""}</span></button>`).join("");
+  let h=`<div class="sugg">`+m.map(x=>`<button data-act="ipick" data-ctx="${ctx}" data-pn="${esc(x.it.pn)}"><b>${esc(x.it.pn)}${viaTxt(x)}</b><span>${esc(x.it.name)}${x.it.brand?" · "+esc(x.it.brand):""}</span>${lastOrderHTML(x.it)}</button>`).join("");
   if(!m.length || norm(m[0].it.pn)!==norm(f.pn)) h+=`<button class="newpart" data-act="inew" data-ctx="${ctx}"><span>${m.length?"":esc(L("notFound"))+" "}${esc(L("useNew"))}: <b>${esc(gtPn(f.pn))}</b></span></button>`;
   return h+`</div>`;
 }
@@ -976,7 +1002,7 @@ function matchByName(q,n=6){
 function nameSuggHTML(ctx,f){
   const q=f.nameQ||""; if(norm(q).length<2) return "";
   const m=matchByName(q);
-  return `<div class="sugg">`+m.map(it=>`<button data-act="ipick" data-ctx="${ctx}" data-pn="${esc(it.pn)}"><b>${esc(it.pn)}</b><span>${esc(it.name)}${it.brand?" · "+esc(it.brand):""}${it.mrp!=null&&it.mrp!==""?" · MRP "+rupee(it.mrp):""}</span></button>`).join("")+
+  return `<div class="sugg">`+m.map(it=>`<button data-act="ipick" data-ctx="${ctx}" data-pn="${esc(it.pn)}"><b>${esc(it.pn)}</b><span>${esc(it.name)}${it.brand?" · "+esc(it.brand):""}${it.mrp!=null&&it.mrp!==""?" · MRP "+rupee(it.mrp):""}</span>${lastOrderHTML(it)}</button>`).join("")+
     (m.length?"":`<span class="hint">No part with that name.</span>`)+`<button class="newpart" data-act="inewname" data-ctx="${ctx}"><span>➕ Add new part named <b>${esc(String(q).trim().toUpperCase())}</b></span></button></div>`;
 }
 const isPv = ctx => /^pv\d+$/.test(String(ctx||""));
@@ -1311,7 +1337,7 @@ function scanHTML(ctx){
   if(s.stage==="error") return h+`<p class="err" style="text-align:left">${esc(s.msg)}</p><button class="btn" data-act="sretry" data-ctx="${ctx}">Try again</button><button class="btn" data-act="stype" data-ctx="${ctx}">${esc(L("typeIt"))}</button>`;
   h+=`<div><span class="hint">Text read from the ${s.img?"photo":"label"}:</span><div class="cands">${s.cands.length?s.cands.map(c=>`<span>${esc(c)}</span>`).join(""):"<span>nothing that looks like a part number</span>"}</div></div>`;
   if(s.matches.length){
-    h+=`<p style="margin:0;font-weight:600">Tap the matching stock item:</p><div class="sugg">`+s.matches.map(x=>`<button data-act="spick" data-ctx="${ctx}" data-pn="${esc(x.it.pn)}"><b>${esc(x.it.pn)}${viaTxt(x)}</b><span>${esc(x.it.name)}${x.it.brand?" · "+esc(x.it.brand):""}</span></button>`).join("")+`</div>`;
+    h+=`<p style="margin:0;font-weight:600">Tap the matching stock item:</p><div class="sugg">`+s.matches.map(x=>`<button data-act="spick" data-ctx="${ctx}" data-pn="${esc(x.it.pn)}"><b>${esc(x.it.pn)}${viaTxt(x)}</b><span>${esc(x.it.name)}${x.it.brand?" · "+esc(x.it.brand):""}</span>${lastOrderHTML(x.it)}</button>`).join("")+`</div>`;
   } else h+=`<p class="err" style="text-align:left">No stock item matched.</p>`;
   const have=new Set(S.items.map(i=>norm(i.pn)));
   const newC=[...new Set(s.cands.map(c=>String(c).toUpperCase().trim()))].filter(c=>norm(c).length>=3&&!have.has(norm(c)));
@@ -1354,7 +1380,7 @@ Reply with JSON only, like {"candidates":["WPA676"]}, most likely part number fi
   }catch(e){
     const msg = e&&e.code==="nokey" ? NOKEY_MSG : e&&e.code==="none" ? "Photo reading isn't available in this view. Try a sample label or type the number." :
       e&&e.code==="not_granted" ? "Photo reading was not allowed. Try a sample label or type the number." :
-      e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The photo could not be read. Try again with the number in focus, or type it.";
+      e&&(e.code==="busy"||e.code==="offline") ? e.message : e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The photo could not be read. Try again with the number in focus, or type it.";
     S.scan={...S.scan,stage:"error",msg};
   }
   renderScan(ctx);
@@ -2815,7 +2841,7 @@ async function invRead(ctx){
   try{
     if(!sample) throw {code:"none"};
     if(sample.limits){ const lim=await sample.limits(); if(lim&&!lim.images) throw {code:"none"}; }
-    const prompt=`You are reading a supplier's tax invoice (or bill) for an automobile spare parts shop in India. The images are the pages of ONE invoice, in order.
+    const prompt=`You are reading a supplier's tax invoice (or bill) for an automobile spare parts shop in India. The attached images and/or PDF are the pages of ONE invoice, in order.
 Extract:
 - vendor: the SELLER's business name (not the buyer "New India Motors")
 - gstin: the seller's GSTIN if printed
@@ -2832,7 +2858,7 @@ Reply with JSON only: {"vendor":"","gstin":"","invoiceNo":"","invoiceDate":"","c
     I.stage="choose";
     I.err = e&&e.code==="nokey" ? NOKEY_MSG : e&&e.code==="none" ? "Invoice reading isn't available in this view. Try the sample invoice." :
       e&&e.code==="not_granted" ? "Reading was not allowed. Try again and allow it." :
-      e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The invoice could not be read. Retake the photo flat, in good light, with the whole page in view.";
+      e&&(e.code==="busy"||e.code==="offline") ? e.message : e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The invoice could not be read. Retake the photo flat, in good light, with the whole page in view, or upload the PDF.";
   }
   invRender(ctx);
 }
@@ -2851,13 +2877,14 @@ function invSample(ctx){
 /* ---------- screens ---------- */
 function invHTML(ctx){
   const I=S.inv[ctx]; if(!I) return ""; const big=ctx==="phone";
-  if(I.stage==="reading") return `<div class="invpages">${I.pages.map(p=>`<img src="${p.data}" alt="Invoice page">`).join("")}</div><p style="font-weight:600">Reading the invoice… this can take a few seconds.</p>`;
+  if(I.stage==="reading") return `<div class="invpages">${I.pages.map((p,i)=>`${p.pdf?`<span class="invpdf" title="${esc(p.name)}">📄<b>PDF</b><small>${esc(p.name)}</small></span>`:`<img src="${p.data}" alt="Page ${i+1}">`}`).join("")}</div><p style="font-weight:600">Reading the invoice… this can take a few seconds.</p>`;
   if(I.stage==="choose"){
-    return `<p class="hint" style="margin:0">Photograph the vendor's invoice flat and in good light. Add one photo per page.</p>
-      ${I.pages.length?`<div class="invpages">${I.pages.map((p,i)=>`<div class="invp"><img src="${p.data}" alt="Page ${i+1}"><button data-act="invdelpage" data-ctx="${ctx}" data-i="${i}" aria-label="Remove page ${i+1}">✕</button></div>`).join("")}</div>`:""}
-      <label class="filebtn">📷 ${I.pages.length?"Add another page":"Take photo / upload invoice"}<input type="file" accept="image/*" ${big?'capture="environment"':"multiple"} data-ch="invfile" data-ctx="${ctx}" aria-label="Invoice photo"></label>
+    return `<p class="hint" style="margin:0">Photograph the invoice flat and in good light (one photo per page), or upload the bill PDF / photos the vendor sent.</p>
+      ${I.pages.length?`<div class="invpages">${I.pages.map((p,i)=>`<div class="invp">${p.pdf?`<span class="invpdf" title="${esc(p.name)}">📄<b>PDF</b><small>${esc(p.name)}</small></span>`:`<img src="${p.data}" alt="Page ${i+1}">`}<button data-act="invdelpage" data-ctx="${ctx}" data-i="${i}" aria-label="Remove page ${i+1}">✕</button></div>`).join("")}</div>`:""}
+      <div class="invsrc">${big?`<label class="filebtn">📷 ${I.pages.length?"Take another photo":"Take photo"}<input type="file" accept="image/*" capture="environment" data-ch="invfile" data-ctx="${ctx}" aria-label="Take invoice photo"></label>`:""}
+      <label class="filebtn ${big?"alt":""}">📄 ${I.pages.length?"Add PDF / photo":"Upload PDF / photo"}<input type="file" accept="application/pdf,.pdf,image/*" multiple data-ch="invfile" data-ctx="${ctx}" aria-label="Upload invoice PDF or photo"></label></div>
       ${I.err?`<p class="err" style="text-align:left;margin:0">${esc(I.err)}</p>`:""}
-      ${I.pages.length?`<button class="save-btn" data-act="invread" data-ctx="${ctx}">READ INVOICE (${I.pages.length} page${I.pages.length===1?"":"s"})</button>`:""}
+      ${I.pages.length?`<button class="save-btn" data-act="invread" data-ctx="${ctx}">READ INVOICE (${I.pages.length} file${I.pages.length===1?"":"s"})</button>`:""}
       <button class="btn" data-act="invsample" data-ctx="${ctx}">Try a sample invoice <span class="simtag">SIMULATED</span></button>`;
   }
   // review
@@ -2980,7 +3007,15 @@ Object.assign(IN,{ invpq(el){ const ctx=el.dataset.ctx, li=Number(el.dataset.li)
 Object.assign(IN,{ invno(el){ const R=S.inv[el.dataset.ctx].rev; R.invNo=el.value; const b=document.querySelector(`[data-act="invrecord"][data-ctx="${el.dataset.ctx}"]`); if(b) b.disabled=!(R.vid&&R.invNo.trim()); } });
 Object.assign(CH,{
   async invfile(el){ const ctx=el.dataset.ctx, I=S.inv[ctx]; const files=[...(el.files||[])]; el.value="";
-    for(const f of files){ try{ I.pages.push(await shrink(f)); }catch(e){ I.err="One file could not be opened as a photo."; } }
+    I.err="";
+    for(const f of files){
+      const isPdf=/pdf/i.test(f.type)||/\.pdf$/i.test(f.name||"");
+      if(isPdf){
+        if(f.size>15*1024*1024){ I.err=`${f.name} is too big (over 15 MB).`; continue; }
+        I.pages.push({pdf:true, name:f.name||"invoice.pdf", blob:new Blob([await f.arrayBuffer()],{type:"application/pdf"})}); continue;
+      }
+      try{ I.pages.push(await shrink(f)); }catch(e){ I.err="One file could not be opened as a photo or PDF."; }
+    }
     invRender(ctx); },
   invvendor(el){ const ctx=el.dataset.ctx, R=S.inv[ctx].rev; R.vid=el.value; invAllocate(R); invRender(ctx); },
   invdate(el){ S.inv[el.dataset.ctx].rev.invDate=el.value; }
@@ -3070,7 +3105,7 @@ Object.assign(CH,{ oevendor(el){ const E=S.phone.oedit; if(E){ E.vendor=el.value
 <script>
 "use strict";
 /* ================= BACKUP & RESTORE + APP SETTINGS (Employees tab) ================= */
-S.bk = { restore:null, ai:{key:"", model:"", msg:"", busy:false} };
+S.bk = { restore:null, ai:{key:"", model:null, msg:"", busy:false} };
 const BK_PARTS = [
   ["master","Vendors, groups & categories", true],
   ["stock","Stock list (part numbers, alternates, MRP, GST)", true],
@@ -3105,8 +3140,8 @@ function settingsHTML(){
   if(real){
     h+=`<div class="setbox"><h3 style="margin:0">📷 App settings: photo reading (Google Gemini)</h3>
       <p class="hint" style="margin:0">Used by <b>Scan part number</b> and <b>Scan invoice</b> on all phones and this computer. ${cfg.geminiKey?`A key is saved (ends <b class="mono">…${esc(String(cfg.geminiKey).slice(-4))}</b>).`:`<b style="color:var(--bad)">No key saved yet.</b>`}</p>
-      <div class="row"><input type="password" placeholder="${cfg.geminiKey?"Paste a new key to replace it":"Paste the Gemini API key"}" data-in="aikey" value="${esc(A.key)}" autocomplete="off" aria-label="Gemini API key">
-      <input type="text" placeholder="Model (default gemini-flash-latest)" data-in="aimodel" value="${esc(A.model||cfg.geminiModel||"")}" autocomplete="off" aria-label="Gemini model" style="min-width:220px"></div>
+      <div class="row"><input type="text" class="keymask" name="nim-gemini-key" placeholder="${cfg.geminiKey?"Paste a new key to replace it":"Paste the Gemini API key"}" data-in="aikey" value="${esc(A.key)}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore aria-label="Gemini API key">
+      <input type="text" placeholder="Model (default gemini-flash-latest)" data-in="aimodel" value="${esc(A.model!=null?A.model:(cfg.geminiModel||""))}" autocomplete="off" spellcheck="false" aria-label="Gemini model" style="min-width:220px"></div>
       <div class="row"><button class="btn ok" data-act="aisave">Save</button><button class="btn" data-act="aitest" ${A.busy?"disabled":""}>${A.busy?"Testing…":"Test photo reading"}</button>${A.msg?`<span class="hint">${esc(A.msg)}</span>`:""}</div></div>
       <div class="setbox"><h3 style="margin:0">🔐 This computer</h3><div class="row"><span class="hint">Signed in to the shop account as <b>${esc(window.NIM_ACCOUNT||"")}</b>.</span><button class="btn danger sm" data-act="nimsignout">Sign out of this computer</button></div></div>`;
   }
@@ -3144,9 +3179,12 @@ Object.assign(ACT,{
       try{ await bkRestore(R); S.bk.restore=null; dtoast("Restore finished ✓"); }catch(e){ R.busy=false; R.err=null; dtoast("Restore stopped: "+((e&&e.message)||"error")); }
       renderDeskBody(); });
   },
-  async aisave(){ const A=S.bk.ai, cfg=window.NIM_SETTINGS||{}; const key=A.key.trim()||cfg.geminiKey||"", model=String(A.model||cfg.geminiModel||"").trim();
+  async aisave(){ const A=S.bk.ai, cfg=window.NIM_SETTINGS||{}; const typed=A.key.trim(); const key=typed||cfg.geminiKey||"";
+    let model=String(A.model!=null?A.model:(cfg.geminiModel||"")).trim();
     if(!key){ A.msg="Paste the key first."; renderDeskBody(); return; }
-    askOwner("Save the photo-reading settings for all phones and this computer?", async()=>{ await S.db.doc("master/settings").set({geminiKey:key, geminiModel:model, updated:new Date().toISOString(), updatedBy:deskUser().name}); A.key=""; A.msg="Saved ✓"; dtoast("Settings saved ✓"); renderDeskBody(); }); },
+    if(typed && typed.length<30){ A.msg="That doesn't look like a Gemini key (too short). Paste the whole key."; renderDeskBody(); return; }
+    if(model && !/^[a-z0-9][a-z0-9.\-]*$/i.test(model)){ A.msg="The Model box should hold a model name like gemini-flash-latest, or stay empty."; renderDeskBody(); return; }
+    askOwner("Save the photo-reading settings for all phones and this computer?", async()=>{ await S.db.doc("master/settings").set({geminiKey:key, geminiModel:model, updated:new Date().toISOString(), updatedBy:deskUser().name}); A.key=""; A.model=null; A.msg="Saved ✓"; dtoast("Settings saved ✓"); renderDeskBody(); }); },
   async aitest(){ const A=S.bk.ai; A.busy=true; A.msg=""; renderDeskBody();
     try{ const r=await window.NIM_testAI(); A.msg=r; }catch(e){ A.msg=(e&&e.message)||"Test failed."; } A.busy=false; renderDeskBody(); },
   nimsignout(){ askOwner("Sign this computer out of the shop account? You will need the shop email and password to sign in again.", async()=>{ await window.NIM_signOut(); }); }
