@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Download – New India Motors Order Book</title>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#eef2f5;color:#13202c}
+.top{background:#13202c;color:#fff;padding:22px 20px}.top h1{margin:0;font-size:24px}.top p{margin:4px 0 0;opacity:.8}
+main{max-width:560px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card{background:#fff;border-radius:14px;padding:18px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.dl{display:block;text-align:center;background:#1f7a3f;color:#fff;text-decoration:none;font-size:20px;font-weight:800;padding:18px;border-radius:12px}
+.v{color:#5b6b7a;font-size:14px;text-align:center;margin:8px 0 0}
+ol{margin:8px 0 0;padding-left:22px;line-height:1.6}h2{margin:0;font-size:18px}
+a.desk{color:#1c64b4;font-weight:700}
+</style></head>
+<body><div class="top"><h1>New India Motors · Order Book</h1><p>Employee Android app</p></div>
+<main>
+<div class="card"><a class="dl" href="NIM-OrderBook.apk" download>⬇ Download the app (APK)</a><p class="v" id="ver"></p></div>
+<div class="card"><h2>First time on this phone</h2><ol>
+<li>Tap <b>Download the app</b>. If Chrome warns about the file, tap <b>Download anyway</b>.</li>
+<li>Open the downloaded file. Android asks to allow installs from Chrome – turn on <b>Allow from this source</b>, then go back.</li>
+<li>Tap <b>Install</b>. If Play Protect asks, tap <b>More details → Install anyway</b>.</li>
+<li>Open <b>NIM Order Book</b>, sign in with the shop account (ask the owner), then log in with your name and PIN.</li></ol></div>
+<div class="card"><h2>Updating</h2><p style="margin:6px 0 0">When the app shows <b>New version available</b>, tap it, download and install. It installs over the old one – your login stays.</p></div>
+<div class="card"><h2>Office computer</h2><p style="margin:6px 0 0">Open the <a class="desk" href="./">office desktop app</a> in Chrome or Edge and pin it to the taskbar.</p></div>
+</main>
+<script>fetch("version.json?t="+Date.now(),{cache:"no-store"}).then(r=>r.json()).then(j=>{document.getElementById("ver").textContent="Version "+j.version+" · "+new Date(j.built).toLocaleDateString("en-IN")}).catch(()=>{});</script>
+</body></html>

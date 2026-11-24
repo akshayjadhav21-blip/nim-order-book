@@ -1,0 +1,9 @@
+{
+  "appId": "com.newindiamotors.orderbook",
+  "appName": "NIM Order Book",
+  "webDir": "dist/phone",
+  "android": {
+    "adjustMarginsForEdgeToEdge": "force",
+    "backgroundColor": "#13202c"
+  }
+}
