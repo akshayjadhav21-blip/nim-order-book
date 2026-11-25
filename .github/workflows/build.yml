@@ -34,6 +34,15 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Reuse downloaded Android libraries
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('package.json') }}
+          restore-keys: gradle-${{ runner.os }}-
+
       - name: Set up Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -55,6 +64,10 @@ jobs:
           M=android/app/src/main/AndroidManifest.xml
           sed -i 's#<uses-permission android:name="android.permission.INTERNET" />#<uses-permission android:name="android.permission.INTERNET" />\n    <uses-permission android:name="android.permission.CAMERA" />#' $M
           grep -q "android.permission.CAMERA" $M
+          # Android 11+ only lets the app open the camera app if it declares it wants to (package visibility)
+          sed -i 's#</manifest>#    <queries>\n        <intent>\n            <action android:name="android.media.action.IMAGE_CAPTURE" />\n        </intent>\n        <intent>\n            <action android:name="android.intent.action.GET_CONTENT" />\n            <data android:mimeType="*/*" />\n        </intent>\n    </queries>\n</manifest>#' $M
+          grep -q "android.media.action.IMAGE_CAPTURE" $M
+          cat $M
           G=android/app/build.gradle
           sed -i -E "s/versionCode [0-9]+/versionCode ${{ github.run_number }}/; s/versionName \"[^\"]*\"/versionName \"$APP_VERSION\"/" $G
           grep -E "versionCode|versionName" $G
@@ -70,6 +83,12 @@ jobs:
         run: |
           cd android
           chmod +x gradlew
+          # library servers sometimes answer "429 Too Many Requests" – wait and try again
+          for i in 1 2 3; do
+            if ./gradlew assembleRelease --no-daemon; then exit 0; fi
+            echo "::warning::Build attempt $i failed – waiting 60 s and retrying"
+            sleep 60
+          done
           ./gradlew assembleRelease --no-daemon --stacktrace
 
       - name: Sign APK
