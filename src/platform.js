@@ -238,3 +238,53 @@
   }
   setTimeout(check, 4000); setInterval(check, 6 * 3600 * 1000);
 })();
+
+/* ---------- keep the field you are typing in above the phone keyboard ----------
+   Android 15+ no longer shrinks the app when the keyboard opens, so the bottom of the
+   screen was hidden behind it. We read the keyboard height, add that much space at the
+   bottom of the scroll area, and scroll the focused field into view. */
+(function(){
+  if (window.NIM_MODE !== "phone") return;
+  const root = document.documentElement;
+  const st = document.createElement("style");
+  st.textContent = "html.mode-phone .p-body{padding-bottom:calc(24px + var(--kb, 0px))!important;scroll-padding-bottom:calc(16px + var(--kb, 0px))}";
+  document.head.appendChild(st);
+  let fullH = window.innerHeight, kb = 0;
+  const isField = el => el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT" || el.isContentEditable);
+  function reveal() {
+    const el = document.activeElement;
+    if (!isField(el) || el.type === "file") return;
+    setTimeout(() => {
+      // scroll the nearest scrolling area so the field sits a little above the keyboard
+      let box = el.parentElement;
+      while (box && box !== document.body) { const o = getComputedStyle(box).overflowY; if ((o === "auto" || o === "scroll") && box.scrollHeight > box.clientHeight) break; box = box.parentElement; }
+      const r = el.getBoundingClientRect(), visibleBottom = window.innerHeight - kb - 16, top = 70;
+      let dy = 0;
+      if (r.bottom > visibleBottom) dy = r.bottom - visibleBottom;
+      else if (r.top < top) dy = r.top - top;
+      if (!dy) return;
+      if (box && box !== document.body) box.scrollTop += dy; else window.scrollBy(0, dy);
+    }, 60);
+  }
+  function setKb(h) {
+    // if Android did shrink the window, that space is already free – only add what is still covered
+    const shrunk = Math.max(0, fullH - window.innerHeight);
+    kb = Math.max(0, Math.round(h - shrunk));
+    root.style.setProperty("--kb", kb + "px");
+    if (kb || shrunk) reveal();
+  }
+  window.addEventListener("resize", () => { if (!kb && document.activeElement && !isField(document.activeElement)) fullH = window.innerHeight; if (window.innerHeight < fullH) reveal(); });
+  document.addEventListener("focusin", e => { if (isField(e.target)) setTimeout(reveal, 350); });
+  document.addEventListener("DOMContentLoaded", () => {
+    const K = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.Keyboard;
+    if (K && K.addListener) {
+      K.addListener("keyboardWillShow", i => setKb((i && i.keyboardHeight) || 0));
+      K.addListener("keyboardDidShow", i => setKb((i && i.keyboardHeight) || 0));
+      K.addListener("keyboardWillHide", () => setKb(0));
+      K.addListener("keyboardDidHide", () => setKb(0));
+    } else if (window.visualViewport) {
+      // fallback without the plugin
+      visualViewport.addEventListener("resize", () => setKb(Math.max(0, window.innerHeight - visualViewport.height)));
+    }
+  });
+})();

@@ -1329,7 +1329,9 @@ function scanHTML(ctx){
   const L = ctx==="phone" ? t : (k=>T.en[k]);
   if(s.stage==="choose"){
     return `<p class="hint" style="margin:0">Point the camera at the part number on the part, the box or the label.</p>
-      <label class="filebtn">📷 Take photo / upload<input type="file" accept="image/*" capture="environment" data-ch="sfile" data-ctx="${ctx}" aria-label="Take a photo of the part number"></label>
+      ${ctx==="phone"?`<div class="invsrc"><label class="filebtn">📷 Take photo<input type="file" accept="image/*" capture="environment" data-ch="sfile" data-ctx="${ctx}" aria-label="Take a photo of the part number"></label>
+      <label class="filebtn alt">🖼 Choose from gallery<input type="file" accept="image/*" data-ch="sfile" data-ctx="${ctx}" aria-label="Choose a photo of the part number"></label></div>`
+      :`<label class="filebtn">📷 Take photo / upload<input type="file" accept="image/*" capture="environment" data-ch="sfile" data-ctx="${ctx}" aria-label="Take a photo of the part number"></label>`}
       <div class="simonly" style="display:flex;flex-direction:column;gap:8px"><p style="margin:6px 0 0;font-weight:600">Or try a sample label <span class="simtag">SIMULATED</span></p>
       ${SAMPLE_LABELS.map((l,i)=>`<button class="lbl-sample" data-act="ssample" data-ctx="${ctx}" data-i="${i}"><b>${esc(l.brand)}</b>${esc(l.text)}<br>PART NO. ${esc(l.pn)}<br>MRP ₹ ···· · MFD 08/2026</button>`).join("")}</div>
       <button class="btn" data-act="stype" data-ctx="${ctx}">${esc(L("typeIt"))}</button>`;
