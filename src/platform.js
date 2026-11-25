@@ -92,10 +92,14 @@
     let last = null;
     for (const [m, wait] of plan) {
       if (wait) await new Promise(res => setTimeout(res, wait));
-      const { r, j } = await geminiOnce(m, key, parts);
+      let res;
+      try { res = await geminiOnce(m, key, parts); }
+      catch (e) { throw { code: "error", message: "Could not reach Google (" + ((e && e.message) || "network") + ")" }; }
+      const { r, j } = res;
       if (r.ok) {
         const txt = ((((j.candidates || [])[0] || {}).content || {}).parts || []).map(p => p.text || "").join("");
-        try { return JSON.parse(txt.replace(/^```(json)?|```$/g, "").trim()); } catch (e) { throw { code: "error", message: "Unreadable reply" }; }
+        const m2 = txt.match(/\{[\s\S]*\}/);
+        try { return JSON.parse(m2 ? m2[0] : txt); } catch (e) { throw { code: "error", message: "Unreadable reply from Google: " + txt.slice(0, 60) }; }
       }
       last = { r, j };
       if (![429, 500, 503].includes(r.status)) break;
@@ -103,11 +107,17 @@
     const { r, j } = last;
     if (r.status === 429) throw { code: "rate_limited" };
     if (r.status === 503 || r.status === 500) throw { code: "busy", message: "Google's photo reading is busy right now. Try again in a minute." };
-    throw { code: r.status === 400 || r.status === 403 ? "badkey" : "error", message: (j.error && j.error.message) || ("Error " + r.status) };
+    throw { code: r.status === 400 || r.status === 403 ? "badkey" : "error", message: "Google " + r.status + ": " + ((j.error && j.error.message) || "error") };
   }
   const sample = { limits: async () => ({ images: true }), json: (prompt, opt) => gemini(prompt, (opt && opt.images) || []) };
   window.NIM_testAI = async () => {
-    try { const r = await gemini('Reply with JSON only: {"ok":true}', []); return r && r.ok ? "✓ Photo reading works." : "Got a reply, but not the expected one."; }
+    try {
+      const c = document.createElement("canvas"); c.width = 360; c.height = 120;
+      const g = c.getContext("2d"); g.fillStyle = "#fff"; g.fillRect(0, 0, 360, 120); g.fillStyle = "#000"; g.font = "bold 40px Arial"; g.fillText("PART NO. WPA676", 12, 75);
+      const img = await new Promise(res => c.toBlob(res, "image/jpeg", 0.9));
+      const r = await gemini('This image shows a printed part number. Reply with JSON only: {"pn":"<the part number>"}', [img]);
+      return r && /WPA ?676/i.test(String(r.pn || "")) ? "✓ Photo reading works (read WPA676 from a test picture)." : "Got a reply, but it did not read the test picture: " + JSON.stringify(r).slice(0, 80);
+    }
     catch (e) { if (e.code === "nokey") return "Save a key first."; if (e.code === "rate_limited") return "Key works, but the free limit is used up for now.";
       if (e.code === "busy") return "Key works ✓ – Google is busy right now, so scanning may need a retry."; throw new Error(e.message || "Test failed."); }
   };

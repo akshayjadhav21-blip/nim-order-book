@@ -1010,6 +1010,7 @@ const isPhoneCtx = ctx => ctx==="phone" || isPv(ctx);
 const formOf = ctx => ctx==="phone" ? S.phone.form : isPv(ctx) ? (S.phone.vlines||[])[Number(String(ctx).slice(2))] : S.desk.form;
 
 /* ---------- receiving (shared) ---------- */
+const errDetail = e => { const d=e&&(e.message||e.code); return d?` (Reason: ${String(d).slice(0,160)})`:""; };
 const NOKEY_MSG="Photo reading isn't set up yet. The owner adds the Gemini key in the desktop app: Employees → App settings.";
 const isOpen = o => o && (o.status==="Pending" || o.status==="Ordered");
 const openFor = vid => liveOrders().filter(o=>o.vendorId===vid && isOpen(o)).sort((a,b)=>String(a.created).localeCompare(String(b.created)));
@@ -1312,6 +1313,7 @@ function drawerHTML(){
     <div class="drnet"><span><b>${P.offline?esc(t("offline")):esc(t("online"))}</b><br>${pend?`<span class="pending">${pend} ${esc(t("pendingSync"))}</span>`:`<span class="hint">Test: switch off to try offline</span>`}</span><button class="switch ${P.offline?"offline":""}" data-act="poffline" aria-label="Online or offline" aria-pressed="${!P.offline}"></button></div>
     <span style="flex:1"></span>
     ${it(`data-act="plogout"`,"🚪",esc(t("logout")),"")}
+    ${window.NIM_VERSION?`<p class="hint" style="margin:4px 16px 10px;font-size:12px">App version ${esc(window.NIM_VERSION)}</p>`:""}
   </nav>`;
 }
 function ptoast(msg){ S.phone.toast=msg; renderPhone(); clearTimeout(ptoast.t); ptoast.t=setTimeout(()=>{ S.phone.toast=null; renderPhone(); },2600); }
@@ -1380,7 +1382,7 @@ Reply with JSON only, like {"candidates":["WPA676"]}, most likely part number fi
   }catch(e){
     const msg = e&&e.code==="nokey" ? NOKEY_MSG : e&&e.code==="none" ? "Photo reading isn't available in this view. Try a sample label or type the number." :
       e&&e.code==="not_granted" ? "Photo reading was not allowed. Try a sample label or type the number." :
-      e&&(e.code==="busy"||e.code==="offline") ? e.message : e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The photo could not be read. Try again with the number in focus, or type it.";
+      e&&(e.code==="busy"||e.code==="offline") ? e.message : e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The photo could not be read. Try again with the number in focus, or type it."+errDetail(e);
     S.scan={...S.scan,stage:"error",msg};
   }
   renderScan(ctx);
@@ -2858,7 +2860,7 @@ Reply with JSON only: {"vendor":"","gstin":"","invoiceNo":"","invoiceDate":"","c
     I.stage="choose";
     I.err = e&&e.code==="nokey" ? NOKEY_MSG : e&&e.code==="none" ? "Invoice reading isn't available in this view. Try the sample invoice." :
       e&&e.code==="not_granted" ? "Reading was not allowed. Try again and allow it." :
-      e&&(e.code==="busy"||e.code==="offline") ? e.message : e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The invoice could not be read. Retake the photo flat, in good light, with the whole page in view, or upload the PDF.";
+      e&&(e.code==="busy"||e.code==="offline") ? e.message : e&&e.code==="rate_limited" ? "Too many scans just now. Wait a minute and try again." : "The invoice could not be read. Retake the photo flat, in good light, with the whole page in view, or upload the PDF."+errDetail(e);
   }
   invRender(ctx);
 }
@@ -3143,7 +3145,7 @@ function settingsHTML(){
       <div class="row"><input type="text" class="keymask" name="nim-gemini-key" placeholder="${cfg.geminiKey?"Paste a new key to replace it":"Paste the Gemini API key"}" data-in="aikey" value="${esc(A.key)}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore aria-label="Gemini API key">
       <input type="text" placeholder="Model (default gemini-flash-latest)" data-in="aimodel" value="${esc(A.model!=null?A.model:(cfg.geminiModel||""))}" autocomplete="off" spellcheck="false" aria-label="Gemini model" style="min-width:220px"></div>
       <div class="row"><button class="btn ok" data-act="aisave">Save</button><button class="btn" data-act="aitest" ${A.busy?"disabled":""}>${A.busy?"Testing…":"Test photo reading"}</button>${A.msg?`<span class="hint">${esc(A.msg)}</span>`:""}</div></div>
-      <div class="setbox"><h3 style="margin:0">🔐 This computer</h3><div class="row"><span class="hint">Signed in to the shop account as <b>${esc(window.NIM_ACCOUNT||"")}</b>.</span><button class="btn danger sm" data-act="nimsignout">Sign out of this computer</button></div></div>`;
+      <div class="setbox"><h3 style="margin:0">🔐 This computer</h3><div class="row"><span class="hint">Signed in to the shop account as <b>${esc(window.NIM_ACCOUNT||"")}</b> · App version ${esc(window.NIM_VERSION||"")}.</span><button class="btn danger sm" data-act="nimsignout">Sign out of this computer</button></div></div>`;
   }
   return h;
 }
