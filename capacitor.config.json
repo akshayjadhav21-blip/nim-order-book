@@ -5,5 +5,11 @@
   "android": {
     "adjustMarginsForEdgeToEdge": "force",
     "backgroundColor": "#13202c"
+  },
+  "plugins": {
+    "Keyboard": {
+      "resize": "none",
+      "resizeOnFullScreen": true
+    }
   }
 }

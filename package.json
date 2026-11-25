@@ -2,7 +2,7 @@
   "name": "nim-order-book",
   "version": "1.0.0",
   "private": true,
-  "description": "New India Motors – Order Book (Android app + office web app)",
+  "description": "New India Motors \u2013 Order Book (Android app + office web app)",
   "scripts": {
     "build": "node build.mjs"
   },
@@ -12,7 +12,8 @@
     "@capacitor/cli": "^7.0.0",
     "@capacitor/core": "^7.0.0",
     "@capacitor/filesystem": "^7.0.0",
-    "@capacitor/share": "^7.0.0"
+    "@capacitor/share": "^7.0.0",
+    "@capacitor/keyboard": "^7.0.0"
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.5"
