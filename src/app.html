@@ -187,6 +187,9 @@ tr.pend td{background:var(--warnbg)}
 .tllist{overflow-x:hidden}
 .tlx{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;border:0;background:#d93025;color:#fff;font-size:17px;font-weight:800;line-height:22px;padding:0;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:pointer}
 .tlx:hover{background:#b3261e}
+.tlx.impx{position:static;width:22px;height:22px;font-size:15px}
+.imp-wrap{max-height:360px;overflow:auto}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .tlinfo{min-width:0;font-size:14px;line-height:1.35;overflow-wrap:anywhere}
 .tltag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:6px;padding:1px 6px;margin-top:2px}
 .tltag.warn{background:#fff4d6;color:#8a5a00}.tltag.bad{background:#fdeceb;color:#b3261e}
@@ -1591,9 +1594,9 @@ function stockShellHTML(){
   if(D.importPrev){
     const p=D.importPrev;
     h+=`<div class="preview"><b>Preview: ${esc(p.file)}: ${p.rows.length} items found (${p.add} new, ${p.upd} already in the list will be updated)</b>
-      <span class="hint">Columns used: Part no. = “${esc(p.map.pn)}”, Item name = “${esc(p.map.name)}”${p.map.brand?`, Brand = “${esc(p.map.brand)}”`:""}${p.map.cat?`, Category = “${esc(p.map.cat)}”`:""}</span>
-      <div class="tbl-wrap"><table><thead><tr><th>Part no.</th><th>Item name</th><th>Brand / make</th><th>Category</th></tr></thead><tbody>${p.rows.slice(0,12).map(r=>`<tr><td class="mono">${esc(r.pn)}</td><td>${esc(r.name)}</td><td>${esc(r.brand)}</td><td>${esc(r.cat)}</td></tr>`).join("")}</tbody></table></div>
-      ${p.rows.length>12?`<span class="hint">…and ${p.rows.length-12} more</span>`:""}<div class="toolbar"><button class="btn ok" data-act="sdoimport">Import ${p.rows.length} items</button><button class="btn" data-act="scancelimport">Cancel</button></div></div>`;
+      <span class="hint">${p.combined?`Part no. and item name were split from one column (the part no. in brackets or after the dash)`:`Columns used: Part no. = “${esc(p.map.pn)}”, Item name = “${esc(p.map.name)}”`}${p.dups?` · ${p.dups} repeated line${p.dups===1?"":"s"} skipped`:""}${p.map.brand?`, Brand = “${esc(p.map.brand)}”`:""}${p.map.cat?`, Category = “${esc(p.map.cat)}”`:""}</span>
+      <div class="tbl-wrap imp-wrap"><table><thead><tr><th>Part no.</th><th>Item name</th><th>Brand / make</th><th>Category</th><th style="width:40px"><span class="sr-only">Remove</span></th></tr></thead><tbody>${p.rows.slice(0,500).map((r,i)=>`<tr><td class="mono">${esc(r.pn)}</td><td>${esc(r.name)}</td><td>${esc(r.brand)}</td><td>${esc(r.cat)}</td><td><button class="tlx impx" data-act="simprm" data-i="${i}" title="Remove this line" aria-label="Remove ${esc(r.pn)} from the import">×</button></td></tr>`).join("")}</tbody></table></div>
+      ${p.rows.length>500?`<span class="hint">Showing the first 500 of ${p.rows.length}.</span>`:""}<div class="toolbar"><button class="btn ok" data-act="sdoimport" ${p.rows.length?"":"disabled"}>Import ${p.rows.length} item${p.rows.length===1?"":"s"}</button><button class="btn" data-act="scancelimport">Cancel</button></div></div>`;
   }
   if(D.importErr) h+=`<p class="err" style="text-align:left">${esc(D.importErr)}</p>`;
   if(D.stockAdd) h+=`<div class="preview inl"><b>Add stock item</b><div class="toolbar"><input placeholder="Part no." data-in="sa-pn" value="${esc(D.stockAdd.pn)}" class="mono"><input placeholder="Item name" data-in="sa-name" value="${esc(D.stockAdd.name)}" style="flex:1"><input placeholder="Alternate nos (comma separated)" data-in="sa-alt" value="${esc(D.stockAdd.alt)}" class="mono" style="flex:1"><input placeholder="Group / make" data-in="sa-brand" data-combo="groups" autocomplete="off" value="${esc(D.stockAdd.brand)}"><input placeholder="Category" data-in="sa-cat" data-combo="cats" autocomplete="off" value="${esc(D.stockAdd.cat)}"><input placeholder="MRP ₹" type="number" min="0" data-in="sa-mrp" value="${esc(D.stockAdd.mrp)}" style="width:110px"><input placeholder="GST %" type="number" min="0" data-in="sa-gst" value="${esc(D.stockAdd.gst)}" style="width:80px"><input placeholder="HSN code" data-in="sa-hsn" value="${esc(D.stockAdd.hsn)}" style="width:110px"><button class="btn ok" data-act="ssave">Save</button><button class="btn" data-act="scanceladd">Cancel</button></div></div>`;
@@ -1793,6 +1796,17 @@ function parseCSV(text){
   }
   if(cell||row.length){ row.push(cell); rows.push(row); }
   return rows;
+}
+/* "OIL PUMP GEAR TATA 40MM (GT-3036/NIM)" or "380DIA KIT (LEY)-GT-P5106038" → {name, pn} */
+function splitNamePn(text){
+  const t=String(text||"").trim(); if(!t || !/\s/.test(t)) return null;
+  let m=t.match(/^(.*\S)\s*\(\s*([^()\s]*\d[^()\s]*)\s*\)\s*$/);                 // name (PN)
+  if(m) return {name:m[1].trim(), pn:m[2]};
+  m=t.match(/^(.*\S)\s*[-–]\s*(GT\s*-?\s*[A-Z0-9][A-Z0-9\/.\-]*)\s*$/i);          // name-GT-PN
+  if(m) return {name:m[1].trim(), pn:m[2].replace(/\s+/g,"")};
+  m=t.match(/^(.*\s.*\S)\s*[-–]\s*([A-Z0-9]*\d[A-Z0-9\/.]*)\s*$/i);              // name-PN
+  if(m) return {name:m[1].trim(), pn:m[2]};
+  return null;
 }
 async function readTable(file){
   const name=file.name.toLowerCase(); let rows;
@@ -2178,6 +2192,10 @@ const ACT = {
       try{ await ensureInLists(p.rows.map(r=>r.brand),p.rows.map(r=>r.cat)); }catch(e){} dtoast(`${p.rows.length} items imported ✓`); }catch(e){ dtoast("Import failed: "+(e.message||e.code)); }
   },
   scancelimport(){ S.desk.importPrev=null; renderDeskBody(); },
+  simprm(el){ const p=S.desk.importPrev; if(!p) return; const wrap=document.querySelector(".imp-wrap"), st=wrap?wrap.scrollTop:0;
+    p.rows.splice(Number(el.dataset.i),1); const have=new Set(S.stockItems.map(i=>norm(i.pn)));
+    p.add=p.rows.filter(r=>!have.has(norm(r.pn))).length; p.upd=p.rows.length-p.add;
+    if(!p.rows.length){ S.desk.importPrev=null; } renderDeskBody(); const w2=document.querySelector(".imp-wrap"); if(w2) w2.scrollTop=st; },
   async vdel(el){
     const D=S.desk, id=el.dataset.id, v=vendorById(id); if(!v) return;
     const open=liveOrders().filter(o=>o.vendorId===id&&isOpen(o)).length;
@@ -2299,9 +2317,17 @@ const CH = {
       const rows=await readTable(file);
       const spec=[["pn",/part\s*n|part\s*#|part\s*code|item\s*code|^code$|^p\.?\s*no|^pno/],["name",/item\s*name|^name|particular|desc/],["brand",/brand|make|company|mfr|manufact|group/],["cat",/categ|type|class/],["alt",/alias|alt/],["mrp",/mrp/],["gst",/gst|igst|tax\s*rate/],["hsn",/hsn\s*code|^hsn$|hsn\/sac/]];
       let fc=findCols(rows,spec), body, map;
-      if(fc){ body=rows.slice(fc.h+1); map=fc.map; } else { body=rows.slice(1); map={pn:0,name:1}; fc={hdr:rows[0]||[]}; }
-      const out=[]; const seen=new Set();
-      body.forEach(r=>{ const pn=gtPn(r[map.pn]); if(!norm(pn)||seen.has(norm(pn))) return; seen.add(norm(pn)); const it={pn,name:r[map.name]||"",brand:map.brand!=null?r[map.brand]||"":"",cat:map.cat!=null&&r[map.cat]!=="Not Applicable"?r[map.cat]||"":""};
+      if(fc){ body=rows.slice(fc.h+1); map=fc.map; }
+      else {
+        // no heading row found: only treat the first row as a heading if it looks like one (words, no digits)
+        const first=rows[0]||[], looksHead=first.some(c=>/part|item|name|desc|code|particular|stock/i.test(c)) && !first.some(c=>/\d/.test(c));
+        body=looksHead?rows.slice(1):rows; map={pn:0,name:1}; fc={hdr:looksHead?first:["column 1","column 2"]};
+      }
+      const out=[]; const seen=new Set(); let combined=0, dups=0;
+      body.forEach(r0=>{ const r=[...r0];
+        // one column holding "name (part no.)" – split it
+        if((map.name==null || !String(r[map.name]||"").trim() || map.name===map.pn) && /\s/.test(String(r[map.pn]||""))){ const sp=splitNamePn(r[map.pn]); if(sp){ r[map.pn]=sp.pn; if(map.name==null){ map.name=r.length; } r[map.name]=sp.name; combined++; } }
+        const pn=gtPn(r[map.pn]); if(!norm(pn)) return; if(seen.has(norm(pn))){ dups++; return; } seen.add(norm(pn)); const it={pn,name:r[map.name]||"",brand:map.brand!=null?r[map.brand]||"":"",cat:map.cat!=null&&r[map.cat]!=="Not Applicable"?r[map.cat]||"":""};
         if(map.mrp!=null){ const m=String(r[map.mrp]||"").replace(/[^\d.]/g,""); if(m) it.mrp=Number(m); }
         if(map.gst!=null){ const g=String(r[map.gst]||"").replace(/[^\d.]/g,""); if(g) it.gst=Number(g); }
         if(map.hsn!=null && String(r[map.hsn]||"").trim()) it.hsn=String(r[map.hsn]).trim();
@@ -2310,7 +2336,7 @@ const CH = {
         const al=[...new Set(alt.filter(a=>norm(a)&&norm(a)!==norm(pn)))]; if(al.length) it.alt=al; out.push(it); });
       if(!out.length) throw new Error("No rows with a part number were found in that file.");
       const have=new Set(S.stockItems.map(i=>norm(i.pn)));
-      D.importPrev={file:file.name,rows:out,add:out.filter(r=>!have.has(norm(r.pn))).length,upd:out.filter(r=>have.has(norm(r.pn))).length,map:{pn:fc.hdr[map.pn]||"column 1",name:fc.hdr[map.name]||"column 2",brand:map.brand!=null?fc.hdr[map.brand]:"",cat:map.cat!=null?fc.hdr[map.cat]:""}};
+      D.importPrev={file:file.name,combined,dups,rows:out,add:out.filter(r=>!have.has(norm(r.pn))).length,upd:out.filter(r=>have.has(norm(r.pn))).length,map:{pn:fc.hdr[map.pn]||"column 1",name:fc.hdr[map.name]||"column 2",brand:map.brand!=null?fc.hdr[map.brand]:"",cat:map.cat!=null?fc.hdr[map.cat]:""}};
     }catch(e){ D.importErr=e.message||"That file could not be read."; }
     renderDeskBody();
   },
