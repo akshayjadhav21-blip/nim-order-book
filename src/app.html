@@ -101,6 +101,32 @@ tr.pend td{background:var(--warnbg)}
 .tile.t-g{border-left-color:var(--accent);cursor:pointer;text-align:left;font:inherit;color:inherit}
 .rvhead{display:flex;flex-direction:column;gap:2px}
 .rvhead b{font-family:var(--display);font-size:22px}
+.restag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px;background:var(--okbg);color:var(--ok);margin-top:3px}
+.resbox{border:2px solid var(--accent);background:var(--warnbg);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.reschoice{display:flex;flex-direction:column;gap:6px}
+.reschoice button{text-align:left;border:1.5px solid var(--line);background:var(--panel);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:2px;cursor:pointer;font:inherit;color:inherit}
+.reschoice button.on{border-color:var(--ok);background:var(--okbg)}
+.reschoice small{font-size:12px;color:var(--muted,#666)}
+.resl{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:13px}
+.resl textarea{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);resize:vertical}
+.rvrev{border:2px solid var(--accent);border-radius:12px;overflow:hidden;background:var(--panel)}
+.rvrev-head{background:var(--warnbg);padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.rvrev-head>b{font-size:16px}
+.rvrev-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px}
+.rvrev-list{display:flex;flex-direction:column}
+.rvrev-row{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-top:1px solid var(--line)}
+.rvrev-n{font-weight:700;color:var(--muted,#888);min-width:18px}
+.rvrev-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;font-size:13px}
+.rvrev-name{font-size:13px}
+.rvrev-tags{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.rvrev-tags .tg{font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px}
+.rvrev-tags .tg.ok{background:var(--okbg);color:var(--ok)}
+.rvrev-tags .tg.bad{background:#fde2e1;color:#b42318}
+.rvrev-tags .tg.pend{background:#e0ecff;color:#1d4ed8}
+.rvrev-tags .tg.ch{background:var(--accent);color:var(--accent-ink)}
+.rvrev-q{display:flex;flex-direction:column;align-items:flex-end;font-size:20px;line-height:1.1}
+.rvrev-q .hint{font-size:11px}
+.btn.rvback{width:100%;margin-top:8px;padding:12px;font-weight:700}
 .rvbill{display:flex;gap:8px;flex-wrap:wrap}
 .rvbill label{flex:1 1 140px;display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:600}
 .rvbill input{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
@@ -169,7 +195,7 @@ tr.pend td{background:var(--warnbg)}
 .lastord.none{color:var(--muted);font-weight:500}
 .ldot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
 .ldot.ok{background:#1f9d55}.ldot.open{background:#d93025}
-.addmore.tlopen{border-style:solid;border-color:#7b5cff;color:#4b2fd1;background:#f4f1ff}
+.addmore.tlopen{border-style:solid;border-color:var(--accent);color:var(--ink);background:var(--warnbg)}
 .tlhead{line-height:1.5}
 .linkbtn{border:0;background:none;color:var(--info);font-weight:600;font-size:13px;text-decoration:underline;padding:4px}
 .tlmode{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
@@ -205,6 +231,58 @@ tr.pend td{background:var(--warnbg)}
 .pvmname{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pvmv{color:var(--ok);font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pvedit{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:7px 12px;font-weight:700;font-size:14px;color:var(--ink)}
+.bb-tr{background:var(--accent);color:var(--accent-ink)}
+.save-btn.trcreate{font-size:18px;padding:14px 16px;min-height:0;margin:0}
+.trstep{text-align:left;flex-direction:row}
+.trform{display:flex;flex-direction:column;gap:8px}
+.trf{display:flex;flex-direction:column;gap:4px}.trf label,.trform .oegrid label{font-size:13px;font-weight:600}
+.trform .sugg:empty{display:none}
+.gdrow{display:flex;gap:6px}.gdrow input{flex:1;min-width:0}
+.gdtoggle{flex:none;width:52px;border:1px solid var(--line);border-radius:10px;background:var(--panel);font-size:20px;font-weight:800;color:var(--ink)}
+.gddrop{margin-top:4px;max-height:230px;overflow-y:auto;border:2px solid var(--accent);border-radius:10px;background:var(--panel);box-shadow:0 6px 18px rgba(0,0,0,.12);overscroll-behavior:contain}
+.gdcount{position:sticky;top:0;background:var(--accent);color:var(--accent-ink);font-size:12px;font-weight:700;padding:5px 10px}
+.gdopt{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:none;padding:11px 12px;font-family:var(--mono,monospace);font-size:16px;font-weight:700;color:var(--ink)}
+.gdopt:last-child{border-bottom:0}
+.gdopt.hi,.gdopt:hover{background:var(--warnbg)}
+.gdopt.sel{color:var(--warn)}.gdopt.sel::after{content:" ✓";color:var(--ok)}
+.gdchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.gdchip{border:1px solid var(--accent);background:var(--warnbg);color:var(--ink);border-radius:999px;padding:6px 12px;font-weight:700;font-family:var(--mono,monospace);font-size:14px}
+.gdchip.static{display:inline-flex;align-items:center;gap:6px;padding:4px 6px 4px 10px}
+.gdchip.static button{border:0;background:#d93025;color:#fff;width:18px;height:18px;border-radius:50%;font-size:12px;line-height:18px;padding:0}
+.gdgrid{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto}
+.trbtn{border-style:solid;border-color:var(--accent);color:var(--ink);background:var(--warnbg)}
+.trh{margin:6px 0 0;font-size:18px}
+.trlines{display:flex;flex-direction:column;gap:8px}
+.trline{position:relative;display:flex;gap:10px;align-items:flex-start;padding:10px 34px 10px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.trn{flex:none;width:24px;height:24px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.trli{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:14px;overflow-wrap:anywhere}
+.trmeta{font-size:13px}
+.gdtag{display:inline-block;background:var(--warnbg);color:var(--ink);border:1px solid var(--accent);border-radius:6px;padding:0 6px;font-weight:700;font-family:var(--mono,monospace);font-size:12.5px;margin-right:4px}
+.trhead{display:flex;justify-content:space-between;gap:8px}
+.trst{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:2px 9px;vertical-align:middle;font-family:inherit}
+.trst.open{background:#fff4d6;color:#8a5a00}.trst.closed{background:var(--okbg);color:var(--ok)}.trst.cancelled{background:#eee;color:#777}
+.trshare{display:flex;gap:8px;flex-wrap:wrap}.trshare .btn{text-decoration:none}
+.trclose{display:flex;flex-direction:column;gap:8px;padding:12px;border:2px solid #e0a800;border-radius:12px;background:var(--warnbg)}
+.trclose.tr-done{border-color:var(--ok);background:var(--okbg)}
+.trstep{display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);width:100%;font:inherit;color:inherit}
+.trstep label{font-weight:700;font-size:14px}
+.trstep.tr-ok{border-color:var(--ok)}
+.trck{flex:none;width:28px;height:28px;border-radius:50%;background:#d93025;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center}
+.trstep.tr-ok .trck{background:var(--ok)}
+.trvrow{display:flex;gap:6px;margin-top:4px}.trvrow input{flex:1;min-width:0}
+.trbar{cursor:pointer}
+.trbar2{display:flex;gap:6px;flex-wrap:wrap}
+.trlist{display:flex;flex-direction:column;gap:8px}
+.trcard{display:flex;flex-direction:column;gap:3px;text-align:left;padding:10px 12px;border:1px solid var(--line);border-left:5px solid #e0a800;border-radius:10px;background:var(--panel);font:inherit;color:inherit;cursor:pointer}
+.trcard.closed{border-left-color:var(--ok)}.trcard.cancelled{border-left-color:#bbb;opacity:.7}
+.trc1{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.trc2{display:flex;gap:2px;flex-wrap:wrap;align-items:center}
+.trneed{display:flex;gap:6px;flex-wrap:wrap}
+.tltag.ok{background:var(--okbg);color:var(--ok)}
+#dbody .trlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.trdeskform .trform{display:grid;grid-template-columns:2fr 2fr 1.2fr 1.6fr;gap:10px;align-items:start}
+.trdeskform .trform>.err,.trdeskform .trform>.trbtn{grid-column:1/-1}
+.trdeskform .trform .oegrid{grid-column:auto}
 .pobtn{padding:8px 12px;border-radius:8px;border:1px solid #1f9d55;background:var(--panel);color:#1f9d55;font-weight:700}
 .bb-wa{background:#1f9d55;color:#fff;font-size:20px}
 .wabtn{display:block;text-align:center;padding:18px;border-radius:14px;background:#1f9d55;color:#fff;font-family:var(--display);font-size:24px;font-weight:700;text-decoration:none}
@@ -616,9 +694,9 @@ const t = k => (T[S.phone.lang]||T.en)[k] ?? T.en[k] ?? k;
 /* ---------- state ---------- */
 const emptyForm = () => ({pn:"",item:null,vendor:"",qty:1,rate:"",customer:"",urgent:false,note:"",sort:"recent",editId:null,lines:[]});
 const S = {
-  claims:[], drafts:[], groups:[], cats:[], items:[], stockItems:[], newParts:[], empReqs:[], pos:[], history:[], vendors:[], employees:[], orders:{},
+  claims:[], drafts:[], transfers:[], godowns:[], groups:[], cats:[], items:[], stockItems:[], newParts:[], empReqs:[], pos:[], history:[], vendors:[], employees:[], orders:{},
   chunkIds:{stock:[],hist:[]}, chunks:{stock:{},hist:{}},
-  loaded:{stock:false,hist:false,vendors:false,employees:false,orders:false,newparts:false,empreq:false,pos:false,groups:false,cats:false,drafts:false,claims:false},
+  loaded:{stock:false,hist:false,vendors:false,employees:false,orders:false,newparts:false,empreq:false,pos:false,groups:false,cats:false,drafts:false,claims:false,godowns:false,transfers:false},
   db:null, mode:"connecting", lastSync:null, prevUpd:{}, flash:{},
   phone:{user:null,screen:"login",pinFor:null,pin:"",pinErr:false,lang:"en",offline:false,queue:[],frozen:null,form:emptyForm(),last:null,toast:null},
   desk:{tab:"book",userId:"",pendingOnly:false,filters:{vendor:"",status:"",emp:"",from:"",to:"",urgent:false,issues:false,q:""},form:null,groupStatus:"Pending",stockQ:"",stockAdd:null,stockEdit:null,importPrev:null,histPrev:null,vendEdit:null,vendAdd:null,empAdd:null,confirmClear:false,copyText:null},
@@ -739,13 +817,18 @@ async function initDb(){
       done(); onData();
     }, handleErr);
   }
-  for(const name of ["vendors","employees","groups","cats"]){
+  for(const name of ["vendors","employees","groups","cats","godowns"]){
     db.doc(`master/${name}`).onSnapshot(s=>{
       const d=s.exists?s.data():null; S[name]=d&&Array.isArray(d.list)?d.list:[];
       if(!s.metadata.fromCache || S[name].length) S.loaded[name]=true;
       done(); onData();
     }, handleErr);
   }
+  db.collection("transfers").onSnapshot(snap=>{
+    S.transfers=snap.docs.map(d=>d.data()).filter(x=>x&&x.id).sort((a,b)=>String(b.created).localeCompare(String(a.created)));
+    if(!snap.metadata.fromCache || snap.size) S.loaded.transfers=true;
+    done(); onData();
+  }, handleErr);
   db.collection("claims").onSnapshot(snap=>{
     S.claims=snap.docs.map(d=>d.data()).filter(x=>x&&x.id).sort((a,b)=>String(b.created).localeCompare(String(a.created)));
     if(!snap.metadata.fromCache || snap.size) S.loaded.claims=true;
@@ -1057,7 +1140,33 @@ function startRecv(ctx, vid, ids){
   const lines={}; os.forEach(o=>lines[o.id]={on:!!ids, qty:o.qty, issue:"", note:""});
   S.recvs[ctx]={vid, single:!!ids, ids:os.map(o=>o.id), billNo:"", billDate:today(), lines, err:""};
 }
+function recvCheck(R){
+  const ids=R.ids.filter(id=>R.lines[id].on && isOpen(S.orders[id]));
+  if(!ids.length) return "Tick at least one item.";
+  const anyCh=ids.some(id=>R.lines[id].challan), anyBill=ids.some(id=>!R.lines[id].challan);
+  if(anyBill&&!String(R.billNo).trim()) return "Enter the vendor bill number.";
+  if(anyCh&&!String(R.challanNo||"").trim()) return "Enter the challan number.";
+  return "";
+}
+function recvReviewHTML(ctx){
+  const R=S.recvs[ctx], v=vendorById(R.vid)||{name:""}, big=ctx==="phone";
+  const ids=R.ids.filter(id=>R.lines[id].on && isOpen(S.orders[id]));
+  const anyCh=ids.some(id=>R.lines[id].challan), anyBill=ids.some(id=>!R.lines[id].challan);
+  let h=`<div class="rvrev"><div class="rvrev-head"><span class="hint">Check before saving</span><b>${esc(v.name)}</b>
+    <div class="rvrev-meta">${anyBill?`<span>Bill no. <b class="mono">${esc(String(R.billNo).trim())}</b></span>`:""}${anyCh?`<span>Challan no. <b class="mono">${esc(String(R.challanNo||"").trim())}</b></span>`:""}<span>Date <b>${fmtD(R.billDate||today())}</b></span></div></div>
+    <div class="rvrev-list">`;
+  ids.forEach((id,i)=>{ const o=S.orders[id], L=R.lines[id], {billed,good:q,notBilled,short:bal}=rvNums(o,L), iss=billed?(L.issue||(bal?"Short":"")):"";
+    h+=`<div class="rvrev-row"><span class="rvrev-n">${i+1}</span><div class="rvrev-main"><span class="mono">${esc(showPn(o.pn))}</span><span class="rvrev-name">${esc(showName(o.name))}</span>
+      <span class="rvrev-tags">${!billed?`<span class="tg pend">Not billed → all ${o.qty} to Pending</span>`:iss?`<span class="tg bad">${esc(iss)}${bal&&iss==="Short"?` ${bal}`:""}</span>`:`<span class="tg ok">OK</span>`}${billed&&notBilled?`<span class="tg pend">${notBilled} not billed → Pending</span>`:""}${L.challan?`<span class="tg ch">📄 Challan</span>`:""}${L.issue&&L.note?`<span class="hint">${esc(L.note)}</span>`:""}</span></div>
+      <div class="rvrev-q"><b>${q}</b><span class="hint">recd</span><span class="hint">${billed} billed · ${esc(o.qty)} ord.</span></div></div>`; });
+  h+=`</div></div>`;
+  if(R.err) h+=`<p class="err" style="text-align:left;margin:0">${esc(R.err)}</p>`;
+  h+=`<button class="${big?"save-btn":"btn ok"}" data-act="rvconfirm" data-ctx="${ctx}">✓ Confirm &amp; save</button>
+    <button class="btn rvback" data-act="rvback" data-ctx="${ctx}">← Back to make changes</button>`;
+  return h;
+}
 function recvHTML(ctx){
+  const R0=S.recvs[ctx]; if(R0&&R0.review) return recvReviewHTML(ctx);
   const R=S.recvs[ctx]; if(!R) return ""; const v=vendorById(R.vid)||{name:""}; const big=ctx==="phone";
   const ids=R.ids.filter(id=>isOpen(S.orders[id]));
   const nOn=ids.filter(id=>R.lines[id].on).length;
@@ -1072,7 +1181,8 @@ function recvHTML(ctx){
     const o=S.orders[id], L=R.lines[id];
     h+=`<div class="rline srow ${L.on?"on":""}" data-sk="rv${ctx}"><button class="rtick" data-act="rvtoggle" data-ctx="${ctx}" data-id="${esc(id)}" aria-pressed="${L.on}"><span class="box">${L.on?"✓":""}</span><span><span class="mono">${esc(showPn(o.pn))}</span> · ${esc(showName(o.name))}<br><span class="hint">Ordered ${esc(o.qty)} · ${fmtD(localDate(o.created))} · ${esc(o.by)}</span></span></button>`;
     if(L.on){
-      h+=`<div class="rbody"><div class="rrow"><span class="rl">Received OK</span><div class="stepper sm"><button data-act="rvqty" data-ctx="${ctx}" data-id="${esc(id)}" data-d="-1" aria-label="Less">−</button><input type="number" min="0" max="${esc(o.qty)}" inputmode="numeric" data-in="rv-qty" data-ctx="${ctx}" data-id="${esc(id)}" value="${esc(L.qty)}" aria-label="Quantity received"><button data-act="rvqty" data-ctx="${ctx}" data-id="${esc(id)}" data-d="1" aria-label="More">+</button><span class="hint">of ${esc(o.qty)}</span></div></div>
+      h+=`<div class="rbody"><div class="rrow"><span class="rl">${L.challan?"On challan":"On bill"}</span><div class="stepper sm"><button data-act="rvbilled" data-ctx="${ctx}" data-id="${esc(id)}" data-d="-1" aria-label="Less">−</button><input type="number" min="0" max="${esc(o.qty)}" inputmode="numeric" data-in="rv-billed" data-ctx="${ctx}" data-id="${esc(id)}" value="${esc(L.billed??o.qty)}" aria-label="Quantity on bill"><button data-act="rvbilled" data-ctx="${ctx}" data-id="${esc(id)}" data-d="1" aria-label="More">+</button><span class="hint">of ${esc(o.qty)} ordered</span></div></div>
+        <div class="rrow"><span class="rl">Received OK</span><div class="stepper sm"><button data-act="rvqty" data-ctx="${ctx}" data-id="${esc(id)}" data-d="-1" aria-label="Less">−</button><input type="number" min="0" max="${esc(o.qty)}" inputmode="numeric" data-in="rv-qty" data-ctx="${ctx}" data-id="${esc(id)}" value="${esc(L.qty)}" aria-label="Quantity received"><button data-act="rvqty" data-ctx="${ctx}" data-id="${esc(id)}" data-d="1" aria-label="More">+</button><span class="hint">of ${esc(rvNums(o,L).billed)} billed</span></div></div>
         <div class="rrow col"><span class="rl">Problem?</span><div class="issues">${ISSUES.map(x=>`<button class="${(L.issue||"")===x?"on":""}" data-act="rvissue" data-ctx="${ctx}" data-id="${esc(id)}" data-v="${x}">${x||"No problem"}</button>`).join("")}<button class="chbtn ${L.challan?"on":""}" data-act="rvchallan" data-ctx="${ctx}" data-id="${esc(id)}" aria-pressed="${!!L.challan}">📄 On challan</button></div></div>
         ${L.issue?`<input data-in="rv-note" data-ctx="${ctx}" data-id="${esc(id)}" value="${esc(L.note)}" placeholder="What's wrong? (optional)" class="rnote">`:""}
         <span class="rsum" id="rsum-${ctx}-${esc(id)}">${rsumText(o,L)}</span></div>`;
@@ -1085,13 +1195,20 @@ function recvHTML(ctx){
   if(!big) h+=`<button class="btn" data-act="rvcancel" data-ctx="desk">Cancel</button>`;
   return h;
 }
+function rvNums(o,L){
+  const billed=Math.min(o.qty,Math.max(0,Math.round(Number(L.billed??o.qty)||0)));
+  const good=Math.min(billed,Math.max(0,Math.round(Number(L.qty)||0)));
+  return {billed, good, notBilled:o.qty-billed, short:billed-good};
+}
 function rsumText(o,L){ const base=rsumText0(o,L); return L.challan?base+" · on challan (invoice to follow)":base; }
 function rsumText0(o,L){
-  const q=Math.min(o.qty,Math.max(0,Number(L.qty)||0)), bal=o.qty-q, iss=L.issue||(bal?"Short":"");
-  if(!bal && !L.issue) return `All ${o.qty} received ✓`;
-  if(!bal) return `${q} received · flagged: ${esc(L.issue)}`;
-  if(!q) return `Nothing received · ${esc(iss)} ${bal}. Order stays open.`;
-  return `${q} received · ${esc(iss)} ${bal}: balance ${bal} stays open with this vendor`;
+  const {billed,good:q,notBilled,short}=rvNums(o,L), iss=L.issue||(short?"Short":"");
+  const nb = notBilled ? `${notBilled} not billed → back to Pending` : "";
+  if(!billed) return `Not billed (vendor has no stock) → all ${o.qty} back to Pending`;
+  if(!short && !L.issue) return notBilled ? `${q} received ✓ · ${nb}` : `All ${o.qty} received ✓`;
+  if(!short) return `${q} received · flagged: ${esc(L.issue)}${nb?" · "+nb:""}`;
+  if(!q) return `Nothing received · ${esc(iss)} ${short}. Order stays open.${nb?" · "+nb:""}`;
+  return `${q} received · ${esc(iss)} ${short}: stays open with this vendor${nb?" · "+nb:""}`;
 }
 async function saveRecv(ctx){
   const R=S.recvs[ctx]; if(!R) return false;
@@ -1106,29 +1223,75 @@ async function saveRecv(ctx){
   for(const id of ids){
     const o=S.orders[id], L=R.lines[id], now=new Date().toISOString();
     const ch=!!L.challan, billNo=ch?`challan ${challanNo}`:billNo0;
-    const good=Math.min(o.qty,Math.max(0,Math.round(Number(L.qty)||0))), bal=o.qty-good;
-    const issue=L.issue||(bal?"Short":"");
-    const rc={t:now,by:who.name,dev,billNo:ch?"":billNo0,challanNo:ch?challanNo:"",billDate,qty:good,issue,note:String(L.note||"").trim()};
+    const {billed,good,notBilled,short}=rvNums(o,L), bal=short;
+    const issue=billed?(L.issue||(short?"Short":"")):"";
+    const rc={t:now,by:who.name,dev,billNo:ch?"":billNo0,challanNo:ch?challanNo:"",billDate,qty:good,billed,issue,note:String(L.note||"").trim()};
     const patch={receipts:[...(o.receipts||[]),rc]};
+    let what, pendTxt="";
+    // part the vendor did not bill (no stock with him) -> back to Pending, not a Short
+    if(notBilled>0 && billed>0){
+      const p={...clone(o), id:newId(), qty:notBilled, status:"Pending", poNo:null, received:null, receipts:[], issue:null, billNo:"", billDate:"", onChallan:false, balanceOf:o.id,
+        note:`Not billed – vendor had no stock (${billed} of ${o.qty} billed on ${ch?"challan ":"bill "}${ch?challanNo:billNo0})`, created:now, updated:now, updatedBy:who.name,
+        log:[{t:now,who:who.name,dev,what:`Back to Pending: ${notBilled} of ${o.qty} not billed on ${ch?"challan ":"bill "}${ch?challanNo:billNo0} (vendor had no stock)`}]};
+      await writeOrder(p); patch.pendingId=p.id; patch.qty=billed; res.pend=(res.pend||0)+1;
+      pendTxt=` · ${notBilled} not billed, back to Pending`;
+    }
+    if(!billed){
+      patch.status="Pending"; patch.poNo=null;
+      await updateOrder(o.id,patch,`Not billed on ${ch?"challan ":"bill "}${ch?challanNo:billNo0} – vendor had no stock, back to Pending`,who,dev);
+      res.pend=(res.pend||0)+1; continue;
+    }
     if(issue){ patch.issue={type:issue,qty:bal||null,note:rc.note,t:now,by:who.name,billNo,resolved:false}; res.issues++; }
-    let what;
     if(good>0){ patch.status="Received"; patch.received=good;
       if(ch){ patch.onChallan=true; patch.challanNo=challanNo; patch.challanDate=billDate; patch.billNo=""; patch.billDate=""; }
       else { patch.billNo=billNo0; patch.billDate=billDate; } }
-    if(good>0 && !bal){ what=`Received ${good} on ${ch?"":"bill "}${billNo}${issue?` (flagged: ${issue})`:""}`; res.full++; }
+    if(good>0 && !bal){ what=`Received ${good}${notBilled?` of ${o.qty}`:""} on ${ch?"":"bill "}${billNo}${issue?` (flagged: ${issue})`:""}${pendTxt}`; res.full++; }
     else if(good>0){
       const b={...clone(o), id:newId(), qty:bal, status:o.status, received:null, receipts:[], issue:null, billNo:"", billDate:"", balanceOf:o.id,
-        note:`Balance of ${o.qty} – ${issue}${rc.note?": "+rc.note:""}`, created:now, updated:now, updatedBy:who.name,
-        log:[{t:now,who:who.name,dev,what:`Balance ${bal} opened after receiving ${good} of ${o.qty} on ${ch?"":"bill "}${billNo}`}]};
+        note:`Short ${bal} – billed ${billed}, received ${good}${rc.note?": "+rc.note:""}`, created:now, updated:now, updatedBy:who.name,
+        log:[{t:now,who:who.name,dev,what:`Short balance ${bal} opened: billed ${billed}, received ${good} on ${ch?"":"bill "}${billNo}`}]};
       await writeOrder(b); patch.balanceId=b.id;
-      what=`Received ${good} of ${o.qty} on ${ch?"":"bill "}${billNo} – ${issue} ${bal}, balance order opened`; res.part++;
-    } else what=`${issue} ${o.qty} on ${ch?"":"bill "}${billNo} – nothing received, order stays open`;
+      what=`Received ${good} of ${billed} billed on ${ch?"":"bill "}${billNo} – ${issue} ${bal}, balance stays open${pendTxt}`; res.part++;
+    } else what=`${issue} ${billed} on ${ch?"":"bill "}${billNo} – nothing received, order stays open${pendTxt}`;
     await updateOrder(o.id,patch,what,who,dev);
     const par=o.balanceOf&&S.orders[o.balanceOf];
     if(par && good>0 && !bal && par.issue && !par.issue.resolved && par.issue.type==="Short")
       await updateOrder(par.id,{issue:{...par.issue,resolved:true}},`Short resolved: balance ${good} received on ${ch?"":"bill "}${billNo}`,who,dev);
   }
   S.recvs[ctx]=null; return res;
+}
+/* ---------- resolve a problem (shared) ---------- */
+S.res={phone:null,desk:null};
+function resBal(o){ const b=o.balanceId&&S.orders[o.balanceId]; return b&&isOpen(b)&&o.issue&&o.issue.type==="Short"?b:null; }
+function resolveHTML(ctx){
+  const R=S.res[ctx], o=R&&S.orders[R.id]; if(!o||!o.issue) return "";
+  const I=o.issue, b=resBal(o), big=ctx==="phone";
+  return `<div class="resbox"><b>Resolve: ⚠ ${esc(I.type)}${I.qty?" "+esc(I.qty):""}</b>
+    ${b?`<div class="reschoice"><button class="${R.how==="came"?"on":""}" data-act="reshow" data-ctx="${ctx}" data-v="came"><b>✓ Short part received</b><small>The missing ${esc(b.qty)} came. Line becomes ${esc((o.received||0)+b.qty)} received on bill ${esc(o.billNo||String(I.billNo||"").replace(/^challan /,""))}</small></button>
+      <button class="${R.how==="no"?"on":""}" data-act="reshow" data-ctx="${ctx}" data-v="no"><b>✗ Not coming</b><small>Credit note / adjusted in bill. Line stays ${esc(o.received||0)} received</small></button></div>
+      <span class="hint">Either way the open balance of ${esc(b.qty)} is removed.</span>`:""}
+    <label class="resl">Note (what happened)<textarea data-in="res-note" data-ctx="${ctx}" rows="2" class="${big?"p-input":""}" placeholder="${b?"e.g. Vendor sent the 1 pc with the next delivery":"e.g. Vendor replaced the damaged piece"}">${esc(R.note)}</textarea></label>
+    ${R.err?`<p class="err" style="text-align:left;margin:0">${esc(R.err)}</p>`:""}
+    <div class="npacts"><button class="btn ok" data-act="resok" data-ctx="${ctx}">✓ Mark resolved</button><button class="btn" data-act="rescancel" data-ctx="${ctx}">Back</button></div></div>`;
+}
+function resRender(ctx){ if(ctx==="phone") renderPhone(); else renderModal(); }
+async function doResolve(ctx){
+  const R=S.res[ctx], o=S.orders[R.id]; if(!o||!o.issue) return;
+  const who=ctx==="phone"?S.phone.user:deskUser(), dev=ctx==="phone"?"Phone":"Desktop", now=new Date().toISOString();
+  const note=String(R.note||"").trim(); if(!note){ R.err="Write a short note of what happened."; resRender(ctx); return; }
+  const b=resBal(o), came=b&&R.how==="came";
+  const patch={issue:{...o.issue,resolved:true,resolvedBy:who.name,resolvedAt:now,resolvedNote:note,resolvedHow:b?(came?"Short part received":"Not coming"):""}};
+  let what=`Problem resolved: ${o.issue.type}${o.issue.qty?" "+o.issue.qty:""}`;
+  if(b){
+    if(came){ const q=(o.received||0)+b.qty; patch.received=q; patch.receipts=[...(o.receipts||[]),{t:now,by:who.name,dev,billNo:o.billNo||"",challanNo:o.challanNo||"",billDate:o.billDate||o.challanDate||"",qty:b.qty,issue:"",note:"Short part received: "+note}];
+      what+=` – short ${b.qty} received on same bill ${o.billNo||o.challanNo||""}, now ${q} of ${o.qty}`; }
+    else what+=` – ${b.qty} not coming, balance removed`;
+    patch.balanceId=null;
+  }
+  what+=`. Note: ${note}`;
+  await updateOrder(o.id,patch,what,who,dev);
+  if(b){ if(S.db) await S.db.doc(`orders/${b.id}`).delete(); else { delete S.orders[b.id]; onData(); } }
+  S.res[ctx]=null; resRender(ctx); if(ctx==="phone") ptoast("Marked resolved ✓"); else dtoast("Marked resolved ✓");
 }
 function issueTag(o){ return o.issue && !o.issue.resolved ? `<span class="isstag">⚠ ${esc(o.issue.type)}${o.issue.qty?" "+esc(o.issue.qty):""}</span>` : ""; }
 
@@ -1292,9 +1455,14 @@ function renderPhone(){
   } else if(P.screen==="rvdone"){
     const r=P.rvres||{};
     head=`<div class="p-head"><b>Receipt saved</b></div>`;
-    body=`<div class="done"><div class="tick">✓</div><h2>Receipt saved</h2><p>${r.full||0} fully received${r.part?` · ${r.part} part received (balance kept open)`:""}${r.issues?` · ${r.issues} problem${r.issues===1?"":"s"} flagged for the office`:""}.</p>
+    body=`<div class="done"><div class="tick">✓</div><h2>Receipt saved</h2><p>${r.full||0} fully received${r.part?` · ${r.part} part received (short balance kept open)`:""}${r.pend?` · ${r.pend} not billed, back to Pending`:""}${r.issues?` · ${r.issues} problem${r.issues===1?"":"s"} flagged for the office`:""}.</p>
       <button class="big-btn bb-recv" data-act="pgo" data-s="rvvendor" style="justify-content:center">📦 Receive more</button>
       <button class="big-btn bb-list" data-act="pgo" data-s="home" style="justify-content:center;font-size:20px">${esc(t("home"))}</button></div>`;
+  } else if((P.screen==="trlist"||P.screen==="trnew"||P.screen==="trview") && typeof trListHTML==="function"){
+    const ttl={trlist:"Godown transfer",trnew:"New transfer",trview:"Transfer"}[P.screen];
+    head=`<div class="p-head"><button class="back" data-act="trback">${esc(t("back"))}</button><b>${ttl}</b></div>`;
+    body= P.screen==="trlist" ? `<button class="big-btn bb-tr" data-act="trnew" data-ctx="phone">➕ New transfer${S.tr.phone.form&&S.tr.phone.form.lines.length?` (${S.tr.phone.form.lines.length} parts not yet created)`:""}</button>${trListHTML("phone")}`
+        : P.screen==="trnew" ? (S.tr.phone.form?trFormHTML("phone"):"") : trViewHTML("phone");
   } else if(P.screen==="tally" && typeof tallyHTML==="function"){
     head=`<div class="p-head"><button class="back" data-act="tlback" data-ctx="phone">${esc(t("back"))}</button><b>Import from Tally</b></div>`; body=tallyHTML("phone");
   } else if(P.screen==="invscan" && typeof invHTML==="function"){
@@ -1341,7 +1509,7 @@ function issuesPhoneHTML(){
         <div class="hint">${I.billNo?`Bill ${esc(String(I.billNo).replace(/^challan /,"challan "))} · `:""}${fmtDT(I.t)} · by ${esc(I.by||"")}</div>
         ${I.note?`<div class="isnote">“${esc(I.note)}”</div>`:""}
         ${bal?`<div class="hint">Balance ${esc(bal.qty)} still open with vendor: <b>${esc(bal.status)}</b>${bal.poNo?` · ${esc(bal.poNo)}`:""}</div>`:""}
-        ${I.resolved?`<span class="pill Received" style="align-self:flex-start">✓ Resolved</span>`:`<div class="cardacts"><button class="rbtn ${sure?"on":""}" data-act="isres" data-id="${esc(o.id)}">${sure?"Tap again: resolved":"✓ Mark resolved"}</button></div>`}</div>`; }).join(""):`<p class="hint">${show==="open"?"No open short or damaged goods. 👍":"Nothing resolved yet."}</p>`);
+        ${I.resolved?`<span class="pill Received" style="align-self:flex-start">✓ Resolved${I.resolvedHow?" · "+esc(I.resolvedHow):""}</span>${I.resolvedNote?`<div class="isnote">📝 ${esc(I.resolvedNote)}<br><span class="hint">${esc(I.resolvedBy||"")}${I.resolvedAt?" · "+fmtDT(I.resolvedAt):""}</span></div>`:""}`:(S.res.phone&&S.res.phone.id===o.id?resolveHTML("phone"):`<div class="cardacts"><button class="rbtn" data-act="isres" data-id="${esc(o.id)}">✓ Mark resolved</button></div>`)}</div>`; }).join(""):`<p class="hint">${show==="open"?"No open short or damaged goods. 👍":"Nothing resolved yet."}</p>`);
 }
 function drawerHTML(){
   const P=S.phone, nd=unplacedCount(), nc=S.claims.filter(c=>!/^Closed/.test(c.status)).length, pend=P.queue.length;
@@ -1353,6 +1521,7 @@ function drawerHTML(){
     ${it(`data-act="isgo"`,"⚠️","Short &amp; damaged","Short, damaged or wrong parts",openIssues().length?`<span class="drbadge" style="background:var(--bad);color:#fff">${openIssues().length}</span>`:"")}
     ${it(`data-act="chgo"`,"📄","On challan","Goods received without invoice",(()=>{ const n=liveOrders().filter(o=>o.onChallan).length; return n?`<span class="drbadge" style="background:#ffd43b">${n}</span>`:""; })())}
     ${it(`data-act="clgo"`,"🔁","Claims","Defective parts back to vendors",nc?`<span class="drbadge">${nc}</span>`:"")}
+    ${it(`data-act="trgo"`,"🏬","Godown transfer","Transfer lists between godowns",(()=>{ const n=typeof trOpenCount==="function"?trOpenCount():0; return n?`<span class="drbadge" style="background:var(--accent);color:var(--accent-ink)">${n}</span>`:""; })())}
     <div class="drnet"><span><b>${P.offline?esc(t("offline")):esc(t("online"))}</b><br>${pend?`<span class="pending">${pend} ${esc(t("pendingSync"))}</span>`:`<span class="hint">Test: switch off to try offline</span>`}</span><button class="switch ${P.offline?"offline":""}" data-act="poffline" aria-label="Online or offline" aria-pressed="${!P.offline}"></button></div>
     <span style="flex:1"></span>
     ${it(`data-act="plogout"`,"🚪",esc(t("logout")),"")}
@@ -1439,7 +1608,7 @@ function applyItem(ctx, it){
 }
 
 /* ---------- desktop ---------- */
-const TABS=[["book","Order Book"],["byvendor","By Vendor"],["stock","Stock Items"],["vendors","Vendors"],["challans","On Challan"],["claims","Claims"],["emps","Employees"],["log","Edit History"]];
+const TABS=[["book","Order Book"],["byvendor","By Vendor"],["stock","Stock Items"],["vendors","Vendors"],["challans","On Challan"],["claims","Claims"],["transfers","Transfers"],["emps","Employees"],["log","Edit History"]];
 function renderDesk(){
   const D=S.desk, u=deskUser();
   if(!D.userId && u.id) D.userId=u.id;
@@ -1465,6 +1634,7 @@ function renderDeskBody0(){
   else if(D.tab==="emps") el.innerHTML=empsHTML();
   else if(D.tab==="log") el.innerHTML=logHTML();
   else if(D.tab==="claims" && typeof claimsTabRender==="function") claimsTabRender(el);
+  else if(D.tab==="transfers" && typeof trDeskHTML==="function") el.innerHTML=trDeskHTML();
   else if(D.tab==="challans" && typeof challanRender==="function") el.innerHTML=challanRender("desk");
 }
 function renderDrafts(){ renderDrafts0(); applyGSearch($("#d-drafts")); }
@@ -1504,7 +1674,7 @@ function renderTable(){
   el.innerHTML=`<div class="tbl-wrap"><table><thead><tr><th>Date / time</th><th>Part no.</th><th>Item</th><th class="num">Qty</th><th>Vendor</th><th class="num">MRP</th><th class="num">Rate</th><th>Entered by</th><th>Device</th><th>Status</th><th>Bill</th><th>Urgent</th><th>Note</th><th></th></tr></thead><tbody>${rows.map(o=>`<tr class="${flashing(o.id)?"flash":""} ${o.urgent?"urg":""}">
     <td class="nowrap">${fmtDT(o.created)}</td><td class="mono nowrap">${esc(showPn(o.pn))}</td><td>${esc(showName(o.name))}</td><td class="num nowrap">${o.received!=null&&o.received<o.qty?`${esc(o.received)} of ${esc(o.qty)}`:esc(o.qty)}</td><td>${esc(o.vendorName)}</td><td class="num">${rupee(o.mrp)}</td><td class="num">${rupee(o.rate)}</td><td>${esc(o.by)}</td>
     <td class="dev">${o.device==="Phone"?"📱 Phone":"🖥 Desktop"}</td>
-    <td><select class="st st-${esc(o.status)}" data-ch="dstatus" data-id="${esc(o.id)}" aria-label="Status">${STATUSES.map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select>${issueTag(o)?`<br>${issueTag(o)} <button class="linkbtn" style="font-size:12px;padding:0" data-act="dresolve" data-id="${esc(o.id)}">Mark resolved</button>`:""}</td>
+    <td><select class="st st-${esc(o.status)}" data-ch="dstatus" data-id="${esc(o.id)}" aria-label="Status">${STATUSES.map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select>${issueTag(o)?`<br>${issueTag(o)} <button class="linkbtn" style="font-size:12px;padding:0" data-act="dresolve" data-id="${esc(o.id)}">Mark resolved</button>`:o.issue&&o.issue.resolved&&o.issue.resolvedNote?`<br><span class="restag" title="${esc((o.issue.resolvedBy||"")+(o.issue.resolvedAt?" · "+fmtDT(o.issue.resolvedAt):""))}">✓ ${esc(o.issue.type)} resolved</span><br><span class="hint" style="font-size:11px">📝 ${esc(o.issue.resolvedNote)}</span>`:""}</td>
     <td class="nowrap">${o.onChallan?`<span class="chtag">Challan ${esc(o.challanNo)}</span><br><span class="hint">${fmtD(o.challanDate)} · invoice pending</span>`:o.billNo?`${esc(o.billNo)}<br><span class="hint">${fmtD(o.billDate)}${o.challanNo?` · ch. ${esc(o.challanNo)}`:""}</span>`:"—"}${o.poNo?`<br><span class="hint">${esc(o.poNo)}</span>`:""}</td>
     <td>${o.urgent?'<span class="urgtag">URGENT</span>':""}</td><td class="note">${esc(o.note||"")}${o.issue&&o.issue.note?`<br><span class="hint">Problem: ${esc(o.issue.note)}</span>`:""}</td><td class="nowrap">${isOpen(o)?`<button class="btn sm ok" data-act="drvone" data-id="${esc(o.id)}">Receive</button> <button class="btn sm danger" data-act="dcancelo" data-id="${esc(o.id)}">${S.desk.cancelId===o.id?"Click again to cancel":"Cancel"}</button> `:""}<button class="btn sm" data-act="dedit" data-id="${esc(o.id)}">Edit</button></td></tr>`).join("")}</tbody></table></div><p class="hint">${rows.length} order${rows.length===1?"":"s"} shown. Orders are never deleted: set the status to Cancelled instead.</p>`;
 }
@@ -1566,7 +1736,7 @@ function poText(vid, orders, poNo, byName, date){
   const v=vendorById(vid)||{name:(orders[0]||{}).vendorName||""};
   const tq=orders.reduce((a,o)=>a+Number(o.qty||0),0);
   return `*PURCHASE ORDER*\n*New India Motors, Kolhapur*\nPO No: ${poNo}\nDate: ${fmtD(date||today())}\nTo: ${v.name}\n\n`+
-    orders.map((o,i)=>`${i+1}. ${isTempPn(o.pn)?"(part no. not known)":`*${o.pn}*`}\n    ${showName(o.name)}\n    Qty: *${o.qty}*`).join("\n")+
+    orders.map((o,i)=>`${i+1}. ${isTempPn(o.pn)?"(part no. not known)":`*${o.pn}*`}\n    ${showName(o.name)}\n    Qty: *${o.qty}*`).join("\n\n")+
     `\n\nTotal items: ${orders.length} · Total qty: ${tq}\nOrdered by: ${byName}\nPlease confirm availability and dispatch.`;
 }
 function waLink(vid, text){
@@ -1719,10 +1889,12 @@ function renderModal0(){
   const m=$("#modal"); if(combo.el&&!document.body.contains(combo.el)) closeCombo();
   if(!S.desk.auth && S.inv && S.inv.desk && typeof invModalHTML==="function"){ m.innerHTML=invModalHTML(); return; }
   if(!S.desk.auth && S.tl && S.tl.desk && typeof tlModalHTML==="function"){ m.innerHTML=tlModalHTML(); return; }
+  if(!S.desk.auth && S.tr && S.tr.desk.view && typeof trModalHTML==="function"){ m.innerHTML=trModalHTML(); return; }
   if(!S.desk.auth && S.cl && S.cl.desk.modal && typeof claimModalHTML==="function"){ m.innerHTML=claimModalHTML(); return; }
   if(S.desk.auth){ m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Owner authorisation"><h2 style="font-size:24px">🔒 Owner authorisation</h2>${authHTML()}</div></div>`; return; }
   if(S.desk.lists && !S.desk.partEdit){ m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Groups and categories" style="width:min(760px,100%)"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:24px">Groups &amp; Categories</h2><button class="btn sm" data-act="lsclose">Close</button></div>${listsHTML()}</div></div>`; return; }
   if(S.desk.partEdit && !(S.scan&&S.scan.ctx==="desk")){ m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Edit part" style="width:min(620px,100%)"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:24px">Edit part</h2><button class="btn sm" data-act="pecancel">Close</button></div>${partEditHTML()}</div></div>`; return; }
+  if(S.res.desk){ const o=S.orders[S.res.desk.id]; m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Resolve problem" style="width:min(560px,100%)"><h2 style="font-size:22px">Resolve problem</h2><p style="margin:0"><span class="mono">${esc(showPn(o.pn))}</span> · ${esc(showName(o.name))}<br><span class="hint">${esc(o.vendorName||"")} · ordered ${esc(o.qty)}${o.received!=null?` · received ${esc(o.received)}`:""}</span></p>${resolveHTML("desk")}</div></div>`; return; }
   if(S.recvs.desk && !(S.scan&&S.scan.ctx==="desk")){ m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Receive goods" style="width:min(640px,100%)"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:24px">Receive goods</h2><button class="btn sm" data-act="rvcancel" data-ctx="desk">Close</button></div>${recvHTML("desk")}</div></div>`; return; }
   if(!S.scan||S.scan.ctx!=="desk"){ m.innerHTML=""; return; }
   m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Scan part number"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:24px">Scan part number</h2><button class="btn sm" data-act="sclose">Close</button></div>${scanHTML("desk")}</div></div>`;
@@ -1763,7 +1935,10 @@ function onData(){
   else if(D.tab==="emps"){ if(!D.empAdd) renderDeskBody(); }
   else if(D.tab==="claims"){ if(typeof claimsTableRender==="function") claimsTableRender(); }
   else if(D.tab==="challans"){ if(!(S.chl&&S.chl.desk.match)) renderDeskBody(); }
+  else if(D.tab==="transfers"){ if(typeof trDeskRefresh==="function") trDeskRefresh(); }
   else renderDeskBody();
+  if(S.tr&&S.tr.desk.view){ const a=document.activeElement; if(!(a&&a.closest&&a.closest("#modal")&&a.tagName==="INPUT")) renderModal(); }
+  if(P.user&&(P.screen==="trlist"||P.screen==="trview")){ const a=document.activeElement; if(!(a&&a.closest&&a.closest("#phone")&&a.tagName==="INPUT")) renderPhone(); }
   if(S.cl&&S.cl.desk.modal==="view"&&!S.cl.desk.act) renderModal();
   setTimeout(()=>{},0);
 }
@@ -1915,9 +2090,7 @@ const ACT = {
   isgo(){ S.phone.screen="issues"; renderPhone(); },
   isfilt(el){ S.phone.isf=el.dataset.v; renderPhone(); },
   isshow(el){ S.phone.isshow=el.dataset.v; renderPhone(); },
-  async isres(el){ const P=S.phone, id=el.dataset.id, o=S.orders[id]; if(!o||!o.issue) return;
-    if(P.isres!==id){ P.isres=id; renderPhone(); clearTimeout(ACT.isres.t); ACT.isres.t=setTimeout(()=>{ if(P.isres===id){ P.isres=null; renderPhone(); } },5000); return; }
-    P.isres=null; await updateOrder(id,{issue:{...o.issue,resolved:true,resolvedBy:P.user.name,resolvedAt:new Date().toISOString()}},`Problem resolved: ${o.issue.type}`,P.user,"Phone"); renderPhone(); ptoast("Marked resolved ✓"); },
+  isres(el){ const o=S.orders[el.dataset.id]; if(!o||!o.issue) return; S.res.phone={id:o.id,note:"",how:"came",err:""}; renderPhone(); },
   pmenu(){ S.phone.menu=true; renderPhone(); },
   pmenuclose(){ S.phone.menu=false; renderPhone(); },
   ofilt(el){ S.phone.ofilter=el.dataset.v; renderPhone(); },
@@ -2154,22 +2327,33 @@ const ACT = {
   },
   prvv(el){ startRecv("phone", el.dataset.vid); S.phone.screen="recv"; renderPhone(); },
   prvone(el){ const o=S.orders[el.dataset.id]; if(!o) return; startRecv("phone", o.vendorId, [o.id]); S.phone.screen="recv"; renderPhone(); },
-  prvback(){ const single=S.recvs.phone&&S.recvs.phone.single; S.recvs.phone=null; S.phone.screen=single?"orders":"rvvendor"; renderPhone(); },
+  prvback(){ if(S.recvs.phone&&S.recvs.phone.review){ S.recvs.phone.review=false; renderPhone(); return; } const single=S.recvs.phone&&S.recvs.phone.single; S.recvs.phone=null; S.phone.screen=single?"orders":"rvvendor"; renderPhone(); },
   drvone(el){ const o=S.orders[el.dataset.id]; if(!o) return; startRecv("desk", o.vendorId, [o.id]); renderModal(); },
   drvbill(el){ startRecv("desk", el.dataset.vid); renderModal(); },
   rvcancel(){ S.recvs.desk=null; renderModal(); },
   rvtoggle(el){ const R=S.recvs[el.dataset.ctx], L=R.lines[el.dataset.id]; L.on=!L.on; R.err=""; rerenderRecv(el.dataset.ctx); },
-  rvqty(el){ const R=S.recvs[el.dataset.ctx], o=S.orders[el.dataset.id], L=R.lines[el.dataset.id]; L.qty=Math.min(o.qty,Math.max(0,(Number(L.qty)||0)+Number(el.dataset.d))); rerenderRecv(el.dataset.ctx); },
+  rvbilled(el){ const R=S.recvs[el.dataset.ctx], o=S.orders[el.dataset.id], L=R.lines[el.dataset.id]; const old=rvNums(o,L);
+    L.billed=Math.min(o.qty,Math.max(0,old.billed+Number(el.dataset.d))); if(old.good===old.billed||Number(L.qty)>L.billed) L.qty=L.billed; rerenderRecv(el.dataset.ctx); },
+  rvqty(el){ const R=S.recvs[el.dataset.ctx], o=S.orders[el.dataset.id], L=R.lines[el.dataset.id]; L.qty=Math.min(rvNums(o,L).billed,Math.max(0,(Number(L.qty)||0)+Number(el.dataset.d))); rerenderRecv(el.dataset.ctx); },
   rvchallan(el){ const L=S.recvs[el.dataset.ctx].lines[el.dataset.id]; L.challan=!L.challan; rerenderRecv(el.dataset.ctx); },
   rvissue(el){ const L=S.recvs[el.dataset.ctx].lines[el.dataset.id]; L.issue=el.dataset.v; rerenderRecv(el.dataset.ctx); },
-  async rvsave(el){
+  rvsave(el){
+    const ctx=el.dataset.ctx, R=S.recvs[ctx]; if(!R) return;
+    const e=recvCheck(R); R.err=e; if(!e) R.review=true;
+    if(ctx==="phone"){ renderPhone(); const sc=document.querySelector(".p-body,.pbody"); if(sc) sc.scrollTop=0; } else renderModal();
+  },
+  rvback(el){ const ctx=el.dataset.ctx, R=S.recvs[ctx]; if(!R) return; R.review=false; R.err=""; rerenderRecv(ctx); },
+  async rvconfirm(el){
     const ctx=el.dataset.ctx; el.disabled=true;
     let r; try{ r=await saveRecv(ctx); }catch(e){ if(S.recvs[ctx]) S.recvs[ctx].err="Could not save. Check the connection and try again."; r=false; }
     if(!r){ rerenderRecv(ctx); return; }
     if(ctx==="phone"){ S.phone.rvres=r; S.phone.screen="rvdone"; renderPhone(); }
-    else { renderModal(); dtoast(`Receipt saved ✓ ${r.full} full${r.part?`, ${r.part} part`:""}${r.issues?`, ${r.issues} problem${r.issues===1?"":"s"} flagged`:""}`); }
+    else { renderModal(); dtoast(`Receipt saved ✓ ${r.full} full${r.part?`, ${r.part} part`:""}${r.pend?`, ${r.pend} back to Pending`:""}${r.issues?`, ${r.issues} problem${r.issues===1?"":"s"} flagged`:""}`); }
   },
-  async dresolve(el){ const o=S.orders[el.dataset.id]; if(!o||!o.issue) return; await updateOrder(o.id,{issue:{...o.issue,resolved:true}},`Problem resolved: ${o.issue.type}`,deskUser(),"Desktop"); },
+  dresolve(el){ const o=S.orders[el.dataset.id]; if(!o||!o.issue) return; S.res.desk={id:o.id,note:"",how:"came",err:""}; renderModal(); setTimeout(()=>{ const t=document.querySelector('#modal [data-in="res-note"]'); if(t) t.focus(); },50); },
+  reshow(el){ const R=S.res[el.dataset.ctx]; R.how=el.dataset.v; resRender(el.dataset.ctx); },
+  rescancel(el){ S.res[el.dataset.ctx]=null; resRender(el.dataset.ctx); },
+  async resok(el){ el.disabled=true; try{ await doResolve(el.dataset.ctx); }catch(e){ const R=S.res[el.dataset.ctx]; if(R){ R.err="Could not save."+errDetail(e); resRender(el.dataset.ctx);} } },
   tilego(el){ const D=S.desk, k=el.dataset.k;
     if(D.tileOn===k){ ACT.tileclear(); return; }
     D.filters={vendor:"",status:"",emp:"",from:"",to:"",urgent:false,issues:false,recvToday:false,q:""};
@@ -2291,6 +2475,8 @@ const IN = {
   "rv-bill"(el){ const R=S.recvs[el.dataset.ctx]; R.billNo=el.value; },
   "rv-challan"(el){ const R=S.recvs[el.dataset.ctx]; R.challanNo=el.value; },
   "rv-note"(el){ S.recvs[el.dataset.ctx].lines[el.dataset.id].note=el.value; },
+  "res-note"(el){ const R=S.res[el.dataset.ctx]; if(R){ R.note=el.value; R.err=""; } },
+  "rv-billed"(el){ const ctx=el.dataset.ctx, o=S.orders[el.dataset.id], L=S.recvs[ctx].lines[el.dataset.id]; L.billed=el.value; const b=rvNums(o,L).billed; if(Number(L.qty)>b) L.qty=b; const sm=document.getElementById(`rsum-${ctx}-${el.dataset.id}`); if(sm&&o) sm.innerHTML=rsumText(o,L); },
   "rv-qty"(el){ const ctx=el.dataset.ctx, o=S.orders[el.dataset.id], L=S.recvs[ctx].lines[el.dataset.id]; L.qty=el.value; const sm=document.getElementById(`rsum-${ctx}-${el.dataset.id}`); if(sm&&o) sm.innerHTML=rsumText(o,L); },
   sq(el){ S.desk.stockQ=el.value; renderStockTable(); },
 };
@@ -3032,7 +3218,7 @@ async function invRecord(ctx){
         const q=Math.min(o.qty,a.q), bal=o.qty-q;
         const rc={t:now,by:who.name,dev,billNo:inv,billDate:date,qty:q,issue:"",note:"From scanned invoice"};
         const patch={status:"Received",received:q,billNo:inv,billDate:date,receipts:[...(o.receipts||[]),rc]};
-        if(bal>0){ const b={...clone(o),id:newId(),qty:bal,status:o.status,received:null,receipts:[],issue:null,billNo:"",billDate:"",balanceOf:o.id,note:`Balance of ${o.qty} – not on invoice ${inv}`,created:now,updated:now,updatedBy:who.name,log:[{t:now,who:who.name,dev,what:`Balance ${bal} opened: invoice ${inv} had ${q} of ${o.qty}`}]};
+        if(bal>0){ const b={...clone(o),id:newId(),qty:bal,status:"Pending",poNo:null,received:null,receipts:[],issue:null,billNo:"",billDate:"",balanceOf:o.id,note:`Not billed – vendor had no stock (invoice ${inv} had ${q} of ${o.qty})`,created:now,updated:now,updatedBy:who.name,log:[{t:now,who:who.name,dev,what:`Back to Pending: ${bal} of ${o.qty} not on invoice ${inv} (vendor had no stock)`}]};
           await writeOrder(b); patch.balanceId=b.id; res.part++; }
         else res.recv++;
         await updateOrder(o.id,patch,`Received ${q}${bal?` of ${o.qty}`:""} on scanned invoice ${inv}${a.manual&&L.pn?` (invoice part no. ${L.pn})`:""}`,who,dev);
@@ -3071,7 +3257,7 @@ Object.assign(ACT,{
     if(!R.vid||!R.invNo.trim()){ R.err="Choose the vendor and enter the invoice number."; invRender(ctx); return; }
     if(ctx==="phone"&&S.phone.offline){ R.err="Go online to record the invoice."; invRender(ctx); return; }
     el.disabled=true; el.textContent="Recording…";
-    try{ const r=await invRecord(ctx); const msg=`Invoice ${R.invNo} recorded ✓ ${[r.challan?`${r.challan} challan item${r.challan===1?"":"s"} closed`:"",r.recv?`${r.recv} order${r.recv===1?"":"s"} received`:"",r.part?`${r.part} part-received (balance open)`:"",r.extra?`${r.extra} not-ordered added`:"",r.alts?`${r.alts} invoice part no. saved as alternate`:""].filter(Boolean).join(", ")}`;
+    try{ const r=await invRecord(ctx); const msg=`Invoice ${R.invNo} recorded ✓ ${[r.challan?`${r.challan} challan item${r.challan===1?"":"s"} closed`:"",r.recv?`${r.recv} order${r.recv===1?"":"s"} received`:"",r.part?`${r.part} part-billed (rest back to Pending)`:"",r.extra?`${r.extra} not-ordered added`:"",r.alts?`${r.alts} invoice part no. saved as alternate`:""].filter(Boolean).join(", ")}`;
       S.inv[ctx]=null; if(ctx==="phone"){ S.phone.screen="home"; renderPhone(); ptoast(msg); } else { renderModal(); dtoast(msg); } }
     catch(e){ R.err="Could not record. Check the connection and try again."; el.disabled=false; invRender(ctx); }
   }
@@ -3496,6 +3682,215 @@ Object.assign(CH,{
 Object.assign(IN,{
   tlq(el){ const ctx=el.dataset.ctx, T=S.tl[ctx]; T.q=el.value; const box=document.getElementById("tllist-"+ctx); if(box){ const q=T.q.toUpperCase(); box.innerHTML=T.rows.filter(r=>!q||[r.name,r.pn,r.it&&r.it.pn,r.it&&r.it.name].join(" ").toUpperCase().includes(q)).map(r=>tlRowHTML(ctx,T,r)).join("")||`<p class="hint">Nothing matches.</p>`; } },
   tlqtyin(el){ const T=S.tl[el.dataset.ctx], r=tlRow(T,el); const v=Math.floor(Number(el.value)); if(v>=1){ r.qty=v; if(!r.on){ r.on=true; const ck=el.closest(".tlrow").querySelector('input[type=checkbox]'); if(ck) ck.checked=true; el.closest(".tlrow").classList.add("on"); } } }
+});
+</script>
+
+<script>
+"use strict";
+/* ================= GODOWN TRANSFERS (transfer list only – no stock tracking) ================= */
+S.tr = { phone:{form:null, view:null, filter:"open", q:"", sure:null}, desk:{form:null, view:null, filter:"open", q:"", gd:false, gq:"", sure:null} };
+const fmtTr = (fy,n) => `TR${fy}/${String(n).padStart(5,"0")}`;
+const newTrForm = () => ({ lines:[], cur:{pn:"",name:"",godown:"",qty:1,mrp:""}, err:"" });
+const trUser = ctx => ctx==="phone" ? S.phone.user : deskUser();
+const trById = id => S.transfers.find(t=>t.id===id);
+const trTotal = t => t.lines.reduce((a,l)=>a+(Number(l.qty)||0)*(Number(l.mrp)||0),0);
+const trPcs = t => t.lines.reduce((a,l)=>a+(Number(l.qty)||0),0);
+const trOpenCount = () => S.transfers.filter(t=>t.status==="open").length;
+const gdNorm = g => String(g||"").toUpperCase().replace(/\s+/g,"").trim();
+function gdValid(g){ if(!S.godowns.length) return !!String(g||"").trim(); return S.godowns.some(x=>gdNorm(x)===gdNorm(g)); }
+function gdCanon(g){ return S.godowns.find(x=>gdNorm(x)===gdNorm(g)) || String(g||"").toUpperCase().trim(); }
+function gdMatches(q, limit){ const k=gdNorm(q);
+  const nat0=(x,y)=>x.localeCompare(y,undefined,{numeric:true,sensitivity:"base"});
+  if(!k) return [...S.godowns].sort(nat0).slice(0,limit||9999);
+  const a=S.godowns.filter(g=>gdNorm(g).startsWith(k)), b=S.godowns.filter(g=>!gdNorm(g).startsWith(k)&&gdNorm(g).includes(k));
+  const nat=(x,y)=>x.localeCompare(y,undefined,{numeric:true,sensitivity:"base"});
+  return [...a.sort(nat),...b.sort(nat)].slice(0,limit||9999); }
+async function saveTransfer(t){
+  t.updated=new Date().toISOString();
+  if(S.db) await S.db.doc(`transfers/${t.id}`).set(t);
+  else { const i=S.transfers.findIndex(x=>x.id===t.id); if(i>=0) S.transfers[i]=t; else S.transfers.unshift(t); onData(); }
+}
+function trLog(t,ctx,what){ t.log=[...(t.log||[]),{t:new Date().toISOString(),who:trUser(ctx).name,dev:ctx,what}].slice(-30); }
+function trText(t){
+  const L=t.lines.map((l,i)=>`${i+1}) ${showPn(l.pn)}${l.name?` – ${l.name}`:""}\n    Godown: *${l.godown}* · Qty ${l.qty}${l.mrp!==""&&l.mrp!=null?` · MRP ₹${Number(l.mrp).toLocaleString("en-IN")} each`:""}`).join("\n\n");
+  return `*NEW INDIA MOTORS – GODOWN TRANSFER*\nTransfer No: *${t.no}*\nDate: ${fmtDT(t.created)}\nBy: ${t.by}\n\n${L}\n\nTotal: ${t.lines.length} part${t.lines.length===1?"":"s"} · ${trPcs(t)} pcs${trTotal(t)?` · MRP value ₹${trTotal(t).toLocaleString("en-IN")}`:""}`;
+}
+
+/* ---------- entry form (phone + desktop) ---------- */
+function trSuggHTML(ctx){
+  const F=S.tr[ctx].form, q=String(F.cur.pn||"").trim(); if(q.length<2) return "";
+  if(F.picked && norm(F.picked)===norm(q)) return "";            // a part was picked – keep the list closed
+  const m=matchItems(q,6); if(!m.length) return "";
+  return m.map(x=>`<button data-act="trpick" data-ctx="${ctx}" data-pn="${esc(x.it.pn)}"><b>${esc(x.it.pn)}</b><span>${esc(x.it.name)}${x.it.mrp!=null&&x.it.mrp!==""?" · MRP "+rupee(x.it.mrp):""}</span></button>`).join("");
+}
+function trGdHTML(ctx){
+  const F=S.tr[ctx].form, q=F.cur.godown||"";
+  if(!F.gdOpen){
+    if(!q) return "";
+    return gdValid(q) ? `<p class="hint" style="margin:4px 0;color:var(--ok);font-weight:700">✓ ${esc(gdCanon(q))}</p>` : `<p class="hint" style="margin:4px 0;color:var(--bad)">"${esc(q)}" is not in the godown list – tap ▾ to choose.</p>`;
+  }
+  const m=gdMatches(q); const hi=Math.min(F.gdHi||0, Math.max(0,m.length-1));
+  if(!m.length) return `<div class="gddrop"><p class="hint" style="margin:8px 10px;color:var(--bad)">No godown matches "${esc(q)}".</p></div>`;
+  return `<div class="gddrop" role="listbox" aria-label="Godowns" id="gddrop-${ctx}"><div class="gdcount">${m.length} godown${m.length===1?"":"s"}${q?` matching "${esc(q)}"`:""}</div>${m.map((g,i)=>`<button type="button" class="gdopt ${i===hi?"hi":""} ${gdNorm(g)===gdNorm(q)?"sel":""}" role="option" data-act="trgd" data-ctx="${ctx}" data-g="${esc(g)}">${esc(g)}</button>`).join("")}</div>`;
+}
+function trFormHTML(ctx){
+  const T=S.tr[ctx], F=T.form, c=F.cur;
+  const lines=F.lines.map((l,i)=>`<div class="trline"><button class="tlx" data-act="trrmline" data-ctx="${ctx}" data-i="${i}" aria-label="Remove ${esc(l.pn||l.name)}">×</button>
+      <span class="trn">${i+1}</span><div class="trli"><b class="mono">${esc(showPn(l.pn))}</b><span>${esc(l.name)}</span>
+      <span class="trmeta"><span class="gdtag">🏬 ${esc(l.godown)}</span> Qty <b>${esc(l.qty)}</b>${l.mrp!==""&&l.mrp!=null?` · MRP ${rupee(l.mrp)} each`:""}</span></div></div>`).join("");
+  return `<div class="trform">
+    <div class="trf"><label for="tr-pn-${ctx}">Part No.</label><input id="tr-pn-${ctx}" class="p-input mono" style="text-transform:uppercase" data-in="trf" data-ctx="${ctx}" data-k="pn" value="${esc(c.pn)}" placeholder="Type part no. or name" autocomplete="off">
+      <div class="sugg" id="trsug-${ctx}">${trSuggHTML(ctx)}</div></div>
+    <div class="trf"><label for="tr-nm-${ctx}">Part name</label><input id="tr-nm-${ctx}" class="p-input" data-in="trf" data-ctx="${ctx}" data-k="name" value="${esc(c.name)}" autocomplete="off"></div>
+    <div class="trf"><label for="tr-gd-${ctx}">Godown</label><div class="gdrow"><input id="tr-gd-${ctx}" class="p-input mono" style="text-transform:uppercase" data-in="trf" data-ctx="${ctx}" data-k="godown" value="${esc(c.godown)}" placeholder="Tap to choose or type e.g. YA-5" autocomplete="off" role="combobox" aria-expanded="${!!F.gdOpen}"><button type="button" class="gdtoggle" data-act="trgdtoggle" data-ctx="${ctx}" aria-label="${F.gdOpen?"Close":"Open"} godown list">${F.gdOpen?"▴":"▾"}</button></div>
+      <div id="trgd-${ctx}">${trGdHTML(ctx)}</div></div>
+    <div class="oegrid"><div><label for="tr-q-${ctx}">Qty</label><div class="tlq"><button data-act="trqty" data-ctx="${ctx}" data-d="-1" aria-label="Less">−</button><input id="tr-q-${ctx}" type="number" min="1" inputmode="numeric" data-in="trf" data-ctx="${ctx}" data-k="qty" value="${esc(c.qty)}"><button data-act="trqty" data-ctx="${ctx}" data-d="1" aria-label="More">+</button></div></div>
+      <div><label for="tr-m-${ctx}">MRP each ₹</label><input id="tr-m-${ctx}" class="p-input" type="number" min="0" inputmode="decimal" data-in="trf" data-ctx="${ctx}" data-k="mrp" value="${esc(c.mrp)}"></div></div>
+    ${F.err?`<p class="err" style="text-align:left;margin:0">${esc(F.err)}</p>`:""}
+    <button class="addmore trbtn" data-act="tradd" data-ctx="${ctx}">➕ Add to transfer list</button>
+  </div>
+  ${F.lines.length?`<h3 class="trh">Transfer list (${F.lines.length})</h3><div class="trlines">${lines}</div>
+  <button class="save-btn trcreate" data-act="trcreate" data-ctx="${ctx}">✓ CREATE TRANSFER LIST (${F.lines.length} part${F.lines.length===1?"":"s"})</button>`:`<p class="hint" style="margin:0">Add each part with its godown. When the list is complete, create it and send it on WhatsApp.</p>`}`;
+}
+
+/* ---------- one transfer ---------- */
+function trViewHTML(ctx){
+  const T=S.tr[ctx], t=trById(T.view); if(!t) return `<p class="hint">This transfer is not available.</p>`;
+  const st=t.status, sure=T.sure===t.id;
+  return `<div class="trhead"><div><b class="mono" style="font-size:18px">${esc(t.no)}</b> <span class="trst ${st}">${st==="open"?"Open":st==="closed"?"Closed ✓":"Cancelled"}</span><br>
+      <span class="hint">${fmtDT(t.created)} · by <b>${esc(t.by)}</b> · ${t.lines.length} part${t.lines.length===1?"":"s"} · ${trPcs(t)} pcs${trTotal(t)?` · ${rupee(trTotal(t))}`:""}</span></div></div>
+    <div class="trlines">${t.lines.map((l,i)=>`<div class="trline"><span class="trn">${i+1}</span><div class="trli"><b class="mono">${esc(showPn(l.pn))}</b><span>${esc(l.name)}</span><span class="trmeta"><span class="gdtag">🏬 ${esc(l.godown)}</span> Qty <b>${esc(l.qty)}</b>${l.mrp!==""&&l.mrp!=null?` · MRP ${rupee(l.mrp)} each`:""}</span></div></div>`).join("")}</div>
+    <div class="trshare"><a class="btn ok" href="${waLinkPhone("",trText(t))}" target="_blank" rel="noopener">📤 Send on WhatsApp</a><button class="btn" data-act="trcopy" data-ctx="${ctx}">📋 Copy text</button></div>
+    ${st==="cancelled"?`<p class="hint">Cancelled ${fmtDT(t.cancelledAt)} by ${esc(t.cancelledBy||"")}.</p>`:`
+    <div class="trclose ${st==="closed"?"tr-done":""}"><b>${st==="closed"?`Closed ${fmtDT(t.closedAt)} by ${esc(t.closedBy||"")}`:"To close this transfer, both are needed:"}</b>
+      <div class="trstep ${t.tallyVno?"tr-ok":""}"><span class="trck">${t.tallyVno?"✓":"1"}</span><div style="flex:1;min-width:0"><label for="tr-v-${ctx}">Tally voucher no.</label>
+        <div class="trvrow"><input id="tr-v-${ctx}" class="p-input mono" data-in="trv" data-ctx="${ctx}" value="${esc(T.vno!=null?T.vno:t.tallyVno||"")}" placeholder="Voucher no." autocomplete="off"><button class="btn ${t.tallyVno?"":"pri"}" data-act="trsavev" data-ctx="${ctx}">Save</button></div></div></div>
+      <button class="trstep trbar ${t.barcode?"tr-ok":""}" data-act="trbarcode" data-ctx="${ctx}" aria-pressed="${!!t.barcode}"><span class="trck">${t.barcode?"✓":"2"}</span><span style="flex:1;text-align:left"><b>🏷 Barcode stuck</b><br><span class="hint">${t.barcode?`Ticked by ${esc(t.barcodeBy||"")} · tap to untick`:"Tap when the barcode stickers are on the parts"}</span></span></button>
+    </div>
+    ${st==="open"?`<button class="cbtn ${sure?"sure":""}" style="align-self:flex-start" data-act="trcancel" data-ctx="${ctx}">${sure?"Tap again to cancel this transfer":"✕ Cancel transfer"}</button>`:""}`}`;
+}
+
+/* ---------- list ---------- */
+function trListHTML(ctx){
+  const T=S.tr[ctx], q=String(T.q||"").toUpperCase().trim();
+  const n={open:0,closed:0,all:S.transfers.length}; S.transfers.forEach(t=>{ if(t.status==="open") n.open++; else if(t.status==="closed") n.closed++; });
+  const list=S.transfers.filter(t=>T.filter==="all"||t.status===T.filter).filter(t=>!q||[t.no,t.by,t.tallyVno,...t.lines.flatMap(l=>[l.pn,showPn(l.pn),l.name,l.godown])].join(" ").toUpperCase().includes(q))
+    .sort((a,b)=>String(b.created).localeCompare(String(a.created)));
+  const chip=(k,l)=>`<button class="tlmb ${T.filter===k?"on":""}" data-act="trfilter" data-ctx="${ctx}" data-f="${k}" aria-pressed="${T.filter===k}">${l} (${n[k]})</button>`;
+  return `<div class="trbar2">${chip("open","Open")}${chip("closed","Closed")}${chip("all","All")}</div>
+    <input type="search" class="tlsearch" placeholder="🔍 Search transfer no., part, godown, voucher" data-in="trq" data-ctx="${ctx}" value="${esc(T.q||"")}" autocomplete="off" aria-label="Search transfers">
+    <div class="trlist" id="trlist-${ctx}">${trCardsHTML(ctx,list)}</div>`;
+}
+function trCardsHTML(ctx,list){
+  if(!list.length) return `<p class="hint">No transfers here.</p>`;
+  return list.map(t=>`<button class="trcard ${t.status}" data-act="trview" data-ctx="${ctx}" data-id="${esc(t.id)}">
+    <span class="trc1"><b class="mono">${esc(t.no)}</b><span class="trst ${t.status}">${t.status==="open"?"Open":t.status==="closed"?"Closed ✓":"Cancelled"}</span></span>
+    <span class="hint">${fmtDT(t.created)} · ${esc(t.by)} · ${t.lines.length} part${t.lines.length===1?"":"s"} · ${trPcs(t)} pcs</span>
+    <span class="trc2">${t.lines.slice(0,3).map(l=>`<span class="gdtag">${esc(l.godown)}</span>`).join("")}${t.lines.length>3?`<span class="hint">+${t.lines.length-3}</span>`:""}</span>
+    ${t.status==="open"?`<span class="trneed">${!t.tallyVno?`<span class="tltag bad">Tally voucher no.</span>`:`<span class="tltag ok">Voucher ${esc(t.tallyVno)} ✓</span>`} ${!t.barcode?`<span class="tltag bad">Barcode</span>`:`<span class="tltag ok">Barcode ✓</span>`}</span>`:t.status==="closed"?`<span class="hint">Voucher ${esc(t.tallyVno)} · Barcode ✓</span>`:""}
+  </button>`).join("");
+}
+
+/* ---------- godown list (desktop) ---------- */
+function gdPanelHTML(){
+  const D=S.tr.desk, q=gdNorm(D.gq), list=S.godowns.filter(g=>!q||gdNorm(g).includes(q));
+  return `<div class="preview inl"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><b>🏬 Godowns (${S.godowns.length})</b>
+      <span style="display:flex;gap:6px;flex-wrap:wrap"><label class="btn" style="position:relative">⬆ Import list from Tally (Excel)<input type="file" accept=".xlsx,.xls,.csv" data-ch="gdimport" style="position:absolute;inset:0;opacity:0;cursor:pointer" aria-label="Godown list file"></label><button class="btn" data-act="gdclose">Close</button></span></div>
+    <p class="hint" style="margin:4px 0">Tally: Chart of Accounts → Godowns → Export to Excel. Importing replaces this list. Used only to pick godowns on transfers.</p>
+    <div class="toolbar"><input placeholder="Search or add a godown" data-in="gdq" value="${esc(D.gq)}" class="mono" style="text-transform:uppercase;flex:1" autocomplete="off"><button class="btn" data-act="gdadd">➕ Add</button></div>
+    <div class="gdgrid" id="gdgrid">${gdGridHTML(list)}</div></div>`;
+}
+function gdGridHTML(list){ return list.slice(0,400).map(g=>`<span class="gdchip static">${esc(g)}<button data-act="gdrm" data-g="${esc(g)}" aria-label="Remove godown ${esc(g)}">×</button></span>`).join("")+(list.length>400?`<span class="hint">+${list.length-400} more – search to find</span>`:""); }
+async function trGdRefresh(ctx){ const b=document.getElementById("trgd-"+ctx); if(b) b.innerHTML=trGdHTML(ctx); const t=document.querySelector(`[data-act="trgdtoggle"][data-ctx="${ctx}"]`); const F=S.tr[ctx].form; if(t&&F){ t.textContent=F.gdOpen?"▴":"▾"; } const i=document.getElementById("tr-gd-"+ctx); if(i&&F) i.setAttribute("aria-expanded",String(!!F.gdOpen)); }
+function trGdScroll(ctx){ const d=document.getElementById("gddrop-"+ctx); if(!d) return; const h=d.querySelector(".gdopt.hi")||d.querySelector(".gdopt.sel"); if(h) h.scrollIntoView({block:"nearest"}); }
+/* open the list when the godown field is tapped; arrow keys + Enter on the desktop */
+document.addEventListener("focusin",e=>{ const el=e.target; if(!el||!el.id||!/^tr-gd-/.test(el.id)) return; const ctx=el.dataset.ctx, F=S.tr[ctx]&&S.tr[ctx].form; if(!F||F.gdOpen) return; F.gdOpen=true; F.gdHi=0; trGdRefresh(ctx); });
+document.addEventListener("keydown",e=>{ const el=e.target; if(!el||!el.id||!/^tr-gd-/.test(el.id)) return; const ctx=el.dataset.ctx, F=S.tr[ctx]&&S.tr[ctx].form; if(!F) return;
+  const m=gdMatches(F.cur.godown||"");
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){ e.preventDefault(); if(!F.gdOpen){ F.gdOpen=true; F.gdHi=0; } else F.gdHi=Math.max(0,Math.min(m.length-1,(F.gdHi||0)+(e.key==="ArrowDown"?1:-1))); trGdRefresh(ctx); trGdScroll(ctx); }
+  else if(e.key==="Enter" && F.gdOpen && m.length){ e.preventDefault(); F.cur.godown=m[Math.min(F.gdHi||0,m.length-1)]; F.gdOpen=false; F.gdHi=0; trRender(ctx); const q=document.getElementById("tr-q-"+ctx); if(q) q.focus(); }
+  else if(e.key==="Escape" && F.gdOpen){ F.gdOpen=false; trGdRefresh(ctx); } });
+async function saveGodowns(list){ S.godowns=list; if(S.db) await S.db.doc("master/godowns").set({list,updated:new Date().toISOString()}); renderDeskBody(); }
+
+/* ---------- desktop tab ---------- */
+function trDeskHTML(){
+  const D=S.tr.desk;
+  let h=`<div class="toolbar"><button class="btn pri" data-act="trnew" data-ctx="desk">➕ New transfer</button><button class="btn" data-act="gdopen">🏬 Godowns (${S.godowns.length})</button><span class="hint">Transfer lists only – stock is not tracked here.</span></div>`;
+  if(D.gd) h+=gdPanelHTML();
+  if(D.form) h+=`<div class="preview inl trdeskform"><div style="display:flex;justify-content:space-between;align-items:center"><b>New godown transfer</b><button class="btn sm" data-act="trformclose" data-ctx="desk">Close</button></div>${trFormHTML("desk")}</div>`;
+  h+=trListHTML("desk");
+  return h;
+}
+function trDeskRefresh(){ const a=document.activeElement; if(a && a.closest && a.closest(".trdeskform,#gdgrid,.preview.inl") && /INPUT|TEXTAREA/.test(a.tagName)) return; renderDeskBody(); }
+function trModalHTML(){ return `<div class="modal-bg"><div class="modal" role="dialog" aria-label="Godown transfer" style="width:min(720px,100%)"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:22px">🏬 Godown transfer</h2><button class="btn sm" data-act="trviewclose" data-ctx="desk">Close</button></div>${trViewHTML("desk")}</div></div>`; }
+function trRender(ctx){ if(ctx==="phone") renderPhone(); else { if(S.tr.desk.view) renderModal(); renderDeskBody(); } }
+
+Object.assign(ACT,{
+  trgo(){ S.phone.menu=false; S.phone.screen="trlist"; renderPhone(); },
+  trnew(el){ const ctx=el.dataset.ctx, T=S.tr[ctx]; if(!T.form) T.form=newTrForm(); if(ctx==="phone"){ S.phone.screen="trnew"; renderPhone(); } else { renderDeskBody(); const i=document.getElementById("tr-pn-desk"); if(i) i.focus(); } },
+  trformclose(el){ S.tr[el.dataset.ctx].form=null; trRender(el.dataset.ctx); },
+  trback(){ const P=S.phone; P.screen=P.screen==="trlist"?"home":"trlist"; S.tr.phone.view=null; S.tr.phone.vno=null; renderPhone(); },
+  trpick(el){ const ctx=el.dataset.ctx, c=S.tr[ctx].form.cur, it=itemByPn(el.dataset.pn); if(!it) return; c.pn=it.pn; c.name=it.name||""; if(it.mrp!=null&&it.mrp!=="") c.mrp=it.mrp; S.tr[ctx].form.err=""; S.tr[ctx].form.picked=it.pn; trRender(ctx); const g=document.getElementById("tr-gd-"+ctx); if(g&&!c.godown) g.focus(); },
+  trgd(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; F.cur.godown=el.dataset.g; F.gdOpen=false; F.gdHi=0; F.err=""; trRender(ctx); },
+  trgdtoggle(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; F.gdOpen=!F.gdOpen; F.gdHi=0; trGdRefresh(ctx); if(F.gdOpen) trGdScroll(ctx); },
+  trqty(el){ const ctx=el.dataset.ctx, c=S.tr[ctx].form.cur; c.qty=Math.max(1,(Math.floor(Number(c.qty))||1)+Number(el.dataset.d)); trRender(ctx); },
+  tradd(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form, c=F.cur;
+    const pn=norm(c.pn)?gtPn(c.pn):"", name=String(c.name||"").trim(), qty=Math.floor(Number(c.qty));
+    if(!pn&&!name){ F.err="Enter the part number or the part name."; return trRender(ctx); }
+    if(!String(c.godown||"").trim()){ F.err="Choose the godown."; return trRender(ctx); }
+    if(!gdValid(c.godown)){ F.err=`"${String(c.godown).toUpperCase()}" is not in the godown list. Tap ▾ and choose one from the list.`; return trRender(ctx); }
+    if(!(qty>=1)){ F.err="Quantity must be 1 or more."; return trRender(ctx); }
+    const it=pn?itemByPn(pn):null;
+    F.lines.push({pn:pn||newTempPn(), name:(name||(it&&it.name)||"").toUpperCase(), godown:gdCanon(c.godown), qty, mrp:c.mrp===""||c.mrp==null?"":Number(c.mrp)});
+    F.cur={pn:"",name:"",godown:"",qty:1,mrp:""}; F.err=""; F.picked=null; F.gdOpen=false; trRender(ctx); const i=document.getElementById("tr-pn-"+ctx); if(i&&ctx==="desk") i.focus(); },
+  trrmline(el){ const ctx=el.dataset.ctx; S.tr[ctx].form.lines.splice(Number(el.dataset.i),1); trRender(ctx); },
+  async trcreate(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; if(!F||!F.lines.length) return; el.disabled=true;
+    try{ const n=await nextNumber("tr"), u=trUser(ctx), now=new Date().toISOString();
+      const t={id:"tr"+Date.now().toString(36)+Math.random().toString(36).slice(2,5), no:fmtTr(fyLabel(),n), lines:F.lines, by:u.name, byId:u.id, created:now, status:"open", tallyVno:"", barcode:false, log:[{t:now,who:u.name,dev:ctx,what:"Created"}]};
+      await saveTransfer(t); S.tr[ctx].form=null; S.tr[ctx].view=t.id; S.tr[ctx].vno=null;
+      if(ctx==="phone"){ S.phone.screen="trview"; renderPhone(); ptoast(`${t.no} created ✓ Send it on WhatsApp`); } else { renderDeskBody(); renderModal(); dtoast(`${t.no} created ✓`); }
+    }catch(e){ el.disabled=false; F.err=(e&&e.message)||"Could not create. Try again."; trRender(ctx); } },
+  trview(el){ const ctx=el.dataset.ctx; S.tr[ctx].view=el.dataset.id; S.tr[ctx].vno=null; S.tr[ctx].sure=null; if(ctx==="phone"){ S.phone.screen="trview"; renderPhone(); } else renderModal(); },
+  trviewclose(el){ S.tr[el.dataset.ctx].view=null; renderModal(); },
+  trfilter(el){ const ctx=el.dataset.ctx; S.tr[ctx].filter=el.dataset.f; trRender(ctx); },
+  async trcopy(el){ const t=trById(S.tr[el.dataset.ctx].view); if(!t) return; try{ await navigator.clipboard.writeText(trText(t)); (el.dataset.ctx==="phone"?ptoast:dtoast)("Copied ✓"); }catch(e){ (el.dataset.ctx==="phone"?ptoast:dtoast)("Copy not allowed here – use WhatsApp."); } },
+  async trsavev(el){ const ctx=el.dataset.ctx, T=S.tr[ctx], t0=trById(T.view); if(!t0) return; const v=String(T.vno!=null?T.vno:t0.tallyVno||"").trim();
+    if(v===String(t0.tallyVno||"")) { T.vno=null; return trRender(ctx); }
+    const t=clone(t0); t.tallyVno=v; trLog(t,ctx,v?`Tally voucher no. ${v}`:"Tally voucher no. removed"); trStatus(t,ctx); T.vno=null; await saveTransfer(t); trToast(ctx,t); trRender(ctx); },
+  async trbarcode(el){ const ctx=el.dataset.ctx, t0=trById(S.tr[ctx].view); if(!t0||t0.status==="cancelled") return; const t=clone(t0); t.barcode=!t.barcode; t.barcodeBy=t.barcode?trUser(ctx).name:""; t.barcodeAt=t.barcode?new Date().toISOString():"";
+    trLog(t,ctx,t.barcode?"Barcode stuck ✓":"Barcode tick removed"); trStatus(t,ctx); await saveTransfer(t); trToast(ctx,t); trRender(ctx); },
+  async trcancel(el){ const ctx=el.dataset.ctx, T=S.tr[ctx], t0=trById(T.view); if(!t0) return; if(T.sure!==t0.id){ T.sure=t0.id; return trRender(ctx); }
+    const t=clone(t0); t.status="cancelled"; t.cancelledAt=new Date().toISOString(); t.cancelledBy=trUser(ctx).name; trLog(t,ctx,"Cancelled"); T.sure=null; await saveTransfer(t); trRender(ctx); },
+  gdopen(){ S.tr.desk.gd=true; renderDeskBody(); },
+  gdclose(){ S.tr.desk.gd=false; renderDeskBody(); },
+  async gdadd(){ const D=S.tr.desk, g=String(D.gq||"").toUpperCase().trim(); if(!g) return; if(S.godowns.some(x=>gdNorm(x)===gdNorm(g))){ dtoast(`${g} is already in the list`); return; }
+    D.gq=""; await saveGodowns([...S.godowns,g].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}))); dtoast(`${g} added ✓`); },
+  async gdrm(el){ await saveGodowns(S.godowns.filter(g=>g!==el.dataset.g)); }
+});
+function trStatus(t,ctx){
+  if(t.status==="cancelled") return;
+  const done=!!(String(t.tallyVno||"").trim()&&t.barcode);
+  if(done&&t.status!=="closed"){ t.status="closed"; t.closedAt=new Date().toISOString(); t.closedBy=trUser(ctx).name; trLog(t,ctx,"Closed"); }
+  else if(!done&&t.status==="closed"){ t.status="open"; t.closedAt=""; t.closedBy=""; trLog(t,ctx,"Re-opened"); }
+}
+function trToast(ctx,t){ const f=ctx==="phone"?ptoast:dtoast; f(t.status==="closed"?`${t.no} closed ✓`:!t.tallyVno?"Saved ✓ Still needs the Tally voucher no.":!t.barcode?"Saved ✓ Still needs the barcode tick.":"Saved ✓"); }
+Object.assign(IN,{
+  trf(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; if(!F) return; const k=el.dataset.k; F.cur[k]=el.value; F.err="";
+    if(k==="pn"){ const b=document.getElementById("trsug-"+ctx); if(b) b.innerHTML=trSuggHTML(ctx); }
+    if(k==="godown"){ F.gdOpen=true; F.gdHi=0; trGdRefresh(ctx); } },
+  trv(el){ S.tr[el.dataset.ctx].vno=el.value; },
+  trq(el){ const ctx=el.dataset.ctx, T=S.tr[ctx]; T.q=el.value; const box=document.getElementById("trlist-"+ctx); if(!box) return;
+    const q=T.q.toUpperCase().trim(); const list=S.transfers.filter(t=>T.filter==="all"||t.status===T.filter).filter(t=>!q||[t.no,t.by,t.tallyVno,...t.lines.flatMap(l=>[l.pn,showPn(l.pn),l.name,l.godown])].join(" ").toUpperCase().includes(q)).sort((a,b)=>String(b.created).localeCompare(String(a.created)));
+    box.innerHTML=trCardsHTML(ctx,list); },
+  gdq(el){ S.tr.desk.gq=el.value; const b=document.getElementById("gdgrid"); if(b){ const q=gdNorm(el.value); b.innerHTML=gdGridHTML(S.godowns.filter(g=>!q||gdNorm(g).includes(q))); } }
+});
+Object.assign(CH,{
+  async gdimport(el){ const f=el.files&&el.files[0]; el.value=""; if(!f) return;
+    try{ const rows=await readTable(f); const seen=new Set(), list=[];
+      rows.forEach(r=>{ const g=String(r[0]||"").trim(); if(!g || /^list of godowns$/i.test(g) || /^\d+\s*godown\(?s?\)?$/i.test(g) || /^(name|godown|particulars)$/i.test(g)) return; const k=gdNorm(g); if(seen.has(k)) return; seen.add(k); list.push(g.toUpperCase()); });
+      if(!list.length) throw new Error("No godown names found in the first column.");
+      await saveGodowns(list); dtoast(`${list.length} godowns imported ✓`);
+    }catch(e){ dtoast((e&&e.message)||"Could not read the file."); } }
 });
 </script>
 
