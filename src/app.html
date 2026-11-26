@@ -169,6 +169,39 @@ tr.pend td{background:var(--warnbg)}
 .lastord.none{color:var(--muted);font-weight:500}
 .ldot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
 .ldot.ok{background:#1f9d55}.ldot.open{background:#d93025}
+.addmore.tlopen{border-style:solid;border-color:#7b5cff;color:#4b2fd1;background:#f4f1ff}
+.tlhead{line-height:1.5}
+.linkbtn{border:0;background:none;color:var(--info);font-weight:600;font-size:13px;text-decoration:underline;padding:4px}
+.tlmode{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tlmb{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;color:var(--ink)}
+.tlmb.on{background:var(--brand);border-color:var(--brand);color:#fff}
+.tlbar{display:flex;gap:6px;align-items:center}.tlbar .tlsearch{flex:1;min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-size:15px;background:var(--panel)}
+.tllist{display:flex;flex-direction:column;gap:8px}
+.modal .tllist{max-height:52vh;overflow:auto;padding-right:4px}
+.tlrow{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);opacity:.62}
+.tlrow.on{opacity:1;border-color:var(--ok,#1f9d55);background:#f3fbf6}
+.tlrow.none.on{border-color:#e0a800;background:#fffaf0}
+.tlck input{width:22px;height:22px}
+.tlrow{position:relative;padding-top:14px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.tlrow.swiping{box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.tllist{overflow-x:hidden}
+.tlx{position:absolute;top:6px;right:6px;width:24px;height:24px;border-radius:50%;border:0;background:#d93025;color:#fff;font-size:17px;font-weight:800;line-height:22px;padding:0;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.25);cursor:pointer}
+.tlx:hover{background:#b3261e}
+.tlinfo{min-width:0;font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.tltag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:6px;padding:1px 6px;margin-top:2px}
+.tltag.warn{background:#fff4d6;color:#8a5a00}.tltag.bad{background:#fdeceb;color:#b3261e}
+.tlq{display:flex;align-items:center;gap:4px}.tlq button{width:34px;height:34px;border-radius:8px;border:0;background:var(--brand);color:#fff;font-size:20px;font-weight:800}
+.tlq input{width:46px;height:34px;text-align:center;border:1px solid var(--line);border-radius:8px;font-size:16px;font-weight:700}
+.tlfoot{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;position:sticky;bottom:-16px;background:var(--bg,#fff);padding:10px 0}
+#phone .tlfoot{flex-direction:column-reverse;align-items:stretch;gap:6px}
+.tlfoot .save-btn{font-size:17px;padding:13px 18px;min-height:0;margin:0}
+.modal .tlfoot .save-btn{width:auto}
+.tlreading{padding:30px 10px;text-align:center}
+.pvblock.pvmini{display:flex;flex-direction:row;align-items:center;gap:10px;padding:10px 12px;text-align:left}
+.pvmi{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;font-size:14px;line-height:1.3}
+.pvmname{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pvmv{color:var(--ok);font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pvedit{flex:none;border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:7px 12px;font-weight:700;font-size:14px;color:var(--ink)}
 .pobtn{padding:8px 12px;border-radius:8px;border:1px solid #1f9d55;background:var(--panel);color:#1f9d55;font-weight:700}
 .bb-wa{background:#1f9d55;color:#fff;font-size:20px}
 .wabtn{display:block;text-align:center;padding:18px;border-radius:14px;background:#1f9d55;color:#fff;font-family:var(--display);font-size:24px;font-weight:700;text-decoration:none}
@@ -1152,7 +1185,8 @@ function renderPhone(){
        : f.newPart ? newPartHTML("phone",f)
        : `<div class="pnrow"><input id="p-pn" class="p-input mono" data-in="pn" data-ctx="phone" value="${esc(f.pn)}" autocomplete="off" autocapitalize="characters" placeholder="WPA676"><button class="scanbtn" data-act="scan" data-ctx="phone">${esc(t("scan"))}</button></div><div id="sugg-phone">${suggHTML("phone",f)}</div>
        <label class="l" for="p-name">Part name</label><input id="p-name" class="p-input" style="font-size:17px" data-in="pname" data-ctx="phone" value="${esc(f.nameQ||"")}" autocomplete="off" placeholder="e.g. water pump"><div id="nsugg-phone">${nameSuggHTML("phone",f)}</div>
-       <button class="addmore" data-act="inewany" data-ctx="phone">➕ Add new part</button>`)+
+       <button class="addmore" data-act="inewany" data-ctx="phone">➕ Add new part</button>
+       <button class="addmore tlopen" data-act="tlopen" data-ctx="phone">📥 Import from Tally</button>`)+
 
       (f.item?`<label class="l" for="p-qty">${esc(t("qty"))}</label><div class="stepper"><button data-act="qty" data-ctx="phone" data-d="-1" aria-label="Less">−</button><input id="p-qty" type="number" min="1" inputmode="numeric" data-in="qty" data-ctx="phone" value="${esc(f.qty)}"><button data-act="qty" data-ctx="phone" data-d="1" aria-label="More">+</button></div>
 `:"")+
@@ -1196,8 +1230,12 @@ function renderPhone(){
     head=`<div class="p-head"><button class="back" data-act="pvback">${esc(t("back"))}</button><b>${P.vret==="drafts"?"Choose vendor":"Choose vendors"}</b><span class="right"><span class="chipbtn" style="border:0">${done}/${V.length}</span></span></div>`;
     body=`<p class="hint" style="margin:0">Pick the vendor for each part. Past purchases are shown first.</p>`+
       (fv&&V.some(l=>!l.vendor)&&P.vret!=="drafts"?`<button class="addmore" data-act="pvall" data-vid="${esc(fv.id)}">Use ${esc(fv.name)} for all remaining parts</button>`:"")+
-      V.map((ln,i)=>`<div class="pvblock ${ln.vendor?"ok":""}"><div class="pvhead"><span class="pvn">${i+1}</span><span><span class="mono">${esc(showPn(ln.item.pn))}</span> · Qty ${esc(ln.qty)}<br><span class="hint">${esc(showName(ln.item.name))}</span></span>${ln.vendor?`<span class="pill Received" style="margin-left:auto">✓</span>`:""}</div>${vcardHTML("pv"+i,ln)}</div>`).join("")+
-      (P.vret==="drafts"?(V[0]&&V[0].vendor?`<button class="save-btn" data-act="pvconfirm">✓ Confirm ${esc((vendorById(V[0].vendor)||{}).name||"")}</button><p class="hint" style="margin:0;text-align:center">Suggested by the app. Tap another vendor above to change it.</p>`:`<p class="hint" style="margin:0">Pick a vendor: you'll go back to Unplaced orders.</p>`):`<div class="placerow"><button class="later-btn" data-act="pvlater">PLACE LATER</button><button class="save-btn" data-act="pvplace" ${ok?"":"disabled"}>PLACE ORDER${V.length>1?` (${V.length})`:""}</button></div>
+      V.map((ln,i)=>{
+        if(ln.open && ln.vendor!==ln.openedWith) ln.open=false;        // a vendor was picked after Edit → fold again
+        if(ln.vendor && !ln.open){ const v=vendorById(ln.vendor);
+          return `<div class="pvblock ok pvmini"><span class="pvn">${i+1}</span><div class="pvmi"><span><b class="mono">${esc(showPn(ln.item.pn))}</b> · Qty ${esc(ln.qty)}</span><span class="pvmname">${esc(showName(ln.item.name))}</span><span class="pvmv">✓ ${esc(v?v.name:"")}</span></div><button class="pvedit" data-act="pvopen" data-i="${i}" aria-label="Change vendor for ${esc(showPn(ln.item.pn))}">Edit</button></div>`; }
+        return `<div class="pvblock ${ln.vendor?"ok":""}"><div class="pvhead"><span class="pvn">${i+1}</span><span><span class="mono">${esc(showPn(ln.item.pn))}</span> · Qty ${esc(ln.qty)}<br><span class="hint">${esc(showName(ln.item.name))}</span></span>${ln.vendor?`<span class="pill Received" style="margin-left:auto">✓</span>`:""}${ln.open?`<button class="pvedit" style="margin-left:6px" data-act="pvclose" data-i="${i}">Done</button>`:""}</div>${vcardHTML("pv"+i,ln)}</div>`; }).join("")+
+      (P.vret==="drafts"?(V[0]&&V[0].vendor?`<button class="save-btn" data-act="pvconfirm">✓ Confirm ${esc((vendorById(V[0].vendor)||{}).name||"")}</button><p class="hint" style="margin:0;text-align:center">Suggested by the app. Tap <b>Edit</b> above to change it.</p>`:`<p class="hint" style="margin:0">Pick a vendor: you'll go back to Unplaced orders.</p>`):`<div class="placerow"><button class="later-btn" data-act="pvlater">PLACE LATER</button><button class="save-btn" data-act="pvplace" ${ok?"":"disabled"}>PLACE ORDER${V.length>1?` (${V.length})`:""}</button></div>
       <p class="hint" style="margin:0;text-align:center">${ok?"All parts have a vendor.":`${V.length-done} part${V.length-done===1?"":"s"} still need${V.length-done===1?"s":""} a vendor.`}</p>`);
   } else if(P.screen==="drafts"){
     const mine=S.drafts, pend=pendingOrders();
@@ -1254,6 +1292,8 @@ function renderPhone(){
     body=`<div class="done"><div class="tick">✓</div><h2>Receipt saved</h2><p>${r.full||0} fully received${r.part?` · ${r.part} part received (balance kept open)`:""}${r.issues?` · ${r.issues} problem${r.issues===1?"":"s"} flagged for the office`:""}.</p>
       <button class="big-btn bb-recv" data-act="pgo" data-s="rvvendor" style="justify-content:center">📦 Receive more</button>
       <button class="big-btn bb-list" data-act="pgo" data-s="home" style="justify-content:center;font-size:20px">${esc(t("home"))}</button></div>`;
+  } else if(P.screen==="tally" && typeof tallyHTML==="function"){
+    head=`<div class="p-head"><button class="back" data-act="tlback" data-ctx="phone">${esc(t("back"))}</button><b>Import from Tally</b></div>`; body=tallyHTML("phone");
   } else if(P.screen==="invscan" && typeof invHTML==="function"){
     head=`<div class="p-head"><button class="back" data-act="invback" data-ctx="phone">${esc(t("back"))}</button><b>Scan invoice</b></div>`; body=invHTML("phone");
   } else if(P.screen==="issues"){
@@ -1410,7 +1450,7 @@ function renderDeskBody(){ renderDeskBody0(); applyGSearch($("#dbody")); }
 function renderDeskBody0(){
   const D=S.desk, el=$("#dbody"); if(!el) return;
   if(D.tab==="book"){
-    el.innerHTML=`<div id="d-tiles"></div><div class="toolbar"><button class="btn pri" data-act="dnew">➕ New order</button><button class="btn dark" data-act="invopen" data-ctx="desk">🧾 Scan invoice</button><button class="btn" data-act="scan" data-ctx="desk" ${D.form?"":"hidden"}>📷 Scan part no. (webcam)</button><span class="grow"></span><button class="btn danger sm" data-act="dclear">${D.confirmClear?`Click again to delete all ${Object.keys(S.orders).length} orders`:"Clear all orders (test only)"}</button></div>
+    el.innerHTML=`<div id="d-tiles"></div><div class="toolbar"><button class="btn pri" data-act="dnew">➕ New order</button><button class="btn" data-act="tlopen" data-ctx="desk">📥 Import from Tally</button><button class="btn dark" data-act="invopen" data-ctx="desk">🧾 Scan invoice</button><button class="btn" data-act="scan" data-ctx="desk" ${D.form?"":"hidden"}>📷 Scan part no. (webcam)</button><span class="grow"></span><button class="btn danger sm" data-act="dclear">${D.confirmClear?`Click again to delete all ${Object.keys(S.orders).length} orders`:"Clear all orders (test only)"}</button></div>
       <div id="d-drafts"></div>
       <div id="d-form">${D.form?dformHTML():""}</div>
       ${D.tileOn?`<div class="showing" id="d-showing">Showing: ${{p:"Pending orders",u:"Urgent & pending orders",o:"Ordered, not received",r:"Received today"}[D.tileOn]}<button class="btn sm" data-act="tileclear">✕ Show all orders</button></div>`:""}
@@ -1675,6 +1715,7 @@ function renderModal(){ renderModal0(); const m=$("#modal"); if(m) applyGSearch(
 function renderModal0(){
   const m=$("#modal"); if(combo.el&&!document.body.contains(combo.el)) closeCombo();
   if(!S.desk.auth && S.inv && S.inv.desk && typeof invModalHTML==="function"){ m.innerHTML=invModalHTML(); return; }
+  if(!S.desk.auth && S.tl && S.tl.desk && typeof tlModalHTML==="function"){ m.innerHTML=tlModalHTML(); return; }
   if(!S.desk.auth && S.cl && S.cl.desk.modal && typeof claimModalHTML==="function"){ m.innerHTML=claimModalHTML(); return; }
   if(S.desk.auth){ m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Owner authorisation"><h2 style="font-size:24px">🔒 Owner authorisation</h2>${authHTML()}</div></div>`; return; }
   if(S.desk.lists && !S.desk.partEdit){ m.innerHTML=`<div class="modal-bg"><div class="modal" role="dialog" aria-label="Groups and categories" style="width:min(760px,100%)"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:24px">Groups &amp; Categories</h2><button class="btn sm" data-act="lsclose">Close</button></div>${listsHTML()}</div></div>`; return; }
@@ -1889,6 +1930,8 @@ const ACT = {
   pdsel(el){ const P=S.phone; P.psel=P.psel||new Set(); const id=el.dataset.id; if(P.psel.has(id)) P.psel.delete(id); else P.psel.add(id); renderPhone(); },
   pdselall(){ const P=S.phone, pend=pendingOrders(); P.psel=P.psel||new Set(); const all=pend.every(o=>P.psel.has(o.id)); P.psel=all?new Set():new Set(pend.map(o=>o.id)); renderPhone(); },
   pvback(){ const P=S.phone; if(P.vret==="drafts"){ P.vlines=null; P.vret=null; P.screen="drafts"; renderPhone(); return; } P.form.lines=(P.vlines||[]).map(l=>({item:l.item,vendor:l.vendor,qty:l.qty,draftId:l.draftId})); P.screen="new"; renderPhone(); },
+  pvopen(el){ const ln=(S.phone.vlines||[])[Number(el.dataset.i)]; if(!ln) return; ln.open=true; ln.openedWith=ln.vendor; renderPhone(); },
+  pvclose(el){ const ln=(S.phone.vlines||[])[Number(el.dataset.i)]; if(!ln) return; ln.open=false; renderPhone(); },
   pvall(el){ (S.phone.vlines||[]).forEach(l=>{ if(!l.vendor) l.vendor=el.dataset.vid; }); renderPhone(); },
   async pvlater(el){ const P=S.phone; if(P.offline){ ptoast("Go online to save an unplaced order."); return; } el.disabled=true;
     try{ for(const ln of P.vlines||[]) await draftFromLine("phone",ln); }catch(e){ el.disabled=false; ptoast("Could not save. Try again."); return; }
@@ -3202,6 +3245,232 @@ Object.assign(CH,{
   bkpick(el){ const R=S.bk.restore; if(R&&R.pick){ R.pick[el.dataset.k]=el.checked; renderDeskBody(); } }
 });
 Object.assign(IN,{ aikey(el){ S.bk.ai.key=el.value; }, aimodel(el){ S.bk.ai.model=el.value; } });
+</script>
+
+<script>
+"use strict";
+/* ================= IMPORT FROM TALLY (stock summary → order at re-order level) ================= */
+S.tl = { phone:null, desk:null };
+const PDFJS_URL = () => window.NIM_PDFJS_URL || "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs";
+let _pdfjs = null;
+async function loadPdfJs(){
+  if(_pdfjs) return _pdfjs;
+  const url=PDFJS_URL();
+  const lib=await Promise.race([import(url), new Promise((_,rej)=>setTimeout(()=>rej(new Error("PDF reader did not load")),15000))]);
+  lib.GlobalWorkerOptions.workerSrc = window.NIM_PDFJS_WORKER || url.replace(/pdf(\.min)?\.mjs$/, "pdf.worker$1.mjs");
+  _pdfjs=lib; return lib;
+}
+/* PDF → text lines (items with the same height on the page are one line) */
+async function pdfLines(blob){
+  const lib=await loadPdfJs();
+  const doc=await Promise.race([lib.getDocument({data:new Uint8Array(await blob.arrayBuffer())}).promise, new Promise((_,rej)=>setTimeout(()=>rej(new Error("PDF took too long to open")),20000))]);
+  const out=[];
+  for(let p=1;p<=doc.numPages;p++){
+    const tc=await (await doc.getPage(p)).getTextContent();
+    const rows=[];
+    for(const it of tc.items){ if(!it.str||!it.str.trim()) continue; const x=it.transform[4], y=it.transform[5];
+      let r=rows.find(r=>Math.abs(r.y-y)<3); if(!r){ r={y,parts:[]}; rows.push(r); } r.parts.push({x,s:it.str,w:it.width||0}); }
+    rows.sort((a,b)=>b.y-a.y);
+    for(const r of rows){ r.parts.sort((a,b)=>a.x-b.x); let s="", end=null;
+      for(const q of r.parts){ if(end!==null && q.x-end>1.5) s+=" "; s+=q.s; end=q.x+q.w; }
+      out.push(s.replace(/\s+/g," ").trim()); }
+  }
+  return out;
+}
+/* one Tally line → {name, pn, closing, reorder} */
+const QTY_END = /(-?\d+(?:\.\d+)?)\s*([A-Za-z][A-Za-z.]*)?\s*(-?\d+(?:\.\d+)?)\s*([A-Za-z][A-Za-z.]*)?\s*$/;
+function parseTallyText(lines, order){
+  // which of the two quantity columns comes first? read it from the column headings
+  if(!order){ const h=lines.find(L=>/closing/i.test(L)&&/re-?\s*order/i.test(L));
+    order = h ? (h.search(/re-?\s*order/i) < h.search(/closing/i) ? "rc" : "cr") : "rc"; }
+  // join wrapped lines: a row starts with its Sr No and ends with the two quantities
+  const raw=[]; let buf="";
+  for(const L of lines){
+    if(/^(sr\.?\s*no|item|particulars|closing|page\b|itemwise|stock summary|as on)/i.test(L) && !QTY_END.test(L.replace(/^\d+\s+/,""))) continue;
+    if(/^\d+\s+\S/.test(L)) buf=L; else if(buf) buf+=" "+L; else continue;
+    const m=buf.match(QTY_END); if(m && /\D/.test(buf.replace(QTY_END,"").replace(/^\d+\s+/,""))){ const a=Number(m[1]), b=Number(m[3]); raw.push({text:buf.replace(QTY_END,"").replace(/^\d+\s+/,"").trim(), closing:order==="rc"?b:a, reorder:order==="rc"?a:b, unit:(m[2]||m[4]||"").replace(/\.$/,"")}); buf=""; }
+  }
+  // the stock group is printed at the end of every name (e.g. LEYPARTS) – find it and remove it
+  const freq={}; raw.forEach(r=>{ const t=(r.text.match(/([A-Za-z][A-Za-z &]{2,})$/)||[])[1]; if(t){ const words=t.trim().split(/\s+/); for(let k=1;k<=words.length;k++){ const suf=words.slice(-k).join(" "); freq[suf]=(freq[suf]||0)+1; } const g=(t.match(/[A-Z]{3,}$/)||[])[0]; if(g) for(let k=3;k<=g.length;k++){ const suf=g.slice(-k); freq["#"+suf]=(freq["#"+suf]||0)+1; } } });
+  let group=""; let best=0;
+  for(const [k,v] of Object.entries(freq)){ const g=k.replace(/^#/,""); if(v>=Math.max(2,raw.length*0.4) && (v>best || (v===best && g.length>group.length))){ best=v; group=g; } }
+  return { group, order, rows: raw.map(r=>{
+    let t=r.text; if(group && t.toUpperCase().endsWith(group.toUpperCase())) t=t.slice(0,t.length-group.length).trim();
+    let pn="", name=t;
+    const m=t.match(/[-–]\s*(GT\s*-?\s*[A-Z0-9][A-Z0-9\/.\-]*)\s*$/i) || t.match(/[-–]\s*([A-Z0-9]*\d[A-Z0-9\/.]*)\s*$/i);
+    if(m){ pn=m[1].replace(/\s+/g,""); name=t.slice(0,m.index).trim(); }
+    return { name, pn, closing:r.closing, reorder:r.reorder, unit:r.unit };
+  })};
+}
+/* Excel / CSV export from Tally */
+async function sheetRows(file){
+  if(!window.XLSX) throw new Error("Excel reader not loaded");
+  const wb=XLSX.read(new Uint8Array(await file.arrayBuffer()),{type:"array"}), ws=wb.Sheets[wb.SheetNames[0]];
+  const A=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:""});
+  let h=-1, cName=-1, cCl=-1, cRo=-1;
+  for(let i=0;i<Math.min(A.length,30);i++){ const r=A[i].map(x=>String(x).toLowerCase());
+    const cl=r.findIndex(x=>/closing/.test(x)), ro=r.findIndex(x=>/re-?order/.test(x));
+    if(cl>=0&&ro>=0){ h=i; cCl=cl; cRo=ro; cName=r.findIndex(x=>/item|particular|name/.test(x)); break; } }
+  if(h<0) throw new Error("No 'Closing' and 'Re-order' columns found in this sheet.");
+  if(cName<0) cName=A[h].findIndex((x,j)=>j!==cCl&&j!==cRo&&!/sr|no/i.test(String(x)));
+  const num=v=>{ const m=String(v).replace(/,/g,"").match(/-?\d+(\.\d+)?/); return m?Number(m[0]):null; };
+  const lines=A.slice(h+1).filter(r=>String(r[cName]||"").trim() && num(r[cRo])!=null).map(r=>`1 ${String(r[cName]).trim()} ${num(r[cCl])??0} NOS ${num(r[cRo])} NOS`);
+  return parseTallyText(lines,"cr");
+}
+/* photo of a printout → ask the photo reader */
+async function photoRows(files){
+  const sample=window.claude&&claude.use?await claude.use("sample"):null; if(!sample) throw {code:"none"};
+  const imgs=[]; for(const f of files) imgs.push(/pdf/i.test(f.type)?f:(await shrink(f)).blob);
+  const res=await sample.json(`This is a Tally "Stock Summary" / re-order report from an automobile spare parts shop in India.
+Read every item row. The part number is usually at the end of the item name after a dash (often starting GT-).
+Reply with JSON only: {"rows":[{"name":"item name without the part number","pn":"part number or empty","closing":0,"reorder":0}]}`,{images:imgs});
+  const rows=(res&&Array.isArray(res.rows)?res.rows:[]).map(r=>({name:String(r.name||""),pn:String(r.pn||"").replace(/\s+/g,""),closing:Number(r.closing)||0,reorder:Number(r.reorder)||0,unit:""}));
+  return {group:"",rows};
+}
+/* match a Tally row with a part in the app */
+function tallyMatch(r){
+  const bare=String(r.pn||"").toUpperCase().replace(/^GT\s*-?\s*/,"");
+  if(bare){
+    const keys=new Set([norm(bare),norm("GT-"+bare)]);
+    const own=S.items.find(i=>keys.has(norm(i.pn)));                 // the part's own number first
+    if(own) return {it:own,how:"pn"};
+    const alt=S.items.find(i=>codesOf(i).some(c=>keys.has(c)));       // then alternate numbers
+    if(alt) return {it:alt,how:"alt"};
+    const m=matchItems(bare,1)[0]; if(m && m.sc>=92) return {it:m.it,how:"close"};
+  }
+  const nm=String(r.name||"").toUpperCase().replace(/\s+/g," ").trim();
+  if(nm){ const it=S.items.find(i=>String(i.name||"").toUpperCase().replace(/\s+/g," ").trim()===nm); if(it) return {it,how:"name"}; }
+  return {it:null,how:"none"};
+}
+function tallyBuild(T, parsed){
+  T.group=parsed.group||""; T.order=parsed.order||""; T.rows=parsed.rows.map((r,i)=>{ const m=tallyMatch(r); const L=m.it?lastOrderInfo(m.it):null; const onOrder=!!(L&&!L.received);
+    const short=Math.max(0,(r.reorder||0)-(r.closing||0));
+    return {...r, i, it:m.it, how:m.how, last:L, onOrder, on: short>0 && !onOrder, qty:null}; });
+  T.stage="review";
+}
+const tlRow=(T,el)=>T.rows.find(r=>r.i===Number(el.dataset.i));
+function tlQty(T,r){ if(r.qty!=null) return r.qty; return T.mode==="short"?Math.max(1,(r.reorder||0)-(r.closing||0)):Math.max(1,r.reorder||0); }
+async function tallyRead(ctx, files){
+  const T=S.tl[ctx]; T.stage="reading"; T.err=""; T.file=files.map(f=>f.name).join(", "); tlRender(ctx);
+  try{
+    let parsed=null; const f=files[0];
+    if(/\.(xlsx|xls|csv)$/i.test(f.name)) parsed=await sheetRows(f);
+    else if(/pdf/i.test(f.type)||/\.pdf$/i.test(f.name)){
+      try{ const lines=[]; for(const x of files) lines.push(...await pdfLines(x)); parsed=parseTallyText(lines); }catch(e){ console.warn("pdf text failed",e); parsed=null; }
+      if(!parsed||!parsed.rows.length) parsed=await photoRows(files);         // scanned PDF – no text inside
+    } else parsed=await photoRows(files);
+    if(!parsed.rows.length) throw new Error("No item rows were found. Use Tally's Stock Summary / Re-order report.");
+    tallyBuild(T,parsed);
+  }catch(e){ T.stage="choose"; T.err=(e&&e.code==="nokey")?NOKEY_MSG:(e&&e.code==="none")?"This file has no text inside and photo reading isn't available here. Export the report from Tally as PDF or Excel.":"The file could not be read."+errDetail(e); }
+  tlRender(ctx);
+}
+function tlRender(ctx){ ctx==="phone"?renderPhone():renderModal(); }
+
+function tallyHTML(ctx){
+  const T=S.tl[ctx]; if(!T) return "";
+  if(T.stage==="reading") return `<div class="tlreading"><p style="margin:0;font-weight:600">⏳ Reading ${esc(T.file||"the report")}…</p><p class="hint" style="margin:0">Matching every line with your parts list</p></div>`;
+  if(T.stage!=="review") return `<p class="hint" style="margin:0">In Tally open <b>Stock Summary</b> (or the Re-order report) for a group, export it as <b>PDF</b> (or Excel), and upload it here. Each line is matched with your parts and added at its re-order level. You can change everything before placing.</p>
+    ${T.err?`<p class="err" style="text-align:left;margin:0">${esc(T.err)}</p>`:""}
+    <label class="filebtn">📥 Choose Tally PDF / Excel<input type="file" accept="application/pdf,.pdf,.xlsx,.xls,.csv,image/*" multiple data-ch="tlfile" data-ctx="${ctx}" aria-label="Tally report file"></label>
+    ${ctx==="phone"?"":`<p class="hint" style="margin:0">Photos of a printed report also work (they are read by the photo reader).</p>`}`;
+  const rows=T.rows, on=rows.filter(r=>r.on), q=T.q||"";
+  const vis=rows.filter(r=>!q||[r.name,r.pn,r.it&&r.it.pn,r.it&&r.it.name].join(" ").toUpperCase().includes(q.toUpperCase()));
+  const cnt={pn:0,alt:0,close:0,name:0,none:0}; rows.forEach(r=>cnt[r.how]++);
+  return `<div class="tlhead"><b>${esc(T.file)}</b>${T.group?` <span class="chip">${esc(T.group)}</span>`:""}<br>
+      <span class="hint">${rows.length} lines · ${cnt.pn+cnt.alt+cnt.close+cnt.name} matched with your parts${cnt.none?` · <b style="color:var(--bad)">${cnt.none} not in the app</b>`:""}${rows.some(r=>r.onOrder)?` · ${rows.filter(r=>r.onOrder).length} already on order (unticked)`:""}</span></div>
+    <div class="tlmode" role="group" aria-label="Order quantity"><span class="hint">Order qty:</span>
+      <button class="tlmb ${T.mode!=="short"?"on":""}" data-act="tlmode" data-ctx="${ctx}" data-m="level" aria-pressed="${T.mode!=="short"}">Re-order level</button>
+      <button class="tlmb ${T.mode==="short"?"on":""}" data-act="tlmode" data-ctx="${ctx}" data-m="short" aria-pressed="${T.mode==="short"}">Re-order level − stock</button>
+      <button class="linkbtn" data-act="tlswap" data-ctx="${ctx}" title="Use if stock and re-order look the wrong way round">⇄ swap stock / re-order</button></div>
+    <div class="tlbar"><input type="search" class="tlsearch" placeholder="🔍 Search these lines" data-in="tlq" data-ctx="${ctx}" value="${esc(q)}" autocomplete="off" aria-label="Search lines">
+      <button class="btn sm" data-act="tlall" data-ctx="${ctx}" data-v="1">Tick all</button><button class="btn sm" data-act="tlall" data-ctx="${ctx}" data-v="0">None</button></div>
+    <p class="hint" style="margin:0;font-size:12px">Tip: swipe a line to the right, or tap the red ×, to remove it from the list.</p>
+    <div class="tllist" id="tllist-${ctx}">${vis.map(r=>tlRowHTML(ctx,T,r)).join("")||`<p class="hint">Nothing matches.</p>`}</div>
+    <div class="tlfoot"><button class="btn" data-act="tlback" data-ctx="${ctx}">Choose another file</button>
+      <button class="save-btn" data-act="tladd" data-ctx="${ctx}" ${on.length?"":"disabled"}>${ctx==="phone"?`ADD ${on.length} PART${on.length===1?"":"S"} TO ORDER`:`Add ${on.length} to Unplaced orders`}</button></div>`;
+}
+function tlRowHTML(ctx,T,r){
+  const it=r.it, q=tlQty(T,r);
+  const tag = r.how==="pn"?"" : r.how==="alt"?`<span class="tltag warn">matched by alternate no. ${esc(r.pn)} – check</span>` : r.how==="close"?`<span class="tltag warn">close match – check</span>` : r.how==="name"?`<span class="tltag warn">matched by name – check</span>` : `<span class="tltag bad">not in the app – will be added as a new part</span>`;
+  return `<div class="tlrow ${r.on?"on":""} ${r.how==="none"?"none":""}">
+    <button class="tlx" data-act="tlrm" data-ctx="${ctx}" data-i="${r.i}" aria-label="Remove ${esc(it?it.pn:(r.pn||r.name))} from the list" title="Remove from the list">×</button>
+    <label class="tlck"><input type="checkbox" data-ch="tlon" data-ctx="${ctx}" data-i="${r.i}" ${r.on?"checked":""} aria-label="Order ${esc(r.pn||r.name)}"></label>
+    <div class="tlinfo"><b class="mono">${esc(it?it.pn:(r.pn?gtPn(r.pn):"(no part no.)"))}</b> ${tag}<br><span>${esc(it?it.name:r.name)}</span>
+      <br><span class="hint">Tally: stock <b>${r.closing}</b> · re-order <b>${r.reorder}</b>${r.unit?" "+esc(r.unit):""}</span>
+      ${r.onOrder?`<br><span class="tltag bad">🔴 already ordered ${esc(fmtD(r.last.date))}${r.last.vendor?` · ${esc(r.last.vendor)}`:""} – not received yet</span>`:it?`<br>${lastOrderHTML(it)}`:""}</div>
+    <div class="tlq"><button data-act="tlqty" data-ctx="${ctx}" data-i="${r.i}" data-d="-1" aria-label="Less">−</button><input type="number" min="1" inputmode="numeric" data-in="tlqtyin" data-ctx="${ctx}" data-i="${r.i}" value="${q}" aria-label="Quantity"><button data-act="tlqty" data-ctx="${ctx}" data-i="${r.i}" data-d="1" aria-label="More">+</button></div>
+  </div>`;
+}
+/* swipe a line to the right to remove it (same as the red ×) */
+(function(){
+  let d=null;
+  const ctxOf=row=>row.closest("#phone")?"phone":"desk";
+  document.addEventListener("pointerdown",e=>{
+    const row=e.target.closest(".tlrow"); if(!row||e.target.closest("button,input,label,select")) return;
+    d={row,x:e.clientX,y:e.clientY,id:e.pointerId,dx:0,on:false};
+  },{passive:true});
+  document.addEventListener("pointermove",e=>{
+    if(!d||e.pointerId!==d.id) return;
+    const dx=e.clientX-d.x, dy=e.clientY-d.y;
+    if(!d.on){ if(Math.abs(dy)>12&&Math.abs(dy)>Math.abs(dx)){ d=null; return; } if(dx>12&&dx>Math.abs(dy)){ d.on=true; d.row.classList.add("swiping"); try{ d.row.setPointerCapture(d.id); }catch(x){} } else return; }
+    d.dx=Math.max(0,dx); d.row.style.transform=`translateX(${d.dx}px)`; d.row.style.opacity=String(Math.max(.25,1-d.dx/(d.row.offsetWidth*.9)));
+  },{passive:true});
+  const end=e=>{
+    if(!d||e.pointerId!==d.id) return; const {row,dx,on}=d; d=null; if(!on) return;
+    row.classList.remove("swiping");
+    if(dx>Math.max(90,row.offsetWidth*0.35)){
+      row.style.transition="transform .15s ease-out, opacity .15s"; row.style.transform=`translateX(${row.offsetWidth}px)`; row.style.opacity="0";
+      const x=row.querySelector(".tlx"); setTimeout(()=>{ if(x) ACT.tlrm(x); },140);
+    } else { row.style.transition="transform .18s ease-out, opacity .18s"; row.style.transform=""; row.style.opacity=""; setTimeout(()=>{ row.style.transition=""; },200); }
+  };
+  document.addEventListener("pointerup",end); document.addEventListener("pointercancel",end);
+})();
+function tlModalHTML(){ return `<div class="modal-bg"><div class="modal" role="dialog" aria-label="Import from Tally" style="width:min(860px,100%)"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="font-size:24px">📥 Import from Tally</h2><button class="btn sm" data-act="tlclose" data-ctx="desk">Close</button></div>${tallyHTML("desk")}</div></div>`; }
+
+async function tallyAdd(ctx){
+  const T=S.tl[ctx], pick=T.rows.filter(r=>r.on); if(!pick.length) return;
+  const lines=[];
+  for(const r of pick){
+    let item=r.it;
+    if(!item){   // part not in the app yet → add it to "parts to complete"
+      const pn=r.pn?gtPn(r.pn):newTempPn(), who=ctx==="phone"?S.phone.user:deskUser();
+      const ex=itemByPn(pn);
+      if(ex) item=ex; else {
+        const np={id:"n"+Date.now().toString(36)+Math.random().toString(36).slice(2,5),pn,name:String(r.name||"").trim().toUpperCase(),brand:"",cat:"",hsn:"",alt:[],mrp:"",by:who.name,byId:who.id,created:new Date().toISOString(),source:"Tally import"};
+        await saveNewPart(np); if(!S.items.some(i=>norm(i.pn)===norm(pn))){ S.newParts=[...S.newParts,np]; rebuildItems(); }
+        item=itemByPn(pn)||{pn,name:np.name};
+      }
+    }
+    const st=vendorStats(item.pn);
+    lines.push({item:{pn:item.pn,name:item.name,brand:item.brand||"",mrp:item.mrp??null},vendor:st.length===1?st[0].vid:"",qty:tlQty(T,r),draftId:null});
+  }
+  if(ctx==="phone"){
+    const f=S.phone.form; f.lines=[...(f.lines||[]),...lines]; S.tl.phone=null; S.phone.screen="new"; renderPhone();
+    ptoast(`${lines.length} part${lines.length===1?"":"s"} added from Tally ✓ Check the quantities, then place.`);
+  } else {
+    for(const ln of lines) await draftFromLine("desk",ln,{note:"From Tally re-order"});
+    S.tl.desk=null; renderModal(); renderDeskBody(); dtoast(`${lines.length} added to Unplaced orders ✓ Choose vendors there.`);
+  }
+}
+Object.assign(ACT,{
+  tlopen(el){ const ctx=el.dataset.ctx; S.tl[ctx]={stage:"choose",mode:"level",rows:[],err:"",q:""}; if(ctx==="phone"){ S.phone.screen="tally"; renderPhone(); } else renderModal(); },
+  tlclose(el){ const ctx=el.dataset.ctx; S.tl[ctx]=null; if(ctx==="phone"){ S.phone.screen="new"; renderPhone(); } else renderModal(); },
+  tlback(el){ const ctx=el.dataset.ctx, T=S.tl[ctx]; if(T&&T.stage==="review"){ T.stage="choose"; T.rows=[]; tlRender(ctx); } else ACT.tlclose(el); },
+  tlrm(el){ const T=S.tl[el.dataset.ctx]; T.rows=T.rows.filter(r=>r.i!==Number(el.dataset.i)); tlRender(el.dataset.ctx); },
+  tlswap(el){ const T=S.tl[el.dataset.ctx]; T.rows.forEach(r=>{ const c=r.closing; r.closing=r.reorder; r.reorder=c; r.qty=null; r.on=(r.reorder-r.closing)>0&&!r.onOrder; }); tlRender(el.dataset.ctx); },
+  tlmode(el){ const T=S.tl[el.dataset.ctx]; T.mode=el.dataset.m; T.rows.forEach(r=>r.qty=null); tlRender(el.dataset.ctx); },
+  tlall(el){ const T=S.tl[el.dataset.ctx], q=(T.q||"").toUpperCase(); T.rows.forEach(r=>{ if(!q||[r.name,r.pn,r.it&&r.it.pn].join(" ").toUpperCase().includes(q)) r.on=el.dataset.v==="1"; }); tlRender(el.dataset.ctx); },
+  tlqty(el){ const T=S.tl[el.dataset.ctx], r=tlRow(T,el); r.qty=Math.max(1,tlQty(T,r)+Number(el.dataset.d)); r.on=true; tlRender(el.dataset.ctx); },
+  async tladd(el){ el.disabled=true; try{ await tallyAdd(el.dataset.ctx); }catch(e){ el.disabled=false; (el.dataset.ctx==="phone"?ptoast:dtoast)("Could not add. Try again."); } }
+});
+Object.assign(CH,{
+  tlfile(el){ const files=[...(el.files||[])]; el.value=""; if(files.length) tallyRead(el.dataset.ctx, files); },
+  tlon(el){ const r=tlRow(S.tl[el.dataset.ctx],el); r.on=el.checked; tlRender(el.dataset.ctx); }
+});
+Object.assign(IN,{
+  tlq(el){ const ctx=el.dataset.ctx, T=S.tl[ctx]; T.q=el.value; const box=document.getElementById("tllist-"+ctx); if(box){ const q=T.q.toUpperCase(); box.innerHTML=T.rows.filter(r=>!q||[r.name,r.pn,r.it&&r.it.pn,r.it&&r.it.name].join(" ").toUpperCase().includes(q)).map(r=>tlRowHTML(ctx,T,r)).join("")||`<p class="hint">Nothing matches.</p>`; } },
+  tlqtyin(el){ const T=S.tl[el.dataset.ctx], r=tlRow(T,el); const v=Math.floor(Number(el.value)); if(v>=1){ r.qty=v; if(!r.on){ r.on=true; const ck=el.closest(".tlrow").querySelector('input[type=checkbox]'); if(ck) ck.checked=true; el.closest(".tlrow").classList.add("on"); } } }
+});
 </script>
 
 </body>
