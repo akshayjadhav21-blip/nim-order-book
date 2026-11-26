@@ -20,7 +20,7 @@ function make(mode, dir) {
     .replace(/<script src="https:\/\/cdnjs\.cloudflare\.com\/ajax\/libs\/jspdf\/[^"]+"><\/script>/, '<script src="vendor/jspdf.umd.min.js"></script>')
     .replace(/<title>[^<]*<\/title>/, `<title>New India Motors – Order Book</title>`);
   const head = `<meta name="nim-version" content="${version}">\n` +
-    `<script>window.NIM_MODE=${JSON.stringify(mode)};window.NIM_VERSION=${JSON.stringify(version)};window.NIM_SITE=${JSON.stringify(site==="/"?"":site)};</script>\n` +
+    `<script>window.NIM_MODE=${JSON.stringify(mode)};window.NIM_VERSION=${JSON.stringify(version)};window.NIM_SITE=${JSON.stringify(site==="/"?"":site)};window.NIM_PDFJS_URL="./vendor/pdfjs.min.js";window.NIM_PDFJS_WORKER="./vendor/pdfjs.worker.min.js";</script>\n` +
     VENDOR.map(v => `<script src="${v}"></script>`).join("\n") +
     `\n<script src="config.js"></script>\n<script src="platform.js"></script>\n`;
   const i = h.indexOf("<script>");
