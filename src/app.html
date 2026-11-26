@@ -250,7 +250,9 @@ tr.pend td{background:var(--warnbg)}
 .gdchip.static{display:inline-flex;align-items:center;gap:6px;padding:4px 6px 4px 10px}
 .gdchip.static button{border:0;background:#d93025;color:#fff;width:18px;height:18px;border-radius:50%;font-size:12px;line-height:18px;padding:0}
 .gdgrid{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto}
-.trbtn{border-style:solid;border-color:var(--accent);color:var(--ink);background:var(--warnbg)}
+.trbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;padding:12px 16px;border:none;border-radius:12px;background:var(--info);color:#fff;font:inherit;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.trbtn:active{transform:translateY(1px);filter:brightness(.95)}
+.trbtn .trarr{font-size:20px;line-height:1}
 .trh{margin:6px 0 0;font-size:18px}
 .trlines{display:flex;flex-direction:column;gap:8px}
 .trline{position:relative;display:flex;gap:10px;align-items:flex-start;padding:10px 34px 10px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
@@ -482,6 +484,19 @@ tr.pend td{background:var(--warnbg)}
 .bb-draft{background:var(--panel2);color:var(--info);border:2px dashed var(--info);padding:16px 18px;font-size:19px}
 .drafts-desk{border:2px dashed var(--info);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--panel)}
 .drafts-desk .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.carthead{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.cvseg{display:inline-flex;border:1.5px solid var(--brand);border-radius:8px;overflow:hidden;flex:0 0 auto}
+.cvseg button{border:none;background:var(--panel);color:var(--brand);font:inherit;font-size:12px;font-weight:700;padding:5px 9px;cursor:pointer}
+.cvseg button.on{background:var(--brand);color:#fff}
+.clist{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden}
+.crow{display:flex;align-items:center;gap:6px;padding:6px 8px;border-top:1px solid var(--line);min-height:44px}
+.crow:first-child{border-top:none}
+.crow .cn{font-size:12px;font-weight:700;color:var(--muted);min-width:14px}
+.crow .cmain{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;border:none;background:none;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.crow .cmain .mono{font-size:13px;font-weight:700}
+.crow .cnm{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.crow .cq{display:flex;align-items:center;gap:5px} .crow .cq.sm button{width:28px;height:28px;font-size:15px;border-radius:7px;border:0;background:var(--brand);color:var(--brand-ink);font-weight:700} .crow .cq.sm span{min-width:18px;text-align:center;font-weight:700}
+.crow .cx{border:none;background:var(--bad);color:#fff;width:24px;height:24px;border-radius:50%;font-size:12px;cursor:pointer;flex:0 0 auto}
 .cart{border:2px solid var(--brand);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px;background:var(--panel2)}
 .cline{display:flex;align-items:center;gap:8px;padding:8px;border-radius:10px;background:var(--panel);border:1px solid var(--line)}
 .cline .ci{flex:1;min-width:0;font-size:14px;overflow-wrap:anywhere}
@@ -555,6 +570,27 @@ tr.pend td{background:var(--warnbg)}
 .tiles{display:flex;flex-wrap:wrap;gap:10px}
 .tile{flex:1 1 130px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);border-left:5px solid var(--grey)}
 .tile b{display:block;font-family:var(--display);font-size:28px;line-height:1}
+.wabtn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:#25D366;box-shadow:0 2px 0 rgba(0,0,0,.18);flex:0 0 auto;margin-right:2px} .wabtn:hover{background:#1ebe5b;transform:scale(1.06)} .wabtn svg{width:24px;height:24px;min-width:24px;flex:0 0 24px}
+.dtbl{margin-top:8px;background:var(--panel)} .dtbl td{vertical-align:middle} .dtbl th.c,.dtbl td.c{text-align:center}
+.dqty{display:inline-flex;align-items:center;gap:3px} .dqty button{width:26px;height:28px;border:none;border-radius:6px;background:var(--brand);color:#fff;font-weight:700;cursor:pointer}
+.dqty input{width:46px;height:28px;text-align:center;border:1px solid var(--line);border-radius:6px;font:inherit;background:var(--panel);color:var(--ink)}
+.dven{position:relative} .dven input{width:100%;height:34px;padding:4px 26px 4px 9px;border:1.5px solid var(--line);border-radius:8px;font:inherit;font-size:13px;background:var(--panel);color:var(--ink)}
+.dven.ok input{border-color:var(--ok);background:var(--okbg)} .dven.bad input{border-color:var(--bad)} .dven .dvarr{position:absolute;right:9px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--muted);font-size:12px}
+.cartbtn{width:40px;height:36px;border:none;border-radius:9px;background:var(--ok);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.15)} .cartbtn:hover{filter:brightness(1.08)} .cartbtn:disabled{opacity:.5}
+.dx{border:1px solid var(--line);background:var(--panel);color:var(--bad);border-radius:7px;padding:4px 8px;cursor:pointer;font:inherit;font-size:12px;white-space:nowrap} .dx.sure{background:var(--bad);color:#fff;border-color:var(--bad)}
+.gocarts-row{display:flex;justify-content:flex-end;margin-top:8px}
+.gocarts{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ok);background:var(--ok);color:#fff;border-radius:8px;padding:7px 14px;font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.gocarts span{font-weight:400;font-size:12px;background:rgba(255,255,255,.2);padding:2px 8px;border-radius:99px} .gocarts:hover{filter:brightness(1.08)}
+.carts.flash{animation:dflash 1.4s ease;border-radius:10px}
+.carts{display:grid;grid-template-columns:repeat(auto-fill,220px);gap:8px;margin-top:6px}
+.cartchip .cinfo{flex:1;min-width:0} .cartchip .cinfo b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cartchip{display:flex;align-items:center;gap:9px;width:220px;height:54px;box-sizing:border-box;border:1.5px solid var(--ok);background:var(--okbg);color:var(--ink);border-radius:10px;padding:6px 10px;cursor:pointer;font:inherit;text-align:left}
+.cartchip small{display:block;font-size:11px;color:var(--muted)} .cartchip .cico{font-size:18px} .cartchip .cgo{font-size:20px;font-weight:700;color:var(--ok);margin-left:4px}
+.cartchip:hover{background:var(--ok);color:#fff} .cartchip:hover small,.cartchip:hover .cgo{color:#fff}
+.cartchip.flash{animation:dflash 1.4s ease} .group.flash{animation:dflash 1.4s ease}
+.tile.t-un{border-left-color:var(--info)} .tile.t-un small{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:2px}
+#d-drafts.flash .drafts-desk{animation:dflash 1.4s ease}
+@keyframes dflash{0%,60%{box-shadow:0 0 0 4px var(--info)}100%{box-shadow:none}}
 .tile.t-p{border-left-color:var(--warn)} .tile.t-u{border-left-color:var(--bad)} .tile.t-o{border-left-color:var(--info)} .tile.t-r{border-left-color:var(--ok)}
 .toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .toolbar .grow{flex:1}
@@ -944,13 +980,19 @@ function lastOrderHTML(item){
   if(!L) return `<span class="lastord none">Never ordered before</span>`;
   return `<span class="lastord"><i class="ldot ${L.received?"ok":"open"}" title="${L.received?"Received":"Not received yet"}" aria-label="${L.received?"Received":"Not received yet"}"></i>Last ordered ${esc(fmtD(L.date).replace(/-(\d\d)(\d\d)$/,"-$2"))}</span>`;
 }
+try{ S.cartView=localStorage.getItem("nim-cartview")||"tab"; }catch(e){ S.cartView="tab"; }
 function cartHTML(f){
   if(!f.lines||!f.lines.length) return "";
-  return `<div class="cart"><b>Parts in this order (${f.lines.length+(f.item?1:0)})</b>`+f.lines.map((ln,i)=>{ const v=ln.vendor?vendorById(ln.vendor):null;
+  const lv=S.cartView==="list";
+  const head=`<div class="carthead"><b>Parts in this order (${f.lines.length+(f.item?1:0)})</b><div class="cvseg" role="group" aria-label="View"><button class="${lv?"":"on"}" data-act="cartview" data-v="tab" aria-pressed="${!lv}">▦ Tab</button><button class="${lv?"on":""}" data-act="cartview" data-v="list" aria-pressed="${lv}">☰ List</button></div></div>`;
+  const foot=(f.item?`<span class="hint">Now adding: <b class="mono">${esc(showPn(f.item.pn))}</b> (below)</span>`:`<span class="hint">Add the next part below, or place the order.</span>`)+`</div>`;
+  if(lv) return `<div class="cart">${head}<div class="clist">`+f.lines.map((ln,i)=>`<div class="crow"><span class="cn">${i+1}</span><button class="cmain" data-act="lnedit" data-i="${i}" title="Edit"><span class="mono">${esc(showPn(ln.item.pn))}</span><span class="cnm">${esc(showName(ln.item.name))}</span></button>
+      <div class="cq sm"><button data-act="lnqty" data-i="${i}" data-d="-1" aria-label="Less">−</button><span>${esc(ln.qty)}</span><button data-act="lnqty" data-i="${i}" data-d="1" aria-label="More">+</button></div><button class="cx" data-act="lnrm" data-i="${i}" aria-label="Remove">✕</button></div>`).join("")+`</div>`+foot;
+  return `<div class="cart">${head}`+f.lines.map((ln,i)=>{ const v=ln.vendor?vendorById(ln.vendor):null;
     return `<div class="cline"><div class="ci"><span class="mono">${esc(showPn(ln.item.pn))}</span> <span class="hint">${esc(showName(ln.item.name))}</span><br><span class="hint" style="font-size:12px">${v?esc(v.name):"Vendor: choose on next screen"}</span><br>${lastOrderHTML(ln.item)}</div>
       <div class="cq"><button data-act="lnqty" data-i="${i}" data-d="-1" aria-label="Less">−</button><span>${esc(ln.qty)}</span><button data-act="lnqty" data-i="${i}" data-d="1" aria-label="More">+</button></div>
       <div class="ca"><button data-act="lnedit" data-i="${i}">Edit</button><button class="x" data-act="lnrm" data-i="${i}" aria-label="Remove">✕</button></div></div>`; }).join("")+
-    (f.item?`<span class="hint">Now adding: <b class="mono">${esc(showPn(f.item.pn))}</b> (below)</span>`:`<span class="hint">Add the next part below, or place the order.</span>`)+`</div>`;
+    foot;
 }
 async function draftFromLine(ctx, ln, extra){
   const who=ctx==="phone"?S.phone.user:deskUser(), v=ln.vendor?vendorById(ln.vendor):null, now=new Date().toISOString();
@@ -970,6 +1012,7 @@ function applyGSearch(root){
     const none=document.querySelector(`.gs-none[data-sk="${key}"]`); if(none) none.hidden=!(words.length&&total&&!shown);
   });
 }
+const vendorByName = n => { const k=norm(n); return k?S.vendors.find(v=>norm(v.name)===k):null; };
 const pendingOrders = () => liveOrders().filter(o=>o.status==="Pending");
 const unplacedCount = () => S.drafts.length + pendingOrders().length;
 function phonePendingCardHTML(o){
@@ -1020,6 +1063,9 @@ function listsHTML(){
 }
 const combo={el:null,idx:-1,opts:[],q:""};
 function comboOptions(kind,q){
+  if(kind==="vendors"){ const n=norm(q), names=S.vendors.map(v=>v.name).filter(Boolean);
+    const exact=names.some(x=>norm(x)===n);
+    return names.filter(x=>exact||!n||norm(x).includes(n)).sort((a,b)=>(n&&!exact?(norm(a).indexOf(n)-norm(b).indexOf(n)):0)||a.localeCompare(b)); }
   const list=S[kind]||[], n=norm(q);
   const m=list.filter(x=>!n||norm(x).includes(n)).sort((a,b)=>(norm(a).indexOf(n)-norm(b).indexOf(n))||a.localeCompare(b)).slice(0,10);
   const exact=list.some(x=>norm(x)===n);
@@ -1459,7 +1505,7 @@ function renderPhone(){
       <button class="big-btn bb-recv" data-act="pgo" data-s="rvvendor" style="justify-content:center">📦 Receive more</button>
       <button class="big-btn bb-list" data-act="pgo" data-s="home" style="justify-content:center;font-size:20px">${esc(t("home"))}</button></div>`;
   } else if((P.screen==="trlist"||P.screen==="trnew"||P.screen==="trview") && typeof trListHTML==="function"){
-    const ttl={trlist:"Godown transfer",trnew:"New transfer",trview:"Transfer"}[P.screen];
+    const ttl=P.screen==="trnew"&&S.tr.phone.form&&S.tr.phone.form.review?"Check transfer":{trlist:"Godown transfer",trnew:"New transfer",trview:"Transfer"}[P.screen];
     head=`<div class="p-head"><button class="back" data-act="trback">${esc(t("back"))}</button><b>${ttl}</b></div>`;
     body= P.screen==="trlist" ? `<button class="big-btn bb-tr" data-act="trnew" data-ctx="phone">➕ New transfer${S.tr.phone.form&&S.tr.phone.form.lines.length?` (${S.tr.phone.form.lines.length} parts not yet created)`:""}</button>${trListHTML("phone")}`
         : P.screen==="trnew" ? (S.tr.phone.form?trFormHTML("phone"):"") : trViewHTML("phone");
@@ -1637,19 +1683,43 @@ function renderDeskBody0(){
   else if(D.tab==="transfers" && typeof trDeskHTML==="function") el.innerHTML=trDeskHTML();
   else if(D.tab==="challans" && typeof challanRender==="function") el.innerHTML=challanRender("desk");
 }
-function renderDrafts(){ renderDrafts0(); applyGSearch($("#d-drafts")); }
+function renderDrafts(){
+  const a=document.activeElement, box=$("#d-drafts"), keep=a&&box&&box.contains(a)&&a.dataset&&a.dataset.in?{in:a.dataset.in,id:a.dataset.id,s:a.selectionStart,e:a.selectionEnd,combo:combo.el===a,idx:combo.idx}:null;
+  renderDrafts0(); applyGSearch($("#d-drafts"));
+  if(keep){ const n=document.querySelector(`#d-drafts [data-in="${keep.in}"]${keep.id?`[data-id="${CSS.escape(keep.id)}"]`:""}`); if(n){ n.focus({preventScroll:true}); try{ if(keep.s!=null) n.setSelectionRange(keep.s,keep.e); }catch(e){} if(keep.combo){ combo.el=n; combo.opts=comboOptions("vendors",n.value); combo.idx=keep.idx; drawCombo(); } } }
+}
 function renderDrafts0(){
   const el=$("#d-drafts"); if(!el) return;
   const pend=pendingOrders();
-  if(pend.length || S.drafts.length){ el.innerHTML=`<div class="drafts-desk"><b style="color:var(--info)">📝 Unplaced orders (${S.drafts.length+pend.length}) <span class="hint" style="font-weight:400">${S.drafts.length} not placed · ${pend.length} pending (PO not sent)</span></b>
-    ${S.drafts.length>3?gsBar("ddr","Search unplaced items…"):""}${S.drafts.length?`<div class="grid">${S.drafts.map(d=>draftCardHTML(d,"desk").replace('<div class="ocard dcard"','<div class="ocard dcard srow" data-sk="ddr"')).join("")}</div>`:""}
-    ${pend.length?`<div class="toolbar"><span class="hint">${pend.length} pending order${pend.length===1?"":"s"} from ${new Set(pend.map(o=>o.vendorId)).size} vendor${new Set(pend.map(o=>o.vendorId)).size===1?"":"s"}: send their POs to place them.</span><button class="btn sm dark" data-act="dgopend">Send POs (By Vendor) ›</button></div>`:""}</div>`; return; }
-  el.innerHTML=S.drafts.length?`<div class="drafts-desk"><b style="color:var(--info)">📝 Unplaced orders (${S.drafts.length}) <span class="hint" style="font-weight:400">selected but not placed, from all phones and this desktop</span></b><div class="grid">${S.drafts.map(d=>draftCardHTML(d,"desk")).join("")}</div></div>`:"";
+  if(!pend.length && !S.drafts.length){ el.innerHTML=""; return; }
+  const D=S.desk; D.dq=D.dq||{}; D.dv=D.dv||{};
+  const ds=[...S.drafts].sort((a,b)=>String(b.updated||b.created).localeCompare(String(a.updated||a.created)));
+  let h=`<div class="drafts-desk"><b style="color:var(--info)">📝 Unplaced orders (${S.drafts.length+pend.length}) <span class="hint" style="font-weight:400">${S.drafts.length} not placed · ${pend.length} in vendor carts (PO not sent)</span></b>`;
+  const pcsAll=pend.reduce((a,o)=>a+(Number(o.qty)||0),0);
+  if(ds.length){
+    h+=(ds.length>3?gsBar("ddr","Search unplaced items…"):"")+(pend.length?`<div class="gocarts-row"><button class="gocarts" data-act="dgocarts">🛒 Go to carts <span>${pend.length} item${pend.length===1?"":"s"} · ${pcsAll} pcs</span> ↓</button></div>`:"")+`<div class="tbl-wrap dtbl"><table><thead><tr><th>Date / time</th><th>Part no.</th><th>Item</th><th class="num">Qty</th><th style="min-width:240px">Vendor</th><th class="num">MRP</th><th>Entered by</th><th class="c">Cart</th><th></th></tr></thead><tbody>`+
+    ds.map(d=>{ const sure=D.dcancel===d.id, q=D.dq[d.id]??d.qty, vtxt=D.dv[d.id]??(d.vendorConfirmed&&d.vendorName?d.vendorName:""), vok=vendorByName(vtxt);
+      const sug=!vtxt&&d.sugVendorId&&vendorById(d.sugVendorId)?vendorById(d.sugVendorId).name:"";
+      return `<tr class="srow" data-sk="ddr"><td class="nowrap">${fmtDT(d.created||d.updated)}</td><td class="mono nowrap">${esc(showPn(d.pn))}</td><td>${esc(showName(d.name))}</td>
+        <td class="num"><div class="dqty"><button data-act="ddq" data-id="${esc(d.id)}" data-d="-1" aria-label="Less">−</button><input type="number" min="1" inputmode="numeric" data-in="ddq" data-id="${esc(d.id)}" value="${esc(q)}" aria-label="Qty"><button data-act="ddq" data-id="${esc(d.id)}" data-d="1" aria-label="More">+</button></div></td>
+        <td><div class="dven ${vok?"ok":vtxt?"bad":""}"><input data-combo="vendors" data-in="ddv" data-id="${esc(d.id)}" value="${esc(vtxt)}" placeholder="${sug?"Suggested: "+esc(sug):"Choose vendor ▾"}" autocomplete="off" aria-label="Vendor for ${esc(d.pn)}"><span class="dvarr" aria-hidden="true">▾</span></div></td>
+        <td class="num">${d.mrp!=null&&d.mrp!==""?rupee(d.mrp):"—"}</td><td>${esc(d.by||"")}</td>
+        <td class="c"><button class="cartbtn" data-act="ddcart" data-id="${esc(d.id)}" title="Add to ${vok?esc(vok.name)+"'s":"the vendor's"} cart" aria-label="Add to vendor cart">🛒</button></td>
+        <td><button class="dx ${sure?"sure":""}" data-act="drcancel" data-ctx="desk" data-id="${esc(d.id)}" title="Cancel this unplaced order">${sure?"Click again":"✕"}</button></td></tr>`; }).join("")+`</tbody></table></div>`;
+  }
+  if(pend.length){
+    const g={}; pend.forEach(o=>{ (g[o.vendorId]=g[o.vendorId]||[]).push(o); });
+    const vids=Object.keys(g).sort((a,b)=>String((vendorById(a)||{name:g[a][0].vendorName}).name).localeCompare(String((vendorById(b)||{name:g[b][0].vendorName}).name)));
+    h+=`<div class="hint" id="d-carts" style="margin-top:10px;scroll-margin-top:12px"><b>🛒 Vendor carts</b> – click a cart to send its PO:</div><div class="carts">${vids.map(vid=>{ const v=vendorById(vid)||{name:g[vid][0].vendorName}, pcs=g[vid].reduce((a,o)=>a+(Number(o.qty)||0),0);
+      return `<button class="cartchip ${D.cartFlash===vid?"flash":""}" data-act="dgocart" data-vid="${esc(vid)}" title="${esc(v.name)}"><span class="cico">🛒</span><span class="cinfo"><b>${esc(v.name)}</b><small>${g[vid].length} item${g[vid].length===1?"":"s"} · ${pcs} pcs</small></span><span class="cgo">›</span></button>`; }).join("")}</div>`;
+  }
+  el.innerHTML=h+`</div>`;
 }
 function renderTiles(){
   const os=liveOrders(), td=today();
   const c={p:os.filter(o=>o.status==="Pending").length,u:os.filter(o=>o.status==="Pending"&&o.urgent).length,o:os.filter(o=>o.status==="Ordered").length,r:os.filter(o=>o.status==="Received"&&localDate(o.updated)===td).length};
-  const el=$("#d-tiles"); if(el) el.innerHTML=`<div class="tiles">${[["p","t-p",c.p,"Pending"],["u","t-u",c.u,"Urgent &amp; pending"],["o","t-o",c.o,"Ordered, not received"],["r","t-r",c.r,"Received today"]].map(([k,cl,n,l])=>`<button class="tile tbtn ${cl} ${S.desk.tileOn===k?"on":""}" data-act="tilego" data-k="${k}" aria-pressed="${S.desk.tileOn===k}"><b>${n}</b>${l} →</button>`).join("")}${S.claims.filter(c=>!/^Closed/.test(c.status)).length?`<button class="tile t-c" data-act="dclaims"><b>${S.claims.filter(c=>!/^Closed/.test(c.status)).length}</b>Open claims →</button>`:""}${pendingReqs().length?`<button class="tile t-e" data-act="goemps"><b>${pendingReqs().length}</b>Employee access requests →</button>`:""}${openIssues().length?`<button class="tile t-i" data-act="goissues"><b>${openIssues().length}</b>Receiving problems →</button>`:""}${pendingParts().length?`<button class="tile t-g" data-act="gopending"><b>${pendingParts().length}</b>Parts to complete (part no. / description / GST) →</button>`:""}</div>`;
+  const nd=S.drafts.length, np=pendingOrders().length;
+  const el=$("#d-tiles"); if(el) el.innerHTML=`<div class="tiles"><button class="tile tbtn t-un" data-act="dunplaced"><b>${nd+np}</b>Unplaced orders →<small>${nd} not placed · ${np} PO not sent</small></button>${[["p","t-p",c.p,"Pending"],["u","t-u",c.u,"Urgent &amp; pending"],["o","t-o",c.o,"Ordered, not received"],["r","t-r",c.r,"Received today"]].map(([k,cl,n,l])=>`<button class="tile tbtn ${cl} ${S.desk.tileOn===k?"on":""}" data-act="tilego" data-k="${k}" aria-pressed="${S.desk.tileOn===k}"><b>${n}</b>${l} →</button>`).join("")}${S.claims.filter(c=>!/^Closed/.test(c.status)).length?`<button class="tile t-c" data-act="dclaims"><b>${S.claims.filter(c=>!/^Closed/.test(c.status)).length}</b>Open claims →</button>`:""}${pendingReqs().length?`<button class="tile t-e" data-act="goemps"><b>${pendingReqs().length}</b>Employee access requests →</button>`:""}${openIssues().length?`<button class="tile t-i" data-act="goissues"><b>${openIssues().length}</b>Receiving problems →</button>`:""}${pendingParts().length?`<button class="tile t-g" data-act="gopending"><b>${pendingParts().length}</b>Parts to complete (part no. / description / GST) →</button>`:""}</div>`;
 }
 function filtersHTML(){
   const F=S.desk.filters;
@@ -1692,6 +1762,7 @@ function dformHTML(){
    <div id="vc-desk">${f.item?vcardHTML("desk",f):`<div class="empty">Enter a part number to see its vendors and past purchases.</div>`}</div>
    <div class="acts">${f.draftId?`<span class="hint" style="margin-right:auto">Placing an unplaced order</span>`:""}<button class="btn" data-act="dcancel">Close</button>${f.editId?"":`<button class="btn later" data-act="drsave" data-ctx="desk" ${f.item?"":"disabled"}>Place later</button>`}<button class="btn ok" data-act="save" data-ctx="desk" ${ok?"":"disabled"} id="d-save">${f.editId?"Save changes":"Place now"}</button></div></div>`;
 }
+const WA_ICON=`<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3.6 20.4l1.2-4.1A8.6 8.6 0 1 1 8 19.3z" fill="none" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/><g transform="translate(6.6 6.4) scale(.45)" fill="#fff"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></g></svg>`;
 function byVendorHTML(){
   const D=S.desk, st=D.groupStatus;
   const os=liveOrders().filter(o=>!st||o.status===st);
@@ -1703,8 +1774,8 @@ function byVendorHTML(){
   h+=gsBar("bv","Search vendor, part, item, person…");
   ids.forEach(vid=>{
     const v=vendorById(vid)||{name:groups[vid][0].vendorName}; const g=groups[vid];
-    h+=`<div class="group srow" data-sk="bv"><div class="group-h"><h3>${esc(v.name)} <span class="muted" style="font-size:15px">· ${g.length} line${g.length===1?"":"s"}</span></h3>
-      <button class="btn sm dark" data-act="dwa" data-vid="${esc(vid)}">Copy for WhatsApp</button><button class="btn sm" data-act="dcsv" data-vid="${esc(vid)}">Download for Excel (CSV)</button>${st==="Pending"?`<button class="btn sm ok" data-act="dmark" data-vid="${esc(vid)}">Mark all as Ordered</button>`:""}${openFor(vid).length?`<button class="btn sm pri" data-act="drvbill" data-vid="${esc(vid)}">📦 Receive bill</button>`:""}</div>
+    h+=`<div class="group srow" data-sk="bv" data-vid="${esc(vid)}"><div class="group-h"><h3>${esc(v.name)} <span class="muted" style="font-size:15px">· ${g.length} line${g.length===1?"":"s"}</span></h3>
+      <a class="wabtn" href="https://web.whatsapp.com/send?text=${encodeURIComponent(waText(vid))}" target="_blank" rel="noopener" title="Open WhatsApp Web and choose the vendor to send this PO" aria-label="Send ${esc(v.name)} PO on WhatsApp Web">${WA_ICON}</a><button class="btn sm dark" data-act="dwa" data-vid="${esc(vid)}">Copy for WhatsApp</button><button class="btn sm" data-act="dcsv" data-vid="${esc(vid)}">Download for Excel (CSV)</button>${st==="Pending"?`<button class="btn sm ok" data-act="dmark" data-vid="${esc(vid)}">Mark all as Ordered</button>`:""}${openFor(vid).length?`<button class="btn sm pri" data-act="drvbill" data-vid="${esc(vid)}">📦 Receive bill</button>`:""}</div>
       <div class="tbl-wrap" style="border:0;border-radius:0"><table><thead><tr><th>Part no.</th><th>Item</th><th class="num">Qty</th><th>Entered</th><th>Status</th></tr></thead><tbody>${g.map(o=>`<tr class="${o.urgent?"urg":""}"><td class="mono">${esc(showPn(o.pn))}</td><td>${esc(showName(o.name))} ${o.urgent?'<span class="urgtag">URGENT</span>':""}</td><td class="num">${esc(o.qty)}</td><td class="nowrap">${fmtDT(o.created)} · ${esc(o.by)}</td><td><span class="pill ${esc(o.status)}">${esc(o.status)}</span></td></tr>`).join("")}</tbody></table></div></div>`;
   });
   return h;
@@ -1752,8 +1823,10 @@ function startPo(vid, focusId){
   peekPoNo().then(n=>{ if(P.po&&!P.po.locked){ P.po.peek=n; if(P.screen==="po") renderPhone(); } });
 }
 function waText(vid){
-  const v=vendorById(vid)||{name:""}; const g=vendorOrders(vid);
-  return `*New India Motors, Kolhapur – Order*\nTo: ${v.name}\nDate: ${fmtD(today())}\n\n`+g.map((o,i)=>`${i+1}. ${o.pn} – ${o.name} – Qty ${o.qty}${o.mrp!=null?` – MRP ₹${o.mrp}`:""}${o.urgent?" (URGENT)":""}`).join("\n")+`\n\nTotal lines: ${g.length}\nPlease confirm availability and rate.`;
+  const v=vendorById(vid)||{name:""}; const g=vendorOrders(vid); const tq=g.reduce((a,o)=>a+Number(o.qty||0),0);
+  return `*New India Motors, Kolhapur – Order*\nTo: ${v.name}\nDate: ${fmtD(today())}\n\n`+
+    g.map((o,i)=>`${i+1}. ${isTempPn(o.pn)?"(part no. not known)":`*${o.pn}*`}${o.urgent?" (URGENT)":""}\n    ${showName(o.name)}\n    Qty: *${o.qty}*`).join("\n\n")+
+    `\n\nTotal items: ${g.length} · Total qty: ${tq}\nPlease confirm availability and rate.`;
 }
 const csvCell = v => { const s=String(v??""); return /[",\n]/.test(s)?`"${s.replace(/"/g,'""')}"`:s; };
 
@@ -2196,7 +2269,7 @@ const ACT = {
   dcopyclose(){ S.desk.copyText=null; renderDeskBody(); },
   async dcsv(el){
     const v=vendorById(el.dataset.vid)||{name:"vendor"}; const g=vendorOrders(el.dataset.vid);
-    const csv=[["Date","Part No","Item","Qty","Vendor","MRP","Rate","Urgent","Note","Status","Entered By"],...g.map(o=>[fmtD(localDate(o.created)),o.pn,o.name,o.qty,o.vendorName,o.mrp??"",o.rate??"",o.urgent?"Yes":"",o.note||"",o.status,o.by])].map(r=>r.map(csvCell).join(",")).join("\r\n");
+    const csv=[["Date","Part No","Item","Qty","Vendor","Rate","Urgent","Note","Status","Entered By"],...g.map(o=>[fmtD(localDate(o.created)),o.pn,o.name,o.qty,o.vendorName,o.rate??"",o.urgent?"Yes":"",o.note||"",o.status,o.by])].map(r=>r.map(csvCell).join(",")).join("\r\n");
     let dl=null; try{ dl=window.claude&&claude.use?await claude.use("downloads"):null; }catch(e){}
     if(!dl){ S.desk.copyText=csv; renderDeskBody(); return; }
     try{ await dl.save({filename:`Order-${v.name.replace(/[^A-Za-z0-9]+/g,"-")}-${today()}.csv`,data:"﻿"+csv}); }catch(e){ if(!(e&&/declin|cancel/i.test(e.code||e.message||""))) { S.desk.copyText=csv; renderDeskBody(); } }
@@ -2354,6 +2427,8 @@ const ACT = {
   reshow(el){ const R=S.res[el.dataset.ctx]; R.how=el.dataset.v; resRender(el.dataset.ctx); },
   rescancel(el){ S.res[el.dataset.ctx]=null; resRender(el.dataset.ctx); },
   async resok(el){ el.disabled=true; try{ await doResolve(el.dataset.ctx); }catch(e){ const R=S.res[el.dataset.ctx]; if(R){ R.err="Could not save."+errDetail(e); resRender(el.dataset.ctx);} } },
+  dunplaced(){ const el=$("#d-drafts"); if(!el||!el.innerHTML.trim()){ dtoast("No unplaced orders right now ✓"); return; }
+    el.scrollIntoView({behavior:"smooth",block:"start"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); },
   tilego(el){ const D=S.desk, k=el.dataset.k;
     if(D.tileOn===k){ ACT.tileclear(); return; }
     D.filters={vendor:"",status:"",emp:"",from:"",to:"",urgent:false,issues:false,recvToday:false,q:""};
@@ -2363,6 +2438,20 @@ const ACT = {
     if(k==="r"){ D.filters.status="Received"; D.filters.recvToday=true; }
     D.tileOn=k; D.tab="book"; renderDesk();
     const t=$("#d-showing"); if(t) t.scrollIntoView({block:"start",behavior:"smooth"}); },
+  ddq(el){ const D=S.desk, d=S.drafts.find(x=>x.id===el.dataset.id); if(!d) return; D.dq=D.dq||{}; const q=Math.max(1,(Number(D.dq[d.id]??d.qty)||1)+Number(el.dataset.d)); D.dq[d.id]=q; const i=document.querySelector(`[data-in="ddq"][data-id="${CSS.escape(d.id)}"]`); if(i) i.value=q; },
+  async ddcart(el){ const D=S.desk, d=S.drafts.find(x=>x.id===el.dataset.id); if(!d) return; D.dq=D.dq||{}; D.dv=D.dv||{};
+    const vtxt=D.dv[d.id]??(d.vendorConfirmed&&d.vendorName?d.vendorName:""), v=vendorByName(vtxt), q=Math.round(Number(D.dq[d.id]??d.qty));
+    if(!v){ dtoast("Choose the vendor first (▾ list)"); const i=document.querySelector(`[data-in="ddv"][data-id="${CSS.escape(d.id)}"]`); if(i) i.focus(); return; }
+    if(!(q>0)){ dtoast("Enter a qty of 1 or more"); return; }
+    el.disabled=true; const who=deskUser(), now=new Date().toISOString(), itm=itemByPn(d.pn)||d;
+    const o={id:newId(),pn:d.pn,name:d.name,brand:d.brand||"",mrp:itm.mrp!=null&&itm.mrp!==""?Number(itm.mrp):(d.mrp!=null&&d.mrp!==""?Number(d.mrp):null),qty:q,vendorId:v.id,vendorName:v.name,rate:null,customer:"",urgent:!!d.urgent,note:d.note||"",status:"Pending",by:d.by||who.name,byId:d.byId||who.id,device:"Desktop",created:now,updated:now,updatedBy:who.name,
+      log:[{t:now,who:who.name,dev:"Desktop",what:`Created from unplaced order (entered by ${d.by||"?"}): ${d.pn} × ${q} → ${v.name} cart`}]};
+    try{ await writeOrder(o); await deleteDraft(d.id); delete D.dq[d.id]; delete D.dv[d.id]; D.cartFlash=v.id; renderDrafts(); renderTiles(); dtoast(`🛒 Added to ${v.name} cart`); setTimeout(()=>{ if(D.cartFlash===v.id){ D.cartFlash=null; renderDrafts(); } },1600); }
+    catch(e){ el.disabled=false; dtoast("Could not add. Check the connection and try again."); } },
+  cartview(el){ S.cartView=el.dataset.v; try{ localStorage.setItem("nim-cartview",S.cartView); }catch(e){} renderPhone(); },
+  dgocarts(){ const c=$("#d-carts"); if(!c) return; c.scrollIntoView({behavior:"smooth",block:"start"}); const g=document.querySelector("#d-drafts .carts"); if(g){ g.classList.remove("flash"); void g.offsetWidth; g.classList.add("flash"); } },
+  dgocart(el){ const vid=el.dataset.vid; S.desk.tab="byvendor"; S.desk.groupStatus="Pending"; renderDesk();
+    setTimeout(()=>{ const g=document.querySelector(`.group[data-vid="${CSS.escape(vid)}"]`); if(g){ g.scrollIntoView({behavior:"smooth",block:"start"}); g.classList.add("flash"); setTimeout(()=>g.classList.remove("flash"),1500); } },60); },
   dgopend(){ S.desk.tab="byvendor"; S.desk.groupStatus="Pending"; renderDesk(); },
   tileclear(){ const D=S.desk; D.tileOn=null; D.filters={vendor:"",status:"",emp:"",from:"",to:"",urgent:false,issues:false,recvToday:false,q:""}; renderDeskBody(); },
   goissues(){ S.desk.filters.issues=true; renderDeskBody(); },
@@ -2476,6 +2565,8 @@ const IN = {
   "rv-challan"(el){ const R=S.recvs[el.dataset.ctx]; R.challanNo=el.value; },
   "rv-note"(el){ S.recvs[el.dataset.ctx].lines[el.dataset.id].note=el.value; },
   "res-note"(el){ const R=S.res[el.dataset.ctx]; if(R){ R.note=el.value; R.err=""; } },
+  "ddq"(el){ const D=S.desk; D.dq=D.dq||{}; D.dq[el.dataset.id]=el.value; },
+  "ddv"(el){ const D=S.desk; D.dv=D.dv||{}; D.dv[el.dataset.id]=el.value; const w=el.closest(".dven"); if(w){ const ok=!!vendorByName(el.value); w.classList.toggle("ok",ok); w.classList.toggle("bad",!ok&&!!el.value.trim()); } },
   "rv-billed"(el){ const ctx=el.dataset.ctx, o=S.orders[el.dataset.id], L=S.recvs[ctx].lines[el.dataset.id]; L.billed=el.value; const b=rvNums(o,L).billed; if(Number(L.qty)>b) L.qty=b; const sm=document.getElementById(`rsum-${ctx}-${el.dataset.id}`); if(sm&&o) sm.innerHTML=rsumText(o,L); },
   "rv-qty"(el){ const ctx=el.dataset.ctx, o=S.orders[el.dataset.id], L=S.recvs[ctx].lines[el.dataset.id]; L.qty=el.value; const sm=document.getElementById(`rsum-${ctx}-${el.dataset.id}`); if(sm&&o) sm.innerHTML=rsumText(o,L); },
   sq(el){ S.desk.stockQ=el.value; renderStockTable(); },
@@ -3733,8 +3824,22 @@ function trGdHTML(ctx){
   if(!m.length) return `<div class="gddrop"><p class="hint" style="margin:8px 10px;color:var(--bad)">No godown matches "${esc(q)}".</p></div>`;
   return `<div class="gddrop" role="listbox" aria-label="Godowns" id="gddrop-${ctx}"><div class="gdcount">${m.length} godown${m.length===1?"":"s"}${q?` matching "${esc(q)}"`:""}</div>${m.map((g,i)=>`<button type="button" class="gdopt ${i===hi?"hi":""} ${gdNorm(g)===gdNorm(q)?"sel":""}" role="option" data-act="trgd" data-ctx="${ctx}" data-g="${esc(g)}">${esc(g)}</button>`).join("")}</div>`;
 }
+function trReviewHTML(ctx){
+  const F=S.tr[ctx].form, c=F.cur, n=F.lines.length, tq=F.lines.reduce((a,l)=>a+(Number(l.qty)||0),0);
+  const gds=[...new Set(F.lines.map(l=>l.godown))];
+  const left=String(c.pn||"").trim()||String(c.name||"").trim();
+  return `<div class="rvrev"><div class="rvrev-head"><span class="hint">Check before creating</span><b>Godown transfer · ${n} part${n===1?"":"s"} · ${tq} pcs</b>
+      <div class="rvrev-meta"><span>To godown${gds.length===1?"":"s"}: <b class="mono">${gds.map(esc).join(", ")}</b></span><span>By <b>${esc(trUser(ctx).name||"")}</b></span><span>${fmtD(today())}</span></div></div>
+    <div class="rvrev-list">${F.lines.map((l,i)=>`<div class="rvrev-row"><span class="rvrev-n">${i+1}</span><div class="rvrev-main"><span class="mono">${esc(showPn(l.pn))}</span><span class="rvrev-name">${esc(l.name)}</span>
+      <span class="rvrev-tags"><span class="gdtag">🏬 ${esc(l.godown)}</span>${l.mrp!==""&&l.mrp!=null?`<span class="hint">MRP ${rupee(l.mrp)} each</span>`:""}</span></div>
+      <div class="rvrev-q"><b>${esc(l.qty)}</b><span class="hint">qty</span></div></div>`).join("")}</div></div>
+    ${left?`<p class="err" style="text-align:left;margin:0">⚠ "${esc(String(c.pn||c.name).trim())}" is typed above but not added to the list. Go back and tap "Add to transfer list" if it should be included.</p>`:""}
+    ${F.err?`<p class="err" style="text-align:left;margin:0">${esc(F.err)}</p>`:""}
+    <button class="save-btn trcreate" data-act="trcreate" data-ctx="${ctx}">✓ Confirm &amp; create transfer list</button>
+    <button class="btn rvback" data-act="trrevback" data-ctx="${ctx}">← Back to make changes</button>`;
+}
 function trFormHTML(ctx){
-  const T=S.tr[ctx], F=T.form, c=F.cur;
+  const T=S.tr[ctx], F=T.form, c=F.cur; if(F.review) return trReviewHTML(ctx);
   const lines=F.lines.map((l,i)=>`<div class="trline"><button class="tlx" data-act="trrmline" data-ctx="${ctx}" data-i="${i}" aria-label="Remove ${esc(l.pn||l.name)}">×</button>
       <span class="trn">${i+1}</span><div class="trli"><b class="mono">${esc(showPn(l.pn))}</b><span>${esc(l.name)}</span>
       <span class="trmeta"><span class="gdtag">🏬 ${esc(l.godown)}</span> Qty <b>${esc(l.qty)}</b>${l.mrp!==""&&l.mrp!=null?` · MRP ${rupee(l.mrp)} each`:""}</span></div></div>`).join("");
@@ -3742,15 +3847,15 @@ function trFormHTML(ctx){
     <div class="trf"><label for="tr-pn-${ctx}">Part No.</label><input id="tr-pn-${ctx}" class="p-input mono" style="text-transform:uppercase" data-in="trf" data-ctx="${ctx}" data-k="pn" value="${esc(c.pn)}" placeholder="Type part no. or name" autocomplete="off">
       <div class="sugg" id="trsug-${ctx}">${trSuggHTML(ctx)}</div></div>
     <div class="trf"><label for="tr-nm-${ctx}">Part name</label><input id="tr-nm-${ctx}" class="p-input" data-in="trf" data-ctx="${ctx}" data-k="name" value="${esc(c.name)}" autocomplete="off"></div>
-    <div class="trf"><label for="tr-gd-${ctx}">Godown</label><div class="gdrow"><input id="tr-gd-${ctx}" class="p-input mono" style="text-transform:uppercase" data-in="trf" data-ctx="${ctx}" data-k="godown" value="${esc(c.godown)}" placeholder="Tap to choose or type e.g. YA-5" autocomplete="off" role="combobox" aria-expanded="${!!F.gdOpen}"><button type="button" class="gdtoggle" data-act="trgdtoggle" data-ctx="${ctx}" aria-label="${F.gdOpen?"Close":"Open"} godown list">${F.gdOpen?"▴":"▾"}</button></div>
-      <div id="trgd-${ctx}">${trGdHTML(ctx)}</div></div>
     <div class="oegrid"><div><label for="tr-q-${ctx}">Qty</label><div class="tlq"><button data-act="trqty" data-ctx="${ctx}" data-d="-1" aria-label="Less">−</button><input id="tr-q-${ctx}" type="number" min="1" inputmode="numeric" data-in="trf" data-ctx="${ctx}" data-k="qty" value="${esc(c.qty)}"><button data-act="trqty" data-ctx="${ctx}" data-d="1" aria-label="More">+</button></div></div>
       <div><label for="tr-m-${ctx}">MRP each ₹</label><input id="tr-m-${ctx}" class="p-input" type="number" min="0" inputmode="decimal" data-in="trf" data-ctx="${ctx}" data-k="mrp" value="${esc(c.mrp)}"></div></div>
+    <div class="trf"><label for="tr-gd-${ctx}">Godown</label><div class="gdrow"><input id="tr-gd-${ctx}" class="p-input mono" style="text-transform:uppercase" data-in="trf" data-ctx="${ctx}" data-k="godown" value="${esc(c.godown)}" placeholder="Tap to choose or type e.g. YA-5" autocomplete="off" role="combobox" aria-expanded="${!!F.gdOpen}"><button type="button" class="gdtoggle" data-act="trgdtoggle" data-ctx="${ctx}" aria-label="${F.gdOpen?"Close":"Open"} godown list">${F.gdOpen?"▴":"▾"}</button></div>
+      <div id="trgd-${ctx}">${trGdHTML(ctx)}</div></div>
     ${F.err?`<p class="err" style="text-align:left;margin:0">${esc(F.err)}</p>`:""}
-    <button class="addmore trbtn" data-act="tradd" data-ctx="${ctx}">➕ Add to transfer list</button>
+    <button class="trbtn" data-act="tradd" data-ctx="${ctx}"><span>Add to transfer list</span><span class="trarr" aria-hidden="true">➡️</span></button>
   </div>
   ${F.lines.length?`<h3 class="trh">Transfer list (${F.lines.length})</h3><div class="trlines">${lines}</div>
-  <button class="save-btn trcreate" data-act="trcreate" data-ctx="${ctx}">✓ CREATE TRANSFER LIST (${F.lines.length} part${F.lines.length===1?"":"s"})</button>`:`<p class="hint" style="margin:0">Add each part with its godown. When the list is complete, create it and send it on WhatsApp.</p>`}`;
+  <button class="save-btn trcreate" data-act="trreview" data-ctx="${ctx}">✓ CREATE TRANSFER LIST (${F.lines.length} part${F.lines.length===1?"":"s"})</button>`:`<p class="hint" style="margin:0">Add each part with its godown. When the list is complete, create it and send it on WhatsApp.</p>`}`;
 }
 
 /* ---------- one transfer ---------- */
@@ -3829,7 +3934,7 @@ Object.assign(ACT,{
   trgo(){ S.phone.menu=false; S.phone.screen="trlist"; renderPhone(); },
   trnew(el){ const ctx=el.dataset.ctx, T=S.tr[ctx]; if(!T.form) T.form=newTrForm(); if(ctx==="phone"){ S.phone.screen="trnew"; renderPhone(); } else { renderDeskBody(); const i=document.getElementById("tr-pn-desk"); if(i) i.focus(); } },
   trformclose(el){ S.tr[el.dataset.ctx].form=null; trRender(el.dataset.ctx); },
-  trback(){ const P=S.phone; P.screen=P.screen==="trlist"?"home":"trlist"; S.tr.phone.view=null; S.tr.phone.vno=null; renderPhone(); },
+  trback(){ const P=S.phone; const F0=S.tr.phone.form; if(P.screen==="trnew"&&F0&&F0.review){ F0.review=false; renderPhone(); return; } P.screen=P.screen==="trlist"?"home":"trlist"; S.tr.phone.view=null; S.tr.phone.vno=null; renderPhone(); },
   trpick(el){ const ctx=el.dataset.ctx, c=S.tr[ctx].form.cur, it=itemByPn(el.dataset.pn); if(!it) return; c.pn=it.pn; c.name=it.name||""; if(it.mrp!=null&&it.mrp!=="") c.mrp=it.mrp; S.tr[ctx].form.err=""; S.tr[ctx].form.picked=it.pn; trRender(ctx); const g=document.getElementById("tr-gd-"+ctx); if(g&&!c.godown) g.focus(); },
   trgd(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; F.cur.godown=el.dataset.g; F.gdOpen=false; F.gdHi=0; F.err=""; trRender(ctx); },
   trgdtoggle(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; F.gdOpen=!F.gdOpen; F.gdHi=0; trGdRefresh(ctx); if(F.gdOpen) trGdScroll(ctx); },
@@ -3844,6 +3949,8 @@ Object.assign(ACT,{
     F.lines.push({pn:pn||newTempPn(), name:(name||(it&&it.name)||"").toUpperCase(), godown:gdCanon(c.godown), qty, mrp:c.mrp===""||c.mrp==null?"":Number(c.mrp)});
     F.cur={pn:"",name:"",godown:"",qty:1,mrp:""}; F.err=""; F.picked=null; F.gdOpen=false; trRender(ctx); const i=document.getElementById("tr-pn-"+ctx); if(i&&ctx==="desk") i.focus(); },
   trrmline(el){ const ctx=el.dataset.ctx; S.tr[ctx].form.lines.splice(Number(el.dataset.i),1); trRender(ctx); },
+  trreview(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; if(!F||!F.lines.length) return; F.review=true; F.err=""; trRender(ctx); if(ctx==="phone"){ const b=document.querySelector("#phone .p-body"); if(b) b.scrollTop=0; } },
+  trrevback(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; if(!F) return; F.review=false; F.err=""; trRender(ctx); },
   async trcreate(el){ const ctx=el.dataset.ctx, F=S.tr[ctx].form; if(!F||!F.lines.length) return; el.disabled=true;
     try{ const n=await nextNumber("tr"), u=trUser(ctx), now=new Date().toISOString();
       const t={id:"tr"+Date.now().toString(36)+Math.random().toString(36).slice(2,5), no:fmtTr(fyLabel(),n), lines:F.lines, by:u.name, byId:u.id, created:now, status:"open", tallyVno:"", barcode:false, log:[{t:now,who:u.name,dev:ctx,what:"Created"}]};
