@@ -484,6 +484,8 @@ tr.pend td{background:var(--warnbg)}
 .bb-draft{background:var(--panel2);color:var(--info);border:2px dashed var(--info);padding:16px 18px;font-size:19px}
 .drafts-desk{border:2px dashed var(--info);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--panel)}
 .drafts-desk .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.clhr{display:flex;flex-direction:column;align-items:flex-end;gap:6px} .cledbtn{border:1.5px solid var(--brand);background:var(--panel);color:var(--brand);border-radius:8px;padding:5px 12px;font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.cledit select{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;font:inherit;background:var(--panel);color:var(--ink)}
 .carthead{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .cvseg{display:inline-flex;border:1.5px solid var(--brand);border-radius:8px;overflow:hidden;flex:0 0 auto}
 .cvseg button{border:none;background:var(--panel);color:var(--brand);font:inherit;font-size:12px;font-weight:700;padding:5px 9px;cursor:pointer}
@@ -2832,10 +2834,29 @@ function clManualVendorList(ctx,f){
   const q=norm(f.mvq); if(q){ h+=`<div class="clrows">${S.vendors.filter(v=>norm(v.name).includes(q)&&v.id!==f.mvid).slice(0,6).map(v=>`<button class="clrow" data-act="clmvpick" data-ctx="${ctx}" data-vid="${esc(v.id)}"><span class="box"></span><b>${esc(v.name)}</b></button>`).join("")}</div>`; }
   return h;
 }
+function clEditHTML(ctx,c){
+  const E=S.cl[ctx].edit;
+  const t=(k,lab,cls,type)=>`<label class="${cls||""}">${lab}<input ${type?`type="${type}"`:""} ${type==="date"?"data-ch":"data-in"}="cl-ed" data-ctx="${ctx}" data-k="${k}" value="${esc(E[k]??"")}" autocomplete="off"></label>`;
+  return `<div class="npbox cledit"><b>Edit claim details</b>
+    <div class="itemcard"><span><span class="mono">${esc(showPn(c.pn))}</span><br>${esc(showName(c.name))}</span></div>
+    <div class="clgrid">
+      ${t("qty","Qty","","number")}${t("saleDate","Date sold to customer","","date")}
+      ${t("customer","Customer name","w")}${t("custPhone","Customer phone","","tel")}${t("saleBill","Sale bill no.")}
+      <label class="w">Defect / complaint<textarea rows="2" data-in="cl-ed" data-ctx="${ctx}" data-k="defect">${esc(E.defect||"")}</textarea></label>
+      ${c.claimNo||c.vendorId?`<label class="w">Vendor<select data-ch="cl-ed" data-ctx="${ctx}" data-k="vendorId"><option value="">— choose —</option>${[...S.vendors].sort((a,b)=>a.name.localeCompare(b.name)).map(v=>`<option value="${esc(v.id)}" ${v.id===E.vendorId?"selected":""}>${esc(v.name)}</option>`).join("")}</select></label>
+      ${t("purchaseDate","Purchase date","","date")}${t("purchaseBill","Purchase bill no.")}`:""}
+    </div>
+    <span class="hint">The part can't be changed here. Claim forms update automatically with the new details.</span>
+    ${E.err?`<p class="err" style="text-align:left;margin:0">${esc(E.err)}</p>`:""}
+    <div class="npacts"><button class="btn ok" data-act="cledsave" data-ctx="${ctx}">✓ Save changes</button><button class="btn" data-act="cledcancel" data-ctx="${ctx}">Cancel</button></div></div>`;
+}
+const CL_EDIT_F=[["qty","Qty"],["customer","Customer"],["custPhone","Customer phone"],["saleDate","Sold date"],["saleBill","Sale bill"],["defect","Defect"],["vendorId","Vendor"],["purchaseDate","Purchase date"],["purchaseBill","Purchase bill"]];
 function clViewHTML(ctx){
   const C=S.cl[ctx], c=S.claims.find(x=>x.id===C.viewId); if(!c) return `<p class="hint">Claim not found.</p>`;
   const st=c.status, A=C.act;
-  let h=`<div class="clhead"><span><b class="mono">${esc(c.claimNo||"No claim no. yet")}</b><br><span class="hint">Created ${fmtDT(c.created)} by ${esc(c.by)}</span></span><span class="pill ${clColor(st)}">${esc(CL_STAGE[st]||st)}</span></div>
+  let h=`<div class="clhead"><span><b class="mono">${esc(c.claimNo||"No claim no. yet")}</b><br><span class="hint">Created ${fmtDT(c.created)} by ${esc(c.by)}</span></span><span class="clhr"><span class="pill ${clColor(st)}">${esc(CL_STAGE[st]||st)}</span>${C.edit?"":`<button class="cledbtn" data-act="cledit" data-ctx="${ctx}">✎ Edit</button>`}</span></div>`;
+  if(C.edit) return h+clEditHTML(ctx,c);
+  h+=`
     <div class="clinfo">
       <div><span>Part</span><b><span class="mono">${esc(showPn(c.pn))}</span> · ${esc(showName(c.name))} · Qty ${esc(c.qty)}</b></div>
       <div><span>Customer</span><b>${esc(c.customer||"—")}${c.custPhone?` · ${esc(c.custPhone)}`:""}</b></div>
@@ -2950,7 +2971,7 @@ function clRender(ctx){ S._clCtx=ctx; if(ctx==="phone") renderPhone(); else rend
 
 /* ---------- actions ---------- */
 Object.assign(ACT,{
-  clgo(){ S.cl.phone.viewId=null; S.cl.phone.act=null; S.phone.screen="claims"; renderPhone(); },
+  clgo(){ S.cl.phone.viewId=null; S.cl.phone.act=null; S.cl.phone.edit=null; S.phone.screen="claims"; renderPhone(); },
   dclaims(){ S.desk.tab="claims"; renderDesk(); },
   cltab(el){ S.cl.phone.tab=el.dataset.v; renderPhone(); },
   clfilt(el){ const F=S.cl.desk.filt; F.status=F.status===el.dataset.v?"open":el.dataset.v; renderDeskBody(); },
@@ -2958,7 +2979,7 @@ Object.assign(ACT,{
     if(ctx==="phone"){ S.phone.screen="claimnew"; renderPhone(); } else { C.modal="new"; renderModal(); }
     setTimeout(()=>{ const i=$("#clpn-"+ctx); if(i) i.focus(); },30); },
   clcancelnew(el){ const ctx=el.dataset.ctx; S.cl[ctx].f=null; if(ctx==="phone"){ S.phone.screen="claims"; renderPhone(); } },
-  clclose(){ const C=S.cl.desk; C.modal=null; C.f=null; C.act=null; C.viewId=null; renderModal(); },
+  clclose(){ const C=S.cl.desk; C.modal=null; C.f=null; C.act=null; C.edit=null; C.viewId=null; renderModal(); },
   clpick(el){ const ctx=el.dataset.ctx, f=S.cl[ctx].f, it=itemByPn(el.dataset.pn); if(!it) return; f.item={pn:it.pn,name:it.name,brand:it.brand||""}; f.pnQ=""; f.err=""; clRender(ctx); },
   clpclear(el){ const ctx=el.dataset.ctx; S.cl[ctx].f.item=null; clRender(ctx); const i=$("#clpn-"+ctx); if(i) i.focus(); },
   async clsavelater(el){ const ctx=el.dataset.ctx, f=S.cl[ctx].f; S._clCtx=ctx;
@@ -2992,7 +3013,7 @@ Object.assign(ACT,{
       if(ctx==="phone"){ S.phone.screen="claim"; renderPhone(); ptoast(`${claimNo} issued ✓`); } else { C.modal="view"; renderModal(); dtoast(`${claimNo} issued ✓`); }
     }catch(e){ f.err=(e&&e.message)||"Could not issue the claim form."; el.disabled=false; clRender(ctx); }
   },
-  clview(el){ const ctx=el.dataset.ctx, C=S.cl[ctx]; C.viewId=el.dataset.id; C.act=null; if(ctx==="phone"){ S.phone.screen="claim"; renderPhone(); } else { C.modal="view"; renderModal(); } },
+  clview(el){ const ctx=el.dataset.ctx, C=S.cl[ctx]; C.viewId=el.dataset.id; C.act=null; C.edit=null; if(ctx==="phone"){ S.phone.screen="claim"; renderPhone(); } else { C.modal="view"; renderModal(); } },
   clforward(el){ const ctx=el.dataset.ctx, C=S.cl[ctx], c=S.claims.find(x=>x.id===C.viewId); if(!c) return;
     const f=newClaimForm(); Object.assign(f,{step:"vendor",claimId:c.id,item:{pn:c.pn,name:c.name,brand:c.brand||""},qty:c.qty}); C.f=f;
     if(ctx==="phone"){ S.phone.screen="claimnew"; renderPhone(); } else { C.modal="new"; renderModal(); } },
@@ -3009,6 +3030,20 @@ Object.assign(ACT,{
     const who=el.dataset.who==="customer"?"customer":"vendor";
     try{ await navigator.clipboard.writeText(claimText(c,who)); S.cl[ctx].share=null; clRender(ctx); say(`${who==="customer"?"Customer":"Vendor"} copy copied ✓`); }catch(e){ say("Copy didn't work here."); } },
   clact(el){ const ctx=el.dataset.ctx; S.cl[ctx].act={k:el.dataset.k,date:today(),err:""}; clRender(ctx); },
+  cledit(el){ const ctx=el.dataset.ctx, C=S.cl[ctx], c=S.claims.find(x=>x.id===C.viewId); if(!c) return; C.act=null; C.share=null;
+    C.edit={err:""}; CL_EDIT_F.forEach(([k])=>C.edit[k]=c[k]??""); clRender(ctx); },
+  cledcancel(el){ const ctx=el.dataset.ctx; S.cl[ctx].edit=null; clRender(ctx); },
+  async cledsave(el){ const ctx=el.dataset.ctx, C=S.cl[ctx], E=C.edit, c=S.claims.find(x=>x.id===C.viewId); if(!c||!E) return; S._clCtx=ctx;
+    const q=Math.round(Number(E.qty)); if(!(q>0)){ E.err="Qty must be 1 or more."; clRender(ctx); return; }
+    if(!String(E.customer||"").trim()){ E.err="Enter the customer name."; clRender(ctx); return; }
+    const patch={}, ch=[];
+    CL_EDIT_F.forEach(([k,lab])=>{ let nv=k==="qty"?q:String(E[k]??"").trim(); const ov=c[k]??""; if(String(nv)!==String(ov)){ patch[k]=nv;
+      if(k==="vendorId"){ const nvn=(vendorById(nv)||{}).name||""; patch.vendorName=nvn; ch.push(`Vendor ${c.vendorName||"–"} → ${nvn||"–"}`); }
+      else ch.push(`${lab} ${k.endsWith("Date")?(ov?fmtD(ov):"–"):(ov||"–")} → ${k.endsWith("Date")?(nv?fmtD(nv):"–"):(nv||"–")}`); } });
+    if(!ch.length){ C.edit=null; clRender(ctx); return; }
+    el.disabled=true;
+    try{ await updClaim(c.id,patch,"Edited: "+ch.join("; ")); C.edit=null; clRender(ctx); (ctx==="phone"?ptoast:dtoast)("Claim updated ✓"); }
+    catch(e){ E.err="Could not save."+errDetail(e); clRender(ctx); } },
   clactcancel(el){ const ctx=el.dataset.ctx; S.cl[ctx].act=null; clRender(ctx); },
   async clactsave(el){ const ctx=el.dataset.ctx, C=S.cl[ctx], A=C.act, c=S.claims.find(x=>x.id===C.viewId); if(!A||!c) return; S._clCtx=ctx;
     const d=A.date||today(); let patch, what;
@@ -3044,6 +3079,7 @@ Object.assign(IN,{
   "cl-mvq"(el){ const ctx=el.dataset.ctx, f=S.cl[ctx].f; f.mvq=el.value; const r=$("#clmv-"+ctx); if(r) r.innerHTML=clManualVendorList(ctx,f); },
   "cl-mbill"(el){ S.cl[el.dataset.ctx].f.mbill=el.value; },
   "cl-act"(el){ const A=S.cl[el.dataset.ctx].act; if(A) A[el.dataset.k]=el.value; },
+  "cl-ed"(el){ const E=S.cl[el.dataset.ctx].edit; if(E){ E[el.dataset.k]=el.value; E.err=""; } },
   "cl-dq"(el){ S.cl.desk.filt.q=el.value; claimsTableRender(); }
 });
 Object.assign(CH,{
@@ -3052,6 +3088,7 @@ Object.assign(CH,{
   "cl-to"(el){ const ctx=el.dataset.ctx; S.cl[ctx].f.to=el.value; S.cl[ctx].f.pick=null; clRender(ctx); },
   "cl-mdate"(el){ const ctx=el.dataset.ctx; S.cl[ctx].f.mdate=el.value; clRender(ctx); },
   "cl-act"(el){ const A=S.cl[el.dataset.ctx].act; if(A) A[el.dataset.k]=el.value; },
+  "cl-ed"(el){ const E=S.cl[el.dataset.ctx].edit; if(E){ E[el.dataset.k]=el.value; E.err=""; } },
   "cl-dstatus"(el){ S.cl.desk.filt.status=el.value; renderDeskBody(); },
   "cl-dvendor"(el){ S.cl.desk.filt.vendor=el.value; claimsTableRender(); }
 });
